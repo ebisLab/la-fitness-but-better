@@ -35,7 +35,7 @@ export const mock2= [
     {
         id:0,
         barcode_number: 'F33501272',
-        first_name: 'Jennifer',
+        first_name: 'Jennifer444',
         last_name: 'Lewis',
         member_photo:'',
         fitness_type:'trainer',
