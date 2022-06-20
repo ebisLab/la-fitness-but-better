@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
+import CaptureContainer from './CaptureContainer';
 // import axios from 'axios'
 
 export default function Main() {
@@ -25,7 +26,7 @@ export default function Main() {
         const user={...filterUser[0], time, timesheet:[Date.now()]}
       setTodaysList([user,...todaysList]);
 
-      
+
       //find the user from the database list and update their info
       const db= usersDatabase.map(obj=> {
         if(obj.barcode_number ===filterUser[0].barcode_number)
@@ -56,8 +57,23 @@ export default function Main() {
 
     const changecurrentuser=()=>{
       console.log('current user', currentUser[0].barcode_number)
-      let list = usersDatabase.filter(item=>item.barcode_number.toLowerCase() === currentUser[0].barcode_number.toLowerCase())
-      console.log('compare', list)
+      // let list = usersDatabase.filter(item=>item.barcode_number.toLowerCase() === currentUser[0].barcode_number.toLowerCase())
+      const db= usersDatabase.map(obj=> {
+        if(obj.barcode_number === currentUser[0].barcode_number)
+        {return {...obj, member_photo:'🌹'}}
+        else {
+          return obj
+        }
+      })
+      setUsersDatabase(db)
+      const db2= todaysList.map(obj=> {
+        if(obj.barcode_number === currentUser[0].barcode_number)
+        {return {...obj, member_photo:'🌹'}}
+        else {
+          return obj
+        }
+      })
+      setTodaysList(db2)
     }
 
     console.log('database list', usersDatabase)
@@ -105,14 +121,8 @@ export default function Main() {
             <div>G(1)</div>
             <button>Guest Waiver</button>
           </div>
-          <div className='card-profile-picture'>
-            <div>
-              <div style={{ height: "200px", width:'200px', background: "red"}} />
-              <div>
-                <button>Delete</button><button onClick={changecurrentuser}>Photo</button>
-              </div> 
-            </div>
-          </div>
+          <CaptureContainer changecurrentuser={changecurrentuser}/>
+
         <div>
           members under plan
           <br/>
