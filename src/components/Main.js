@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
-import {mock} from '../store/mock';
+import {mock} from '../api/mock';
 import axios from 'axios'
 
 export default function Main() {
@@ -42,7 +42,7 @@ export default function Main() {
         console.log('heee')
     }
   return (
-    <main className='grid-container'>
+  <main className='grid-container'>
     <section className='first-column'>
       <div>
         <form onSubmit={submitHandler}>
@@ -128,12 +128,13 @@ export default function Main() {
           <button>Guest Waiver</button>
         </div>
         <div className='card-profile-picture'>
-          
-          <div style={{ height: "200px", width:'200px', background: "red"}} />
-          <div>
-            <button>Delete</button><button>Photo</button>
-          </div>
-        </div>
+        <div>
+        <div style={{ height: "200px", width:'200px', background: "red"}} />
+        <div>
+          <button>Delete</button><button>Photo</button>
+        </div> 
+                </div>
+      </div>
         <div>
           members under plan
           <br/>
