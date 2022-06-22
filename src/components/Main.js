@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
-import CaptureContainer from './CaptureContainer';
-// import axios from 'axios'
+import Display from './Display';
+import Dock from './Dock';
+
 
 export default function Main() {
     const [userBarcode, setUserBarcode]=useState('')
@@ -12,11 +13,17 @@ export default function Main() {
     const [usersDatabase, setUsersDatabase]= useState([])
     const time= new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) 
     const [currentTime,setCurrentTime]=useState(time)
+    const [profileImg, setProvileImg]=useState('')
+    const [currentApp, setCurrentApp] = useState(null);
 
     useEffect(()=>{
       setUsersDatabase(mock)
 
     },[])
+
+    // if (currentApp == null) {
+    //   return <div>something here</div>;
+    // }
     
     const addName =(name)=> {
       let findUser= usersDatabase.some(item=>item.first_name.toLowerCase() === name.toLowerCase())
@@ -55,29 +62,36 @@ export default function Main() {
         console.log('heee')
     }
 
-    const changecurrentuser=()=>{
-      console.log('current user', currentUser[0].barcode_number)
-      // let list = usersDatabase.filter(item=>item.barcode_number.toLowerCase() === currentUser[0].barcode_number.toLowerCase())
+    const changecurrentuser= (img)=>{
+      console.log('🐝 img===>', img)
+      // console.log('current user', currentUser[0].barcode_number)
       const db= usersDatabase.map(obj=> {
         if(obj.barcode_number === currentUser[0].barcode_number)
-        {return {...obj, member_photo:'🌹'}}
+        {return {...obj, member_photo: profileImg}}
         else {
           return obj
         }
       })
-      setUsersDatabase(db)
-      const db2= todaysList.map(obj=> {
+      console.log('db', db)
+         setUsersDatabase(db)     
+      const db2=  todaysList.map(obj=> {
         if(obj.barcode_number === currentUser[0].barcode_number)
-        {return {...obj, member_photo:'🌹'}}
+        {return {...obj, member_photo: profileImg}}
         else {
           return obj
         }
       })
-      setTodaysList(db2)
+      console.log('switched', db2)
+     setTodaysList(db2)
     }
 
-    console.log('database list', usersDatabase)
 
+//     console.log('profile img', profileImg)
+
+    console.log('database', usersDatabase)
+    console.log('todays', todaysList)
+console.log('current app', currentApp)
+console.log('profileim', profileImg)
 
   return (
   <main className='grid-container'>
@@ -90,7 +104,7 @@ export default function Main() {
         </form>
 
       </div>
-      {currentUser.length? (currentUser.map((item)=>(
+      {currentUser.length? (currentUser.map(({content: FaceTime},item)=>(
         <div key={Date.now()}>
         <div className='member-card'>
           <div className='member-info'>
@@ -121,8 +135,39 @@ export default function Main() {
             <div>G(1)</div>
             <button>Guest Waiver</button>
           </div>
-          <CaptureContainer changecurrentuser={changecurrentuser}/>
-
+          {/* <CaptureContainer 
+          currentUser={currentUser}
+            usersDatabase={usersDatabase}
+            profileImg={profileImg}
+            setProvileImg={setProvileImg}
+            setUsersDatabase={setUsersDatabase}
+            hasPhoto={item.member_photo} 
+            changecurrentuser={changecurrentuser}
+          /> */}
+          {/* <SampleCap /> */}
+          {/* <Random usrImg={item.member_photo} changecurrentuser={changecurrentuser}/> */}
+          {/* <Thing 
+            changecurrentuser={changecurrentuser}
+            profileImg={profileImg}
+            setProvileImg={setProvileImg}
+            usrImg={item.member_photo} /> */}
+            {/* <Food
+                        changecurrentuser={changecurrentuser}
+                        profileImg={profileImg}
+                        setProvileImg={setProvileImg}
+                        usrImg={item.member_photo} /> */}
+                      <Dock
+                        setCurrentApp={setCurrentApp}
+                        // changecurrentuser={changecurrentuser}
+                        profileImg={profileImg}
+                        setProvileImg={setProvileImg}
+                        usrImg={item.member_photo} />
+                        {/* <div>{currentApp}</div> */}
+                        <Display 
+                        currentApp={currentApp} 
+                        content={FaceTime} 
+                        setProvileImg={setProvileImg}
+                        changecurrentuser={changecurrentuser} />
         <div>
           members under plan
           <br/>

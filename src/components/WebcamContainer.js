@@ -33,7 +33,7 @@ const updateUserImage=(e, name)=>{
   console.log('currrent', currentUserClicked)
   // let filterUser = mock.filter(item=>item.first_name.toLowerCase() === name.toLowerCase())
   const user={...currentUserClicked[0], member_photo: image, time:'haha' }
-  setTodaysList([...todaysList, user])
+  setTodaysList([user, ...todaysList])
 
 }
   return (
