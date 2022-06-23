@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
 import CaptureContainer from './CaptureContainer';
+import Display from './Display';
+import Dock from './Dock';
+import EX1 from './EX1';
 // import axios from 'axios'
 
 export default function Main() {
@@ -9,10 +12,11 @@ export default function Main() {
     const [userInfo, setUserInfo]=useState('')
     const [todaysList, setTodaysList]=useState([])
     const [currentUser, setCurrentUser]=useState([])
+    const [currentApp, setCurrentApp] = useState(null);
     const [usersDatabase, setUsersDatabase]= useState([])
     const time= new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) 
     const [currentTime,setCurrentTime]=useState(time)
-
+    const [dontRefresh, setDontRefresh]=useState(false)
     useEffect(()=>{
       setUsersDatabase(mock)
 
@@ -55,26 +59,33 @@ export default function Main() {
         console.log('heee')
     }
 
-    const changecurrentuser=()=>{
+    const changecurrentuser= async(img)=>{
+      // console.log('img', img)
+      // setDontRefresh(true)
       console.log('current user', currentUser[0].barcode_number)
-      // let list = usersDatabase.filter(item=>item.barcode_number.toLowerCase() === currentUser[0].barcode_number.toLowerCase())
-      const db= usersDatabase.map(obj=> {
+      const db= await usersDatabase.map(obj=> {
         if(obj.barcode_number === currentUser[0].barcode_number)
-        {return {...obj, member_photo:'🌹'}}
+        {return {...obj, member_photo: img}}
         else {
           return obj
         }
       })
       setUsersDatabase(db)
-      const db2= todaysList.map(obj=> {
+      const db2= await todaysList.map(obj=> {
         if(obj.barcode_number === currentUser[0].barcode_number)
-        {return {...obj, member_photo:'🌹'}}
+        {return {...obj, member_photo: img }}
         else {
           return obj
         }
       })
       setTodaysList(db2)
     }
+
+    const grabImage =(img)=>{
+      changecurrentuser(img)
+      return img
+    }
+ 
 
     console.log('database list', usersDatabase)
 
@@ -90,7 +101,7 @@ export default function Main() {
         </form>
 
       </div>
-      {currentUser.length? (currentUser.map((item)=>(
+      {currentUser.length? (currentUser.map((item,i)=>(
         <div key={Date.now()}>
         <div className='member-card'>
           <div className='member-info'>
@@ -121,8 +132,16 @@ export default function Main() {
             <div>G(1)</div>
             <button>Guest Waiver</button>
           </div>
-          <CaptureContainer changecurrentuser={changecurrentuser}/>
+          <EX1 
+          dontRefresh={dontRefresh}
+          setDontRefresh={setDontRefresh}
+          grabImage={grabImage}
+          item={item} currentUser={currentUser} changecurrentuser={changecurrentuser} />
+          {/* <Display item={item} currentApp={currentApp} changecurrentuser={changecurrentuser} />
 
+          <Dock 
+          changecurrentuser={changecurrentuser} 
+          setCurrentApp={setCurrentApp} item={item} /> */}
         <div>
           members under plan
           <br/>
@@ -195,7 +214,7 @@ export default function Main() {
             </tr>
             {todaysList && todaysList.map(item=>(
             <tr key={uuidv4()}>
-              <td>{item.member_photo}</td>
+              <td><img width="50px" height="50px" src={item.member_photo} alt={item.barcode_number}/></td>
               <td><button>Service</button></td>
               <td>{item.barcode_number}</td>
               <td>{item.fitness_type}</td>
