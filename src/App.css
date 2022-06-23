@@ -87,3 +87,7 @@ th, td {
 .record-container{
   text-align: center;
 }
+
+tr.checked-in-user-table-status {
+  background: #e47474;
+}

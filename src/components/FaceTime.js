@@ -13,25 +13,26 @@ export default function FaceTime({dontRefresh, changecurrentuser, setDontRefresh
   const [imgSrc, setImgSrc] = useState(null);
   const [click, setClick] = useState(false);
   const capture = React.useCallback(
-    async() => {
+    () => {
       const imageSrc = webcamRef.current.getScreenshot();
       setImgSrc(imageSrc);
-      setDontRefresh(true)
+      setDontRefresh(true);
+    //   setCurrentImg(true);
 
       changecurrentuser(imageSrc)
-      await setCurrentImg(imageSrc)
+    //    setCurrentImg(imageSrc)
 
     },
     [webcamRef,setImgSrc, setDontRefresh, changecurrentuser, currentImg,setCurrentImg]
   );
 
   console.log('dontrefres', dontRefresh)
-  console.log('current imgag', currentImg)
-  if(click && dontRefresh)
+  console.log('current imgag****', currentImg)
+  if(click)
     return(
       <div id="container" className="border-8 bg-gray-800 h-full flex space-y-6 flex-col justify-center items-center">
-        {currentImg && dontRefresh &&(
-          <img className="max-h-60 md:max-h-96" src={imgSrc} alt="yourimage"/>
+        {currentImg &&(
+          <img className="max-h-60 md:max-h-96" src={currentImg} alt="yourimage"/>
         )}
         <button 
         style={{

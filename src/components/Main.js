@@ -58,10 +58,13 @@ export default function Main() {
         console.log('heee')
     }
 
-    const changecurrentuser= async(img)=>{
+    const changecurrentuser =(img)=>{
+      
+      // console.log("img--->>", img)
 
-      console.log('current user', currentUser[0].barcode_number)
-      const db= await usersDatabase.map(obj=> {
+      setCurrentImg(img)
+
+      const db= usersDatabase.map(obj=> {
         if(obj.barcode_number === currentUser[0].barcode_number)
         {return {...obj, member_photo: img}}
         else {
@@ -70,7 +73,7 @@ export default function Main() {
       })
 
       setUsersDatabase(db)
-      const db2= await todaysList.map(obj=> {
+      const db2= todaysList.map(obj=> {
         if(obj.barcode_number === currentUser[0].barcode_number)
         {return {...obj, member_photo: img }}
         else {
@@ -79,12 +82,7 @@ export default function Main() {
       })
       console.log('switched', db2)
      setTodaysList(db2)
-    }
-
-
-    const grabImage =(img)=>{
-      changecurrentuser(img)
-      return img
+    //  setCurrentImg("womaannn")
     }
  
 
@@ -144,7 +142,6 @@ console.log('current img', currentImg)
           setCurrentImg={setCurrentImg}
           dontRefresh={dontRefresh}
           setDontRefresh={setDontRefresh}
-          grabImage={grabImage}
           item={item} currentUser={currentUser} changecurrentuser={changecurrentuser} />
         <div>
           members under plan
@@ -216,16 +213,25 @@ console.log('current img', currentImg)
               <th>Status</th>
               <th>Time</th>
             </tr>
-            {todaysList && todaysList.map(item=>(
-            <tr key={uuidv4()}>
-              <td><img width="50px" height="50px" src={item.member_photo} alt={item.barcode_number}/></td>
-              <td><button>Service</button></td>
+            {todaysList && todaysList.map(item=>{
+              console.log('item', item)
+              return(
+            <tr key={uuidv4()} 
+            className={item.status ==='UNRECOGNIZED'?"checked-in-user-table-status":""}
+            // style={{background: item.status === 'RECOGNIZED'? '#e47474':''}}
+            >
+              <td>
+                <div style={{width:'50px', height:'50px', background: item.status === 'UNRECOGNIZED'?'red':'blue'}}>
+                <img width="50px" height="50px" src={item.member_photo} alt={item.barcode_number}/>
+                </div>
+                </td>
+              <td>{item.status==='UNRECOGNIZED'?'':<button>Service</button>}</td>
               <td>{item.barcode_number}</td>
               <td>{item.fitness_type}</td>
               <td>{item.first_name} {item.last_name}</td>
               <td>{item.status}</td>
               <td>{item.time}</td>
-            </tr>))}
+            </tr>)})}
 
           </tbody>
         </table>

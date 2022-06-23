@@ -29,6 +29,18 @@ export const mock= [
         time:0,
         timesheet:[],
         membership: 2,
+    },
+    {
+        id:1,
+        barcode_number: 'F37221272',
+        first_name: 'Yelena',
+        last_name: 'Makron',
+        fitness_type:'trainer',
+        member_photo:'https://images.unsplash.com/photo-1655857202782-8d0ef8f0254b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2528&q=80',
+        status:'OK',
+        time:0,
+        timesheet:[],
+        membership: 1,
     }
 ]
 
