@@ -7,6 +7,7 @@ import Dock from './Dock';
 import EX1 from './EX1';
 // import axios from 'axios'
 
+
 export default function Main() {
     const [userBarcode, setUserBarcode]=useState('')
     const [userInfo, setUserInfo]=useState('')
@@ -21,6 +22,10 @@ export default function Main() {
       setUsersDatabase(mock)
 
     },[])
+
+    // if (currentApp == null) {
+    //   return <div>something here</div>;
+    // }
     
     const addName =(name)=> {
       let findUser= usersDatabase.some(item=>item.first_name.toLowerCase() === name.toLowerCase())
@@ -70,6 +75,7 @@ export default function Main() {
           return obj
         }
       })
+
       setUsersDatabase(db)
       const db2= await todaysList.map(obj=> {
         if(obj.barcode_number === currentUser[0].barcode_number)
@@ -78,8 +84,10 @@ export default function Main() {
           return obj
         }
       })
-      setTodaysList(db2)
+      console.log('switched', db2)
+     setTodaysList(db2)
     }
+
 
     const grabImage =(img)=>{
       changecurrentuser(img)
@@ -89,6 +97,13 @@ export default function Main() {
 
     console.log('database list', usersDatabase)
 
+
+//     console.log('profile img', profileImg)
+
+    console.log('database', usersDatabase)
+    console.log('todays', todaysList)
+console.log('current app', currentApp)
+console.log('profileim', profileImg)
 
   return (
   <main className='grid-container'>
@@ -101,6 +116,7 @@ export default function Main() {
         </form>
 
       </div>
+
       {currentUser.length? (currentUser.map((item,i)=>(
         <div key={Date.now()}>
         <div className='member-card'>
@@ -132,6 +148,7 @@ export default function Main() {
             <div>G(1)</div>
             <button>Guest Waiver</button>
           </div>
+
           <EX1 
           dontRefresh={dontRefresh}
           setDontRefresh={setDontRefresh}
@@ -142,6 +159,7 @@ export default function Main() {
           <Dock 
           changecurrentuser={changecurrentuser} 
           setCurrentApp={setCurrentApp} item={item} /> */}
+
         <div>
           members under plan
           <br/>

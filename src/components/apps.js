@@ -1,7 +1,9 @@
 import * as React from "react";
 import FaceTime from "./FaceTime";
+
 export const apps = 
 [
+
     {
       title: "Safari",
       icon: "safari",

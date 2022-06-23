@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { apps } from './apps';
 
 export default function Dock({setCurrentApp, item}) {
