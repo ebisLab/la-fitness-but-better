@@ -10,7 +10,7 @@ export default function Main() {
     const [userInfo, setUserInfo]=useState('')
     const [todaysList, setTodaysList]=useState([])
     const [currentUser, setCurrentUser]=useState([])
-    const [currentApp, setCurrentApp] = useState(null);
+    const [currentImg, setCurrentImg] = useState(null);
     const [usersDatabase, setUsersDatabase]= useState([])
     const time= new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) 
     const [currentTime,setCurrentTime]=useState(time)
@@ -94,7 +94,7 @@ export default function Main() {
 
     console.log('database', usersDatabase)
     console.log('todays', todaysList)
-console.log('current app', currentApp)
+console.log('current img', currentImg)
 
   return (
   <main className='grid-container'>
@@ -139,8 +139,9 @@ console.log('current app', currentApp)
             <div>G(1)</div>
             <button>Guest Waiver</button>
           </div>
-
           <EX1 
+          currentImg={currentImg}
+          setCurrentImg={setCurrentImg}
           dontRefresh={dontRefresh}
           setDontRefresh={setDontRefresh}
           grabImage={grabImage}

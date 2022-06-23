@@ -8,31 +8,29 @@ const videoConstraints = {
 };
 
 
-export default function FaceTime({dontRefresh, changecurrentuser, setDontRefresh}) {
+export default function FaceTime({dontRefresh, changecurrentuser, setDontRefresh, currentImg, setCurrentImg}) {
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
   const [click, setClick] = useState(false);
   const capture = React.useCallback(
-    () => {
+    async() => {
       const imageSrc = webcamRef.current.getScreenshot();
       setImgSrc(imageSrc);
-      console.log('its clicked')
       setDontRefresh(true)
 
       changecurrentuser(imageSrc)
-    //   setDontRefresh(true)
-    //   setTimeout(()=>{
-        // changecurrentuser(imageSrc)
-    //   },3000)
+      await setCurrentImg(imageSrc)
+
     },
-    [webcamRef,setImgSrc, setDontRefresh, changecurrentuser]
+    [webcamRef,setImgSrc, setDontRefresh, changecurrentuser, currentImg,setCurrentImg]
   );
 
   console.log('dontrefres', dontRefresh)
+  console.log('current imgag', currentImg)
   if(click && dontRefresh)
     return(
       <div id="container" className="border-8 bg-gray-800 h-full flex space-y-6 flex-col justify-center items-center">
-        {imgSrc && dontRefresh &&(
+        {currentImg && dontRefresh &&(
           <img className="max-h-60 md:max-h-96" src={imgSrc} alt="yourimage"/>
         )}
         <button 
