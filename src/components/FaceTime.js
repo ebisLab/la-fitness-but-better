@@ -1,5 +1,7 @@
 import React, {useState,useRef} from "react";
 import Webcam from "react-webcam";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCamera } from '@fortawesome/free-solid-svg-icons'
 
 const videoConstraints = {
     // zIndex: 1,
@@ -55,7 +57,7 @@ export default function FaceTime({dontRefresh, changecurrentuser, setDontRefresh
       <div className='card-profile-picture'>
         <div>
             <div style={{height:'200px', width: '200px', zIndex: 0}}>
-                <span style={{position: 'absolute', 
+                <span style={{
                 zIndex:0,
                 position: 'absolute', margin: '5.4em -1.7em'}}>loading...</span>
          <div style={{
@@ -86,36 +88,11 @@ export default function FaceTime({dontRefresh, changecurrentuser, setDontRefresh
         }}
         className={`mx-auto`} 
         onClick={() => { setClick(true); capture(); }}>
-            📷
+            <FontAwesomeIcon icon={faCamera} size="2x"/>
         </button>
-
-        {/* <div>
-          <button>Delete</button><button>Photo</button>
-        </div>  */}
                 </div>
 
 
         </div>
-    //   <div id="container" className="bg-gray-800 h-full flex space-y-6 flex-col justify-center items-center">
-    //     <Webcam className="border-8 max-h-60 md:max-h-96"
-    //       audio={false}
-    //       ref={webcamRef}
-    //       screenshotFormat="image/jpeg"
-    //       videoConstraints={videoConstraints}
-    //     />
-    //     <button 
-    //     style={{
-    //       borderWidth:1,
-    //       borderColor:'rgba(0,0,0,0.5)',
-    //       alignItems:'center',
-    //       justifyContent:'center',
-    //       width:50,
-    //       height:50,
-    //       backgroundColor:'#fff',
-    //       borderRadius:50
-    //     }}
-    //     className={`mx-auto`} 
-    //     onClick={() => { setClick(true); capture(); }}></button>
-    //   </div>
   );
 }

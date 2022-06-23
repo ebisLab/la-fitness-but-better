@@ -81,17 +81,9 @@ export default function Main() {
       })
       console.log('switched', db2)
      setTodaysList(db2)
-    //  setCurrentImg("womaannn")
     }
- 
 
-    console.log('database list', usersDatabase)
-
-
-
-    console.log('database', usersDatabase)
-    console.log('todays', todaysList)
-console.log('current img', currentImg)
+    console.log('curr', currentImg)
 
   return (
   <main className='grid-container'>
@@ -141,7 +133,9 @@ console.log('current img', currentImg)
           setCurrentImg={setCurrentImg}
           dontRefresh={dontRefresh}
           setDontRefresh={setDontRefresh}
-          item={item} currentUser={currentUser} changecurrentuser={changecurrentuser} />
+          item={item} 
+          currentUser={currentUser} 
+          changecurrentuser={changecurrentuser} />
         <div>
           members under plan
           <br/>
@@ -181,10 +175,8 @@ console.log('current img', currentImg)
       </div>
       <div className='card-profile-picture'>
         <div>
-        <div style={{ height: "200px", width:'200px', background: "red"}} />
-        <div>
-          <button>Delete</button><button>Photo</button>
-        </div> 
+        <div style={{ height: "200px", width:'200px', background: "lightgrey"}} />
+
                 </div>
       </div>
       <div>
@@ -217,7 +209,6 @@ console.log('current img', currentImg)
               return(
             <tr key={uuidv4()} 
             className={item.status ==='UNRECOGNIZED'?"checked-in-user-table-status":""}
-            // style={{background: item.status === 'RECOGNIZED'? '#e47474':''}}
             >
               <td>
                 <div style={{width:'50px', height:'50px', background: item.status === 'UNRECOGNIZED'?'red':'blue'}}>
@@ -228,7 +219,7 @@ console.log('current img', currentImg)
               <td>{item.barcode_number}</td>
               <td>{item.fitness_type}</td>
               <td>{item.first_name} {item.last_name}</td>
-              <td>{item.status}</td>
+              <td style={{color: item.status!=='UNRECOGNIZED' && item.status !== 'CANCELLED'? '#0bbd0b':''}}>{item.status}</td>
               <td>{item.time}</td>
             </tr>)})}
 
