@@ -3,7 +3,6 @@ import FaceTime from './FaceTime'
 
 export default function EX2({changecurrentuser, dontRefresh, setDontRefresh, currentImg, setCurrentImg}) {
     const [click, setClick]=React.useState(false)   
-    const [finishImg, setFinishImg]=React.useState(false)
     if(!click & !dontRefresh) {
         return (
         <div>

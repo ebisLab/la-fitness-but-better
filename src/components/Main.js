@@ -53,6 +53,7 @@ export default function Main() {
         setUserInfo(userBarcode)
         addName(userBarcode)
         setCurrentTime(currentTime)
+        e.target.reset();
     }
     const kidsModal=()=>{
         console.log('heee')
@@ -60,8 +61,6 @@ export default function Main() {
 
     const changecurrentuser =(img)=>{
       
-      // console.log("img--->>", img)
-
       setCurrentImg(img)
 
       const db= usersDatabase.map(obj=> {

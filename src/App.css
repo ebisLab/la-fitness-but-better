@@ -51,6 +51,7 @@
  main section:first-child{
   /* grid-column: 30% 70%; */
   background-color: yellow;
+  /* z-index: 0; */
 }
 
 .status{
@@ -82,6 +83,7 @@ th, td {
   display: grid;
   place-items: center;
   text-align: center;
+  /* z-index: 0; */
 }
 
 .record-container{
