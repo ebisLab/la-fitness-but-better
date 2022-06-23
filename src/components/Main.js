@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
-import CaptureContainer from './CaptureContainer';
-import Display from './Display';
-import Dock from './Dock';
 import EX1 from './EX1';
 // import axios from 'axios'
 
@@ -23,9 +20,6 @@ export default function Main() {
 
     },[])
 
-    // if (currentApp == null) {
-    //   return <div>something here</div>;
-    // }
     
     const addName =(name)=> {
       let findUser= usersDatabase.some(item=>item.first_name.toLowerCase() === name.toLowerCase())
@@ -65,8 +59,7 @@ export default function Main() {
     }
 
     const changecurrentuser= async(img)=>{
-      // console.log('img', img)
-      // setDontRefresh(true)
+
       console.log('current user', currentUser[0].barcode_number)
       const db= await usersDatabase.map(obj=> {
         if(obj.barcode_number === currentUser[0].barcode_number)
@@ -98,12 +91,10 @@ export default function Main() {
     console.log('database list', usersDatabase)
 
 
-//     console.log('profile img', profileImg)
 
     console.log('database', usersDatabase)
     console.log('todays', todaysList)
 console.log('current app', currentApp)
-console.log('profileim', profileImg)
 
   return (
   <main className='grid-container'>
@@ -154,12 +145,6 @@ console.log('profileim', profileImg)
           setDontRefresh={setDontRefresh}
           grabImage={grabImage}
           item={item} currentUser={currentUser} changecurrentuser={changecurrentuser} />
-          {/* <Display item={item} currentApp={currentApp} changecurrentuser={changecurrentuser} />
-
-          <Dock 
-          changecurrentuser={changecurrentuser} 
-          setCurrentApp={setCurrentApp} item={item} /> */}
-
         <div>
           members under plan
           <br/>
