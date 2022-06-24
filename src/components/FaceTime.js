@@ -11,7 +11,9 @@ const videoConstraints = {
 };
 
 
-export default function FaceTime({dontRefresh, changecurrentuser, setDontRefresh, currentImg, setCurrentImg}) {
+export default function FaceTime({
+    setImgAfterUpdate,
+    dontRefresh, changecurrentuser, setDontRefresh, currentImg, setCurrentImg}) {
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
   const [click, setClick] = useState(false);
@@ -24,9 +26,10 @@ export default function FaceTime({dontRefresh, changecurrentuser, setDontRefresh
 
       changecurrentuser(imageSrc)
     //    setCurrentImg(imageSrc)
+    setImgAfterUpdate(imageSrc)
 
     },
-    [webcamRef,setImgSrc, setDontRefresh, changecurrentuser]
+    [webcamRef,setImgSrc, setImgAfterUpdate, setDontRefresh, changecurrentuser]
   );
 
   console.log('dontrefres', dontRefresh)
@@ -87,7 +90,7 @@ export default function FaceTime({dontRefresh, changecurrentuser, setDontRefresh
           margin: '-20px -20px'
         }}
         className={`mx-auto`} 
-        onClick={() => { setClick(true); capture(); }}>
+        onClick={() => { setClick(true); capture();}}>
             <FontAwesomeIcon icon={faCamera} size="2x"/>
         </button>
                 </div>

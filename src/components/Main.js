@@ -15,6 +15,8 @@ export default function Main() {
     const time= new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) 
     const [currentTime,setCurrentTime]=useState(time)
     const [dontRefresh, setDontRefresh]=useState(false)
+    const [imgAfterUpdate, setImgAfterUpdate]=useState('')
+    // const [finishTingPic, setFinishTakingPic]=useState(false)
     useEffect(()=>{
       setUsersDatabase(mock)
 
@@ -50,6 +52,7 @@ export default function Main() {
     }
     const submitHandler=(e)=>{
         e.preventDefault()
+        setImgAfterUpdate('')
         setUserInfo(userBarcode)
         addName(userBarcode)
         setCurrentTime(currentTime)
@@ -84,10 +87,9 @@ export default function Main() {
     }
 
     console.log('curr', currentImg)
-
   return (
   <main className='grid-container'>
-    <section className='first-column'>
+    <section style={{background:'orange'}} className='first-column'>
       <div>
         <form onSubmit={submitHandler}>
         <input name="barcode" type="text" onChange={changeHandler}  />
@@ -123,12 +125,16 @@ export default function Main() {
               </div>
             </div>
           </div>
+          <div className='member-profile-n-fam'>
           <div className='member-privileges'>
             <div>🎾</div>
             <div>G(1)</div>
             <button>Guest Waiver</button>
           </div>
+
           <EX1 
+          imgAfterUpdate={imgAfterUpdate}
+          setImgAfterUpdate={setImgAfterUpdate}
           currentImg={currentImg}
           setCurrentImg={setCurrentImg}
           dontRefresh={dontRefresh}
@@ -136,10 +142,12 @@ export default function Main() {
           item={item} 
           currentUser={currentUser} 
           changecurrentuser={changecurrentuser} />
-        <div>
+          
+        <div className='family-plan'>
           members under plan
-          <br/>
         </div>
+        </div>
+        {/* </div> */}
         </div>
         </div>
       ))):(
@@ -173,6 +181,7 @@ export default function Main() {
         <div>G(1)</div>
         <button>Guest Waiver</button>
       </div>
+      <div className='member-profile-n-fam'>
       <div className='card-profile-picture'>
         <div>
         <div style={{ height: "200px", width:'200px', background: "lightgrey"}} />
@@ -181,14 +190,14 @@ export default function Main() {
       </div>
       <div>
         members under plan
-        <br/>
         {userInfo}
+      </div>
       </div>
       </div>
       </div>
       )}
     </section>
-    <section className='second-column'>
+    <section style={{background: 'limegreen'}} className='second-column'>
       <div>check in tools</div>
       <div className='record-container'>
         <div>Last Refresh: {currentTime} AM <button>Refresh</button></div>
