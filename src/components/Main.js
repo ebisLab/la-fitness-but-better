@@ -116,23 +116,31 @@ export default function Main() {
           <div className='member-info'>
             <div style={{background: 'green'}}>{item.status}</div>
             <div className='status'>
-              <Table>
-                <Tr>
-                  <Th>Barcode</Th>
-                  <Td>{item.barcode_number}</Td>
-                </Tr>
-                <Tr>
-                  <Th>Name</Th>
-                  <Td>{item.first_name} {item.last_name}</Td>
-                </Tr>
-                <Tr>
-                  <Th>Expiration</Th>
-                  <Td>none</Td>
-                </Tr>
-              </Table>
+              <table>
+                <tbody>
+                <tr>
+                  <th>Barcode</th>
+                  <td>{item.barcode_number}</td>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <td>{item.first_name} {item.last_name}</td>
+                </tr>
+                <tr>
+                  <th>Expiration</th>
+                  <td>none</td>
+                </tr>
+                </tbody>
+              </table>
               <div className='member-service'>
                 <Button>service</Button>
-                <Button>Get $</Button>
+                <Button
+                colorScheme="teal"
+                variant="solid"
+                rounded="200"
+                size="sm"
+                fontSize="sm"
+                >Get $</Button>
               </div>
             </div>
           </div>
@@ -167,7 +175,8 @@ export default function Main() {
         <div className='member-info'>
           <div style={{background: 'green'}}>INVALID BARCODE</div>
           <div className='status'>
-            {/* <table>
+            <table>
+              <tbody>
               <tr>
                 <th>Barcode</th>
                 <td>{userInfo}</td>
@@ -180,7 +189,8 @@ export default function Main() {
                 <th>Expiration</th>
                 <td>none</td>
               </tr>
-            </table> */}
+              </tbody>
+            </table>
             <div>
               <button>service</button>
               <button>Get $</button>
@@ -208,94 +218,15 @@ export default function Main() {
       </div>
       )}
     </section>
-    <section style={{background: 'limegreen'}} className='second-column'>
+    <section style={{background: '#ebf0f7'}} className='second-column'>
       <div>check in tools</div>
       <div className='record-container'>
-        <div>Last Refresh: {currentTime} AM <button>Refresh</button></div>
+        <div>Last Refresh: {currentTime}<Button>Refresh</Button></div>
         <div>Check In History</div>
 
-        <table class="fixed_header">
-  <thead>
-    <tr>
-    <th>Photo</th>
-              <th>Service</th>
-              <th>Barcode</th>
-              <th>Type</th>
-              <th>Name</th>
-              <th>Status</th>
-              <th>Time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>row 1-0</td>
-      <td>row 1-1</td>
-      <td>row 1-2</td>
-      <td>row 1-3</td>
-      <td>row 1-4</td>
-      <td>row 1-3</td>
-      <td>row 1-4</td>
-    </tr>
-    <tr>
-      <td>row 2-0</td>
-      <td>row 2-1</td>
-      <td>row 2-2</td>
-      <td>row 2-3</td>
-      <td>row 2-4</td>
-      <td>row 1-3</td>
-      <td>row 1-4</td>
-    </tr>
-    <tr>
-      <td>row 3-0</td>
-      <td>row 3-1</td>
-      <td>row 3-2</td>
-      <td>row 3-3</td>
-      <td>row 3-4</td>
-      <td>row 1-3</td>
-      <td>row 1-4</td>
-    </tr>
-    <tr>
-      <td>row 4-0</td>
-      <td>row 4-1</td>
-      <td>row 4-2</td>
-      <td>row 4-3</td>
-      <td>row 4-4</td>
-      <td>row 1-3</td>
-      <td>row 1-4</td>
-    </tr>
-    <tr>
-      <td>row 5-0</td>
-      <td>row 5-1</td>
-      <td>row 5-2</td>
-      <td>row 5-3</td>
-      <td>row 5-4</td>
-      <td>row 1-3</td>
-      <td>row 1-4</td>
-    </tr>
-    <tr>
-      <td>row 6-0</td>
-      <td>row 6-1</td>
-      <td>row 6-2</td>
-      <td>row 6-3</td>
-      <td>row 6-4</td>
-      <td>row 1-3</td>
-      <td>row 1-4</td>
-    </tr>
-    <tr>
-      <td>row 7-0</td>
-      <td>row 7-1</td>
-      <td>row 7-2</td>
-      <td>row 7-3</td>
-      <td>row 7-4</td>
-      <td>row 1-3</td>
-      <td>row 1-4</td>
-    </tr>
-  </tbody>
-</table>
-
-        {/* <Table className="fixed_header">
-  <thead>
-  <tr>
+        <table className="fixed_header">
+          <thead>
+            <tr>
               <th>Photo</th>
               <th>Service</th>
               <th>Barcode</th>
@@ -303,28 +234,30 @@ export default function Main() {
               <th>Name</th>
               <th>Status</th>
               <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+          {todaysList && todaysList.map(item=>{
+                return(
+              <tr key={uuidv4()} 
+              className={item.status ==='UNRECOGNIZED'?"checked-in-user-table-status":""}
+              >
+                <td>
+                  <div 
+                  style={{width:'50px', height:'50px', background: item.status === 'UNRECOGNIZED'?'red':'blue'}}>
+                  <img width="50px" height="50px" src={item.member_photo} alt={item.barcode_number}/>
+                  </div>
+                  </td>
+                <td>{item.status==='UNRECOGNIZED'?'':<Button>Service</Button>}</td>
+                <td>{item.barcode_number}</td>
+                <td>{item.fitness_type}</td>
+                <td>{item.first_name} {item.last_name}</td>
+                <td style={{color: item.status!=='UNRECOGNIZED' && item.status !== 'CANCELLED'? '#0bbd0b':''}}>{item.status}</td>
+                <td>{item.time}</td>
               </tr>
-  </thead>
-  <tbody>
-  {todaysList && todaysList.map(item=>{
-              return(
-            <tr key={uuidv4()} 
-            className={item.status ==='UNRECOGNIZED'?"checked-in-user-table-status":""}
-            >
-              <td>
-                <div style={{width:'50px', height:'50px', background: item.status === 'UNRECOGNIZED'?'red':'blue'}}>
-                <img width="50px" height="50px" src={item.member_photo} alt={item.barcode_number}/>
-                </div>
-                </td>
-              <td>{item.status==='UNRECOGNIZED'?'':<Button>Service</Button>}</td>
-              <td>{item.barcode_number}</td>
-              <td>{item.fitness_type}</td>
-              <td>{item.first_name} {item.last_name}</td>
-              <td style={{color: item.status!=='UNRECOGNIZED' && item.status !== 'CANCELLED'? '#0bbd0b':''}}>{item.status}</td>
-              <td>{item.time}</td>
-            </tr>)})}
-  </tbody>
-</Table> */}
+              )})}
+          </tbody>
+</table>
       </div>
     </section>
   </main>

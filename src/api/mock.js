@@ -4,7 +4,7 @@ export const mock= [
         barcode_number: 'F33501272',
         first_name: 'Jennifer',
         last_name: 'Lewis',
-        member_photo:'🐝',
+        member_photo:'https://placekitten.com/200/200',
         fitness_type:'trainer',
         membership: 3,
         time:0,
