@@ -63,12 +63,16 @@
 table{
   width: 100%;
 }
-table, th, td {
+/* table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
+} */
+
+.member-service{
+  display: grid;
 }
 th, td {
-  padding: 5px;
+  /* padding: 5px; */
   text-align: left;
 }
 .member-privileges{
@@ -93,3 +97,46 @@ th, td {
 tr.checked-in-user-table-status {
   background: #e47474;
 }
+
+
+/* table th,
+table td {
+  padding: 5px;
+  border: 1px solid;
+  background-color: yellow;
+} */
+
+table th {min-width: 100px;}
+
+
+.fixed_header{
+  /*     width: 400px; */
+    width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+  }
+  
+  .fixed_header tbody{
+    display:block;
+    width: 100%;
+    overflow: auto;
+    height: 75vh;
+  }
+  
+  .fixed_header td {
+    border: 1px solid black;
+  }
+
+  .fixed_header th{
+    border: 1px solid black;
+  }
+  .fixed_header thead tr {
+     display: block;
+  }
+  
+  
+  .fixed_header th, .fixed_header td {
+    /* padding: 5px; */
+    text-align: left;
+    width: 200px;
+  }
