@@ -8,6 +8,9 @@ export default function Header() {
   <TabList >
     <Tab _selected={{ bg: '#ebf0f7' }}>Member</Tab>
     <Tab _selected={{ bg: '#ebf0f7' }}>Search</Tab>
+    <Tab _selected={{ bg: '#ebf0f7' }}>Account</Tab>
+    <Tab _selected={{ bg: '#ebf0f7' }} align='end'>Management</Tab>
+
   </TabList>
   {/* <TabPanels>
     <TabPanel>
