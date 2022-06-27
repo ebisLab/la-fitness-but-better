@@ -96,6 +96,7 @@ th, td {
 
 tr.checked-in-user-table-status {
   background: #e47474 !important;
+  border-bottom: 1px solid indianred;
 }
 
 

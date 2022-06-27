@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
 import EX1 from './EX1';
+import imgplaceholder from '../assets/img/userplaceholder.png'
 import { Input, IconButton, Button, ButtonGroup, 
   Box, Tabs, Table, Thead, Tbody, Tr, Th, Td,
   FormControl } from '@chakra-ui/react'
@@ -18,7 +19,6 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
     const [currentTime,setCurrentTime]=useState(time)
     const [dontRefresh, setDontRefresh]=useState(false)
     const [imgAfterUpdate, setImgAfterUpdate]=useState('')
-    // const [finishTingPic, setFinishTakingPic]=useState(false)
     useEffect(()=>{
       setUsersDatabase(mock)
 
@@ -27,8 +27,6 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
     
 
     const addName =(name)=> {
-      // setPatronsCount(removeduplicates())
-
       let findUser= usersDatabase.some(item=>item.first_name.toLowerCase() === name.toLowerCase())
       let filterUser = usersDatabase.filter(item=>item.first_name.toLowerCase() === name.toLowerCase())
       setCurrentUser(filterUser)
@@ -187,7 +185,6 @@ console.log('patroncount+++', removeduplicates())
             <div>G(1)</div>
             <Button>Guest Waiver</Button>
           </div>
-
           <EX1 
           imgAfterUpdate={imgAfterUpdate}
           setImgAfterUpdate={setImgAfterUpdate}
@@ -241,8 +238,8 @@ console.log('patroncount+++', removeduplicates())
       <div className='member-profile-n-fam'>
       <div className='card-profile-picture'>
         <div>
-        <div style={{ height: "200px", width:'200px', background: "lightgrey"}} />
-
+        {/* <div style={{ height: "200px", width:'200px', background: "gold"}} /> */}
+<img src={imgplaceholder} alt="img placeholder" width="200px" height="200px" />
                 </div>
       </div>
       <div>
@@ -261,7 +258,6 @@ console.log('patroncount+++', removeduplicates())
       <div className='record-container'>
         <div>Last Refresh: {currentTime}<Button colorScheme='green'>Refresh</Button></div>
         <div>Check In History</div>
-
         <table className="fixed_header">
           <thead>
             <tr>
@@ -283,7 +279,7 @@ console.log('patroncount+++', removeduplicates())
                 <td>
                   <div 
                   style={{width:'50px', height:'50px', background: item.status === 'UNRECOGNIZED'?'red':'blue'}}>
-                  <img width="50px" height="50px" src={item.member_photo} alt={item.barcode_number}/>
+                  <img width="50px" height="50px" src={item.member_photo === ''?imgplaceholder:item.member_photo} alt={item.barcode_number}/>
                   </div>
                   </td>
                 <td>{item.status==='UNRECOGNIZED'?'':<Button>Service</Button>}</td>
