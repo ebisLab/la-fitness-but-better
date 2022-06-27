@@ -5,12 +5,9 @@ import EX1 from './EX1';
 import { Input, IconButton, Button, ButtonGroup, 
   Box, Tabs, Table, Thead, Tbody, Tr, Th, Td,
   FormControl } from '@chakra-ui/react'
-  // import { StyledTable, TableCell, TableHead, TableIconButton, TableRow } from './styles'
-
-// import axios from 'axios'
 
 
-export default function Main({bg = "#e6dfd1", color = "gray.800"}) {
+export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount, patronsCount}) {
     const [userBarcode, setUserBarcode]=useState('')
     const [userInfo, setUserInfo]=useState('')
     const [todaysList, setTodaysList]=useState([])
@@ -28,7 +25,10 @@ export default function Main({bg = "#e6dfd1", color = "gray.800"}) {
     },[])
 
     
+
     const addName =(name)=> {
+      // setPatronsCount(removeduplicates())
+
       let findUser= usersDatabase.some(item=>item.first_name.toLowerCase() === name.toLowerCase())
       let filterUser = usersDatabase.filter(item=>item.first_name.toLowerCase() === name.toLowerCase())
       setCurrentUser(filterUser)
@@ -91,7 +91,27 @@ export default function Main({bg = "#e6dfd1", color = "gray.800"}) {
      setTodaysList(db2)
     }
 
-    console.log('curr', currentImg)
+    const removeduplicates=()=>{
+      let duplicateRemover = new Set();
+      let distinctAarr = todaysList.filter((obj,i)=>{
+        if( !duplicateRemover.has(obj.barcode_number) && obj.status !== 'UNRECOGNIZED'){
+          duplicateRemover.add(obj.barcode_number)
+          return obj
+         }
+      })
+      // console.log('dist', distinctAarr)
+      return distinctAarr.length
+    }
+useEffect(() => {
+  setPatronsCount(removeduplicates())
+
+}, [addName])
+
+
+console.log('patroncount', patronsCount)
+console.log('patroncount+++', removeduplicates())
+
+// setPatronsCount(removeduplicates())
   return (
   <main className='grid-container'>
     <section 
@@ -237,6 +257,7 @@ export default function Main({bg = "#e6dfd1", color = "gray.800"}) {
     </section>
     <section style={{background: '#ebf0f7'}} className='second-column'>
       <div>check in tools</div>
+      {/* <div>{removeduplicates()}</div> */}
       <div className='record-container'>
         <div>Last Refresh: {currentTime}<Button colorScheme='green'>Refresh</Button></div>
         <div>Check In History</div>
