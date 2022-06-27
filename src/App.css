@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -43,14 +44,13 @@
   display: grid;
   /* grid-template-columns: repeat(2, 1fr); */
   grid-template-columns: 30% 70%;
-  height: 100vh;
   min-height:15vh;
-  height: 90vh;
+  /* height: 90vh; */
 }
 
  main section:first-child{
   /* grid-column: 30% 70%; */
-  background-color: yellow;
+  /* background-color: yellow; */
   /* z-index: 0; */
 }
 
@@ -63,12 +63,16 @@
 table{
   width: 100%;
 }
-table, th, td {
+/* table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
+} */
+
+.member-service{
+  display: grid;
 }
 th, td {
-  padding: 5px;
+  /* padding: 5px; */
   text-align: left;
 }
 .member-privileges{
@@ -91,5 +95,45 @@ th, td {
 }
 
 tr.checked-in-user-table-status {
-  background: #e47474;
+  background: #e47474 !important;
+}
+
+
+
+.fixed_header{
+  width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.fixed_header tbody tr{
+  background-color: white;
+}
+.fixed_header tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 70vh;
+}
+
+.fixed_header thead tr {
+  display: block;
+}
+
+.fixed_header th, .fixed_header td {
+  padding: 5px;
+  text-align: left;
+  width: 200px;
+} 
+
+.fixed_header thead {
+    background: black;
+    color:#fff;
+  }
+
+.unrecognized{
+  background-color: #e47474;
+}
+.member-cell{
+
 }

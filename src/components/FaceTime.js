@@ -2,7 +2,9 @@ import React, {useState,useRef} from "react";
 import Webcam from "react-webcam";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
-
+import { Input, IconButton, Button, ButtonGroup, 
+    Box, Table, Thead, Tbody, Tr, Th, Td,
+    FormControl } from '@chakra-ui/react'
 const videoConstraints = {
     // zIndex: 1,
     width: 200, 
@@ -40,7 +42,7 @@ export default function FaceTime({
         {currentImg &&(
           <img className="max-h-60 md:max-h-96" src={currentImg} alt="yourimage"/>
         )}
-        <button 
+        <Button 
         style={{
           borderWidth:1,
           borderColor:'rgba(0,0,0,0.5)',
@@ -51,7 +53,7 @@ export default function FaceTime({
           backgroundColor:'#fff',
           borderRadius:50
         }}
-        className={`mx-auto`} onClick={() => { setClick(false); }}><b>Retake</b></button>
+        className={`mx-auto`} onClick={() => { setClick(false); }}><b>Retake</b></Button>
       </div>
     );
   else
