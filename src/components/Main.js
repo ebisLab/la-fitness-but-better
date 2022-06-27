@@ -3,14 +3,14 @@ import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
 import EX1 from './EX1';
 import { Input, IconButton, Button, ButtonGroup, 
-  Box, Table, Thead, Tbody, Tr, Th, Td,
+  Box, Tabs, Table, Thead, Tbody, Tr, Th, Td,
   FormControl } from '@chakra-ui/react'
   // import { StyledTable, TableCell, TableHead, TableIconButton, TableRow } from './styles'
 
 // import axios from 'axios'
 
 
-export default function Main() {
+export default function Main({bg = "#e6dfd1", color = "gray.800"}) {
     const [userBarcode, setUserBarcode]=useState('')
     const [userInfo, setUserInfo]=useState('')
     const [todaysList, setTodaysList]=useState([])
@@ -94,22 +94,39 @@ export default function Main() {
     console.log('curr', currentImg)
   return (
   <main className='grid-container'>
-    <section style={{background:'orange'}} className='first-column'>
-      <div>
+    <section 
+    style={{background: '#ebf0f7'}}
+     className='first-column'>
+      {/* <div style={{background:'red'}}> */}
+      <Box
+       className='sidebar'
+        width="100%"
+        bg={bg} 
+        color={color} 
+        rounded="lg" 
+        p={5}
+      >
         <form onSubmit={submitHandler}>
         <ButtonGroup>
    
-        <Input name="barcode" type="text" onChange={changeHandler}  />
+        <Input 
+        style={{background:'beige'}}
+        name="barcode" type="text" onChange={changeHandler}  />
         <Button type="submit">✔</Button>
         <Button type="submit"
         onClick={(e)=>{e.preventDefault(); kidsModal()}}
         >🧸</Button>
         </ButtonGroup>
         </form>
+      {/* </Box>
+      <Box 
+          width="100%"
+          bg={bg} 
+          color={color} 
+          rounded="lg" 
+          p={5}
 
-
-      </div>
-
+      > */}
       {currentUser.length? (currentUser.map((item,i)=>(
         <div key={Date.now()}>
         <div className='member-card'>
@@ -166,7 +183,6 @@ export default function Main() {
           members under plan
         </div>
         </div>
-        {/* </div> */}
         </div>
         </div>
       ))):(
@@ -217,11 +233,12 @@ export default function Main() {
       </div>
       </div>
       )}
+      </Box>
     </section>
     <section style={{background: '#ebf0f7'}} className='second-column'>
       <div>check in tools</div>
       <div className='record-container'>
-        <div>Last Refresh: {currentTime}<Button>Refresh</Button></div>
+        <div>Last Refresh: {currentTime}<Button colorScheme='green'>Refresh</Button></div>
         <div>Check In History</div>
 
         <table className="fixed_header">
