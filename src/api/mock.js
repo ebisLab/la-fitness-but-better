@@ -20,6 +20,44 @@ export const mock= [
     },
     {
         id:1,
+        barcode_number: 'F33501292',
+        first_name: 'Hermoinie',
+        last_name: 'Granger',
+        member_photo:'https://placekitten.com/200/200',
+        fitness_type:'employee',
+        membership: 3,
+        time:0,
+        timesheet:[],
+        status:'OK',
+        perks:{
+            kids: [true],
+            towel: true,
+            racketball: true,
+            guestAllowed: true,
+            guest: []
+        }
+    },
+    {
+        id:2,
+        barcode_number: 'F33501211',
+        first_name: 'Kelly',
+        last_name: 'Stewart',
+        member_photo:'https://placekitten.com/200/200',
+        fitness_type:'member',
+        membership: 2,
+        time:0,
+        timesheet:[],
+        status:'DECLINED',
+        perks:{
+            kids: [false],
+            towel: false,
+            racketball: false,
+            guestAllowed: false,
+            guest: []
+        }
+    },
+    {
+        id:3,
         barcode_number: 'F37501272',
         first_name: 'Andrea',
         last_name: 'Boccielli',
@@ -31,7 +69,7 @@ export const mock= [
         membership: 2,
     },
     {
-        id:1,
+        id:4,
         barcode_number: 'F37221272',
         first_name: 'Yelena',
         last_name: 'Makron',

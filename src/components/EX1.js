@@ -18,11 +18,6 @@ export default function EX1({
     setCurrentImg={setCurrentImg}
     changecurrentuser={changecurrentuser} dontRefresh={dontRefresh} setDontRefresh={setDontRefresh} 
     />
-    // <EX2 
-    // currentImg={currentImg}
-    // setCurrentImg={setCurrentImg}
-    // changecurrentuser={changecurrentuser} dontRefresh={dontRefresh} setDontRefresh={setDontRefresh
-    // }/>
   )}
   else{
  return <EX4 

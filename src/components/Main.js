@@ -3,8 +3,9 @@ import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
 import EX1 from './EX1';
 import imgplaceholder from '../assets/img/userplaceholder.png'
-import { Input, IconButton, Button, ButtonGroup, 
-  Box, Tabs, Table, Thead, Tbody, Tr, Th, Td,
+import {UNRECOGNIZED, OK} from '../store/constants'
+import { Alert, AlertIcon, Input, IconButton, Button, ButtonGroup, 
+  Box, Center, Grid, Tabs, Table, Thead, Tbody, Tr, Th, Td,
   FormControl } from '@chakra-ui/react'
 
 
@@ -25,13 +26,14 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
     },[])
 
     
-
     const addName =(name)=> {
       let findUser= usersDatabase.some(item=>item.first_name.toLowerCase() === name.toLowerCase())
       let filterUser = usersDatabase.filter(item=>item.first_name.toLowerCase() === name.toLowerCase())
+      console.log('filteruser',filterUser)
       setCurrentUser(filterUser)
       if (findUser){
         const user={...filterUser[0], time, timesheet:[Date.now()]}
+        console.log('this is the name', name)
       setTodaysList([user,...todaysList]);
 
 
@@ -45,8 +47,9 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
       })
       setUsersDatabase(db)
       }else{
-      const user = { id: todaysList.length+1, first_name: name , status: 'UNRECOGNIZED', time};
+      const user = { id: todaysList.length+1, first_name: name , status: UNRECOGNIZED, time};
       setTodaysList([ user,...todaysList]); 
+      setCurrentUser([user])
       }
 
     }
@@ -97,7 +100,6 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
           return obj
          }
       })
-      // console.log('dist', distinctAarr)
       return distinctAarr.length
     }
 useEffect(() => {
@@ -105,17 +107,20 @@ useEffect(() => {
 
 }, [addName])
 
+const clickedRows = (e)=>{
+  setCurrentUser([e])
+}
 
-console.log('patroncount', patronsCount)
-console.log('patroncount+++', removeduplicates())
-
-// setPatronsCount(removeduplicates())
+const status_alert=[
+  {
+    OK: "success"
+  }
+]
   return (
   <main className='grid-container'>
     <section 
     style={{background: '#ebf0f7'}}
      className='first-column'>
-      {/* <div style={{background:'red'}}> */}
       <Box
        className='sidebar'
         width="100%"
@@ -128,7 +133,7 @@ console.log('patroncount+++', removeduplicates())
         <ButtonGroup>
    
         <Input 
-        style={{background:'beige'}}
+        style={{background:'#FEFCBF'}}
         name="barcode" type="text" onChange={changeHandler}  />
         <Button type="submit">✔</Button>
         <Button type="submit"
@@ -136,20 +141,14 @@ console.log('patroncount+++', removeduplicates())
         >🧸</Button>
         </ButtonGroup>
         </form>
-      {/* </Box>
-      <Box 
-          width="100%"
-          bg={bg} 
-          color={color} 
-          rounded="lg" 
-          p={5}
-
-      > */}
       {currentUser.length? (currentUser.map((item,i)=>(
         <div key={Date.now()}>
         <div className='member-card'>
           <div className='member-info'>
-            <div style={{background: 'green'}}>{item.status}</div>
+          <Alert status={item.status!==UNRECOGNIZED?'success':'error'}>
+            <AlertIcon />
+            {item.status}
+          </Alert>
             <div className='status'>
               <table>
                 <tbody>
@@ -186,15 +185,16 @@ console.log('patroncount+++', removeduplicates())
             <Button>Guest Waiver</Button>
           </div>
           <EX1 
-          imgAfterUpdate={imgAfterUpdate}
-          setImgAfterUpdate={setImgAfterUpdate}
-          currentImg={currentImg}
-          setCurrentImg={setCurrentImg}
-          dontRefresh={dontRefresh}
-          setDontRefresh={setDontRefresh}
-          item={item} 
-          currentUser={currentUser} 
-          changecurrentuser={changecurrentuser} />
+            imgAfterUpdate={imgAfterUpdate}
+            setImgAfterUpdate={setImgAfterUpdate}
+            currentImg={currentImg}
+            setCurrentImg={setCurrentImg}
+            dontRefresh={dontRefresh}
+            setDontRefresh={setDontRefresh}
+            item={item} 
+            currentUser={currentUser} 
+            changecurrentuser={changecurrentuser} 
+            />
           
         <div className='family-plan'>
           members under plan
@@ -206,21 +206,24 @@ console.log('patroncount+++', removeduplicates())
             <div key={Date.now()}>
       <div className='member-card'>
         <div className='member-info'>
-          <div style={{background: 'green'}}>INVALID BARCODE</div>
+          <Alert status='info'>
+            <AlertIcon />
+            NO USERS
+          </Alert>
           <div className='status'>
             <table>
               <tbody>
               <tr>
-                <th>Barcode</th>
+                <th>{''}</th>
                 <td>{userInfo}</td>
               </tr>
               <tr>
-                <th>Name</th>
-                <td>member name</td>
+                <th></th>
+                <td></td>
               </tr>
               <tr>
-                <th>Expiration</th>
-                <td>none</td>
+                <th></th>
+                <td></td>
               </tr>
               </tbody>
             </table>
@@ -236,16 +239,24 @@ console.log('patroncount+++', removeduplicates())
         <button>Guest Waiver</button>
       </div>
       <div className='member-profile-n-fam'>
-      <div className='card-profile-picture'>
+      <Box className='card-profile-picture'
+      bg="#BEE3F8"
+       h="32vh" 
+      >
+        <Center>
+          <Grid>
         <div>
-        {/* <div style={{ height: "200px", width:'200px', background: "gold"}} /> */}
-<img src={imgplaceholder} alt="img placeholder" width="200px" height="200px" />
-                </div>
-      </div>
+          <img src={imgplaceholder} alt="img placeholder" width="200px" height="200px" />
+        </div>
+        </Grid>
+        </Center>
+      </Box>
+
       <div>
-        members under plan
-        {userInfo}
+        {/* members under plan
+        {userInfo} */}
       </div>
+
       </div>
       </div>
       </div>
@@ -254,7 +265,6 @@ console.log('patroncount+++', removeduplicates())
     </section>
     <section style={{background: '#ebf0f7'}} className='second-column'>
       <div>check in tools</div>
-      {/* <div>{removeduplicates()}</div> */}
       <div className='record-container'>
         <div>Last Refresh: {currentTime}<Button colorScheme='green'>Refresh</Button></div>
         <div>Check In History</div>
@@ -271,22 +281,23 @@ console.log('patroncount+++', removeduplicates())
             </tr>
           </thead>
           <tbody>
-          {todaysList && todaysList.map(item=>{
+          {todaysList && todaysList.map((item,i)=>{
                 return(
-              <tr key={uuidv4()} 
-              className={item.status ==='UNRECOGNIZED'?"checked-in-user-table-status":""}
+              <tr key={i} 
+              onClick={()=>clickedRows(item)}
+              className={item.status === UNRECOGNIZED ?"checked-in-user-table-status":""}
               >
                 <td>
                   <div 
-                  style={{width:'50px', height:'50px', background: item.status === 'UNRECOGNIZED'?'red':'blue'}}>
-                  <img width="50px" height="50px" src={item.member_photo === ''?imgplaceholder:item.member_photo} alt={item.barcode_number}/>
+                  style={{width:'50px', height:'50px', background: item.status === UNRECOGNIZED?'red':'blue'}}>
+                        <img width="50px" height="50px" src={item.status === UNRECOGNIZED || item.member_photo === '' ? imgplaceholder: item.member_photo} alt={item.barcode_number}/>
                   </div>
                   </td>
-                <td>{item.status==='UNRECOGNIZED'?'':<Button>Service</Button>}</td>
+                <td>{item.status=== UNRECOGNIZED?'':<Button>Service</Button>}</td>
                 <td>{item.barcode_number}</td>
                 <td>{item.fitness_type}</td>
                 <td>{item.first_name} {item.last_name}</td>
-                <td style={{color: item.status!=='UNRECOGNIZED' && item.status !== 'CANCELLED'? '#0bbd0b':''}}>{item.status}</td>
+                <td className={item.status === OK ?'status_cell':''} style={{color: item.status!==UNRECOGNIZED && item.status !== 'CANCELLED'? '#0bbd0b':''}}>{item.status}</td>
                 <td>{item.time}</td>
               </tr>
               )})}

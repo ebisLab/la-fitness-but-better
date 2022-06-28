@@ -82,12 +82,9 @@ th, td {
 }
 
 .card-profile-picture{
-  background-color: indianred;
-  height: 50vh;
   display: grid;
   place-items: center;
   text-align: center;
-  /* z-index: 0; */
 }
 
 .record-container{
@@ -95,8 +92,16 @@ th, td {
 }
 
 tr.checked-in-user-table-status {
-  background: #e47474 !important;
+  color: #9B2C2C;
+  background: #FED7D7 !important;
   border-bottom: 1px solid indianred;
+  border-top: 1px solid indianred;
+}
+
+tr.checked-in-user-table-status:hover {
+
+  background: #fbc3c3 !important;
+
 }
 
 
@@ -110,6 +115,13 @@ tr.checked-in-user-table-status {
 .fixed_header tbody tr{
   background-color: white;
 }
+
+.fixed_header tbody tr:hover {
+  cursor: pointer;
+  background-color: RGBA(0, 0, 0, 0.04);
+}
+
+
 .fixed_header tbody{
   display:block;
   width: 100%;
@@ -132,8 +144,15 @@ tr.checked-in-user-table-status {
     color:#fff;
   }
 
+.status_cell {
+  padding: 0 4% !important;
+  /* text-align: calc();
+    background: black !important;
+    color:#fff; */
+  }
+
 .unrecognized{
-  background-color: #e47474;
+  /* background-color: #FED7D7; */
 }
 .member-cell{
 
