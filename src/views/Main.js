@@ -1,11 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
-import EX1 from './EX1';
+import EX1 from '../components/EX1';
 import imgplaceholder from '../assets/img/userplaceholder.png'
 import {UNRECOGNIZED, OK} from '../store/constants'
-import { Alert, AlertIcon, Input, IconButton, Button, ButtonGroup, 
-  Box, Center, Grid, Tabs, Table, Thead, Tbody, Tr, Th, Td,
+import { 
+  Alert, 
+  AlertIcon, 
+  Input, 
+  IconButton, 
+  Button, 
+  ButtonGroup, 
+  Box, 
+  Center, 
+  Grid, 
+  Tabs, 
+  Table, 
+  Thead,
+  Tbody, 
+  Tr, 
+  Th, 
+  Td,
   FormControl } from '@chakra-ui/react'
 
 
