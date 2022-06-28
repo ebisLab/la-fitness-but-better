@@ -1,10 +1,20 @@
 import React, {useState,useRef} from "react";
+import {
+  OK,
+  EXPIRED,
+  EXPIRING, 
+  DECLINED,
+  FROZEN,
+  UNRECOGNIZED,
+  MEMBERSHIP_REVOCKED
+} from '../store/constants'
 import Webcam from "react-webcam";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCamera } from '@fortawesome/free-solid-svg-icons'
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { Input, IconButton, Button, ButtonGroup, 
-    Box, Table, Thead, Tbody, Tr, Th, Td,
-    FormControl } from '@chakra-ui/react'
+    Box, Center, Grid, Table, Thead, Tbody, Tr, Th, Td,
+    FormControl } from '@chakra-ui/react';
+
 const videoConstraints = {
     // zIndex: 1,
     width: 200, 
@@ -39,6 +49,7 @@ export default function FaceTime({
   if(click)
     return(
       <div id="container" className="border-8 bg-gray-800 h-full flex space-y-6 flex-col justify-center items-center">
+        huihuhu
         {currentImg &&(
           <img className="max-h-60 md:max-h-96" src={currentImg} alt="yourimage"/>
         )}
@@ -58,25 +69,32 @@ export default function FaceTime({
     );
   else
     return (
-
-      <div className='card-profile-picture'>
+<Box 
+className='card-profile-picture'
+bg="#9AE6B4" h="40vh" 
+>
+  <Center>
+    <Grid>
+      {/* // <div className='card-profile-picture'> */}
         <div>
-            <div style={{height:'200px', width: '200px', zIndex: 0}}>
-                <span style={{
-                zIndex:0,
-                position: 'absolute', margin: '5.4em -1.7em'}}>loading...</span>
-         <div style={{
+          <div style={{height:'200px', width: '200px', zIndex: 0}}>
+            <span style={{
+            zIndex:0,
+            position: 'absolute', margin: '5.4em -1.7em'}}>loading...</span>
+          <div style={{
             position: 'absolute', 
             overflow: 'hidden',
             zIndex:1
-        }}><Webcam className="border-8 max-h-60 md:max-h-96"
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/jpeg"
-          videoConstraints={videoConstraints}
-        />
-        </div>
-        </div>
+          }}>
+            <Webcam className="border-8 max-h-60 md:max-h-96"
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
+              />
+          </div>
+          </div>
+
         <button 
         style={{
           borderWidth:1,
@@ -96,8 +114,10 @@ export default function FaceTime({
             <FontAwesomeIcon icon={faCamera} size="2x"/>
         </button>
                 </div>
+                </Grid>
+                </Center>
 
-
-        </div>
+</Box>
+        // </div>
   );
 }
