@@ -20,6 +20,20 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
     const [currentTime,setCurrentTime]=useState(time)
     const [dontRefresh, setDontRefresh]=useState(false)
     const [imgAfterUpdate, setImgAfterUpdate]=useState('')
+    const status_map = { UNRECOGNIZED : "error", OK: "success", QUESTION: "info", DECLINED: "warning"}
+    const status_table = { UNRECOGNIZED : "", OK: "#0bbd0b", DECLINED: "#ED8936"}
+    const stats = [
+      { status: 'UNRECOGNIZED',
+      main:'red',
+      dark:'dark red'
+    },
+      { status: 'OK',
+        main:'green',
+        dark:'dark green'},
+      { status: 'DECLINED',
+        main:'orange',
+        dark:'dark orange'},
+    ]
     useEffect(()=>{
       setUsersDatabase(mock)
 
@@ -102,20 +116,15 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
       })
       return distinctAarr.length
     }
-useEffect(() => {
-  setPatronsCount(removeduplicates())
+    useEffect(() => {
+      setPatronsCount(removeduplicates())
 
-}, [addName])
+    }, [addName])
 
-const clickedRows = (e)=>{
-  setCurrentUser([e])
-}
+    const clickedRows = (e)=>{
+      setCurrentUser([e])
+    }
 
-const status_alert=[
-  {
-    OK: "success"
-  }
-]
   return (
   <main className='grid-container'>
     <section 
@@ -145,7 +154,9 @@ const status_alert=[
         <div key={Date.now()}>
         <div className='member-card'>
           <div className='member-info'>
-          <Alert status={item.status!==UNRECOGNIZED?'success':'error'}>
+          <Alert 
+          status={status_map[item.status]}
+          >
             <AlertIcon />
             {item.status}
           </Alert>
@@ -297,7 +308,9 @@ const status_alert=[
                 <td>{item.barcode_number}</td>
                 <td>{item.fitness_type}</td>
                 <td>{item.first_name} {item.last_name}</td>
-                <td className={item.status === OK ?'status_cell':''} style={{color: item.status!==UNRECOGNIZED && item.status !== 'CANCELLED'? '#0bbd0b':''}}>{item.status}</td>
+                <td className={item.status === OK ?'status_cell':''} 
+                  style={{color: status_table[item.status]}}
+                >{item.status}</td>
                 <td>{item.time}</td>
               </tr>
               )})}

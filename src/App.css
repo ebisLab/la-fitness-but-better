@@ -146,9 +146,6 @@ tr.checked-in-user-table-status:hover {
 
 .status_cell {
   padding: 0 4% !important;
-  /* text-align: calc();
-    background: black !important;
-    color:#fff; */
   }
 
 .unrecognized{
