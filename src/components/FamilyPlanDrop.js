@@ -10,7 +10,7 @@ import {
 export default function FamilyPlanDrop() {
   return (
     <div>
-<Accordion isExpanded="false" allowMultiple>
+<Accordion allowMultiple>
   <AccordionItem >
     <h2>
       <AccordionButton>

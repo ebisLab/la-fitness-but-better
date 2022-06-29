@@ -23,9 +23,18 @@ import {
   Td,
   FormControl } from '@chakra-ui/react'
 import FamilyPlanDrop from '../components/FamilyPlanDrop';
+import PatronList2 from '../components/modals/PatronList';
 
 
-export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount, handleTabsChange, setTabIndex}) {
+export default function Main({
+  bg = "#e6dfd1", 
+  color = "gray.800",
+  setPatronsCount, 
+  patronsCount2,
+  handleTabsChange, 
+  setTabIndex,
+  setPatronsCount2
+}) {
     const [userBarcode, setUserBarcode]=useState('')
     const [userInfo, setUserInfo]=useState('')
     const [todaysList, setTodaysList]=useState([])
@@ -63,7 +72,6 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
       setCurrentUser(filterUser)
       if (findUser){
         const user={...filterUser[0], time, timesheet:[Date.now()]}
-        console.log('this is the name', name)
       setTodaysList([user,...todaysList]);
 
 
@@ -132,7 +140,10 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
       })
       return distinctAarr.length
     }
+
+
     useEffect(() => {
+      setPatronsCount2(todaysList)
       setPatronsCount(removeduplicates())
 
     }, [addName])

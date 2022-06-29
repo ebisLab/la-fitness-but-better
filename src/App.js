@@ -8,9 +8,21 @@ import TabWrapper from './components/TabWrapper';
 
 function App() {
   const [patronsCount, setPatronsCount]=useState(0)
+  const [patronsCount2, setPatronsCount2]=useState([])
   const [tabIndex, setTabIndex] = React.useState(0)
   const handleTabsChange = (index) => {
     setTabIndex(index)
+  }
+
+  function removeduplicates2(){
+         let duplicateRemover = new Set();
+      let distinctAarr = patronsCount2.filter((obj,i)=>{
+        if( !duplicateRemover.has(obj.barcode_number) && obj.status !== 'UNRECOGNIZED'){
+          duplicateRemover.add(obj.barcode_number)
+          return obj
+         }
+      })
+      return distinctAarr
   }
 
   return (
@@ -21,10 +33,16 @@ function App() {
           <Dashboard 
           setTabIndex={setTabIndex}
             handleTabsChange={handleTabsChange}
-            patronsCount={patronsCount} setPatronsCount={setPatronsCount}
+            setPatronsCount2={setPatronsCount2}
+            patronsCount2={patronsCount2}
+            setPatronsCount={setPatronsCount}
           />
         </TabWrapper>
-        <Footer patronsCount={patronsCount}/>
+        <Footer
+        removeduplicates2={removeduplicates2}
+         patronsCount={patronsCount}
+        patronsCount2={patronsCount2}
+        />
         </ChakraProvider>
     </div>
   );
