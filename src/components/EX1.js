@@ -1,6 +1,4 @@
 import React from 'react'
-import EX2 from './EX2'
-import EX3 from './EX3'
 import EX4 from './EX4'
 import FaceTime from './FaceTime'
 

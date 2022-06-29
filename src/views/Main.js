@@ -1,15 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
-import EX1 from './EX1';
+import EX1 from '../components/EX1';
 import imgplaceholder from '../assets/img/userplaceholder.png'
 import {UNRECOGNIZED, OK} from '../store/constants'
-import { Alert, AlertIcon, Input, IconButton, Button, ButtonGroup, 
-  Box, Center, Grid, Tabs, Table, Thead, Tbody, Tr, Th, Td,
+import { 
+  Alert, 
+  AlertIcon, 
+  Input, 
+  IconButton, 
+  Button, 
+  ButtonGroup, 
+  Box, 
+  Center, 
+  Grid, 
+  Tabs, 
+  Table, 
+  Thead,
+  Tbody, 
+  Tr, 
+  Th, 
+  Td,
   FormControl } from '@chakra-ui/react'
+import FamilyPlanDrop from '../components/FamilyPlanDrop';
 
 
-export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount, patronsCount}) {
+export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount, handleTabsChange, setTabIndex}) {
     const [userBarcode, setUserBarcode]=useState('')
     const [userInfo, setUserInfo]=useState('')
     const [todaysList, setTodaysList]=useState([])
@@ -178,7 +194,9 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
                 </tbody>
               </table>
               <div className='member-service'>
-                <Button>service</Button>
+                <Button 
+                onClick={()=>setTabIndex(2)}
+                >service</Button>
                 <Button
                 colorScheme="teal"
                 variant="solid"
@@ -208,7 +226,7 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
             />
           
         <div className='family-plan'>
-          members under plan
+          <FamilyPlanDrop />
         </div>
         </div>
         </div>
