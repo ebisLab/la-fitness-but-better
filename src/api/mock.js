@@ -1,6 +1,7 @@
 export const mock= [
     {
         id:0,
+        date_of_membership:'',
         barcode_number: 'F33501272',
         first_name: 'Jennifer',
         last_name: 'Lewis',
@@ -20,6 +21,7 @@ export const mock= [
     },
     {
         id:1,
+        date_of_membership:'',
         barcode_number: 'F33501292',
         first_name: 'Hermoinie',
         last_name: 'Granger',
@@ -39,6 +41,7 @@ export const mock= [
     },
     {
         id:2,
+        date_of_membership:'',
         barcode_number: 'F33501211',
         first_name: 'Kelly',
         last_name: 'Stewart',
@@ -58,6 +61,7 @@ export const mock= [
     },
     {
         id:3,
+        date_of_membership:'',
         barcode_number: 'F37501272',
         first_name: 'Andrea',
         last_name: 'Boccielli',
@@ -70,6 +74,7 @@ export const mock= [
     },
     {
         id:4,
+        date_of_membership:'',
         barcode_number: 'F37221272',
         first_name: 'Yelena',
         last_name: 'Makron',
@@ -85,6 +90,7 @@ export const mock= [
 export const mock2= [
     {
         id:0,
+        date_of_membership:'',
         barcode_number: 'F33501272',
         first_name: 'Jennifer444',
         last_name: 'Lewis',
@@ -103,6 +109,7 @@ export const mock2= [
     },
     {
         id:1,
+        date_of_membership:'',
         barcode_number: 'F37501272',
         first_name: 'Andrea',
         last_name: 'Boccielli',

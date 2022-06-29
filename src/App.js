@@ -8,13 +8,19 @@ import TabWrapper from './components/TabWrapper';
 
 function App() {
   const [patronsCount, setPatronsCount]=useState(0)
+  const [tabIndex, setTabIndex] = React.useState(0)
+  const handleTabsChange = (index) => {
+    setTabIndex(index)
+  }
 
   return (
     <div className='platform'>
        <ChakraProvider>
         <Header/>
-        <TabWrapper>
+        <TabWrapper tabIndex={tabIndex} setTabIndex={setTabIndex} handleTabsChange={handleTabsChange}>
           <Dashboard 
+          setTabIndex={setTabIndex}
+            handleTabsChange={handleTabsChange}
             patronsCount={patronsCount} setPatronsCount={setPatronsCount}
           />
         </TabWrapper>

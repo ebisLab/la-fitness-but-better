@@ -22,9 +22,10 @@ import {
   Th, 
   Td,
   FormControl } from '@chakra-ui/react'
+import FamilyPlanDrop from '../components/FamilyPlanDrop';
 
 
-export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount, patronsCount}) {
+export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount, handleTabsChange, setTabIndex}) {
     const [userBarcode, setUserBarcode]=useState('')
     const [userInfo, setUserInfo]=useState('')
     const [todaysList, setTodaysList]=useState([])
@@ -193,7 +194,9 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
                 </tbody>
               </table>
               <div className='member-service'>
-                <Button>service</Button>
+                <Button 
+                onClick={()=>setTabIndex(2)}
+                >service</Button>
                 <Button
                 colorScheme="teal"
                 variant="solid"
@@ -223,7 +226,7 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
             />
           
         <div className='family-plan'>
-          members under plan
+          <FamilyPlanDrop />
         </div>
         </div>
         </div>
