@@ -24,6 +24,7 @@ import {
   FormControl } from '@chakra-ui/react'
 import FamilyPlanDrop from '../components/FamilyPlanDrop';
 import PatronList2 from '../components/modals/PatronList';
+import GuestList from '../components/modals/GuestList';
 
 
 export default function Main({
@@ -39,6 +40,7 @@ export default function Main({
     const [userInfo, setUserInfo]=useState('')
     const [todaysList, setTodaysList]=useState([])
     const [currentUser, setCurrentUser]=useState([])
+    const [currentGuestList, setCurrentGuestList] = useState([])
     const [currentImg, setCurrentImg] = useState(null);
     const [usersDatabase, setUsersDatabase]= useState([])
     const time= new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) 
@@ -222,7 +224,12 @@ export default function Main({
           <div className='member-privileges'>
             <div>🎾</div>
             <div>G(1)</div>
-            <Button>Guest Waiver</Button>
+            {item.perks?.guest ? (
+            <GuestList 
+            usersDatabase={usersDatabase}
+            todaysList={todaysList}
+            currentUser={currentUser}
+            item={item}/>):''}
           </div>
           <EX1 
             imgAfterUpdate={imgAfterUpdate}
