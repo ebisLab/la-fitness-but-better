@@ -27,6 +27,7 @@ import FamilyPlanDrop from '../components/FamilyPlanDrop';
 import PatronList2 from '../components/modals/PatronList';
 import GuestList from '../components/modals/GuestList';
 import Sample from '../components/Sample';
+import GuestForm from '../components/modals/GuestForm';
 
 export default function Main({
   bg = '#e6dfd1',
@@ -116,30 +117,31 @@ export default function Main({
     console.log('heee');
   };
 
-  const changeThisUser = data => {
+  const changeThisUser = (e, data) => {
     console.log('change this user', data);
+    e.preventDefault();
     const db = usersDatabase.map(obj => {
       console.log('🐝', obj.perks?.guest);
       if (obj.barcode_number === currentUser[0].barcode_number) {
         return {
           ...obj,
-          test: data,
-          perks: {...obj, guest: [...obj.perks?.guest, data]},
+          test: 'example 🦄',
+          perks: {...obj.perks, guest: [data, ...obj.perks.guest]},
+          //perks: {guest: [...obj.perks?.guest, data], ...obj},
         };
       } else {
         return obj;
       }
     });
-
-    setUsersDatabase(db);
-
     setUsersDatabase(db);
     const db2 = todaysList.map(obj => {
+      console.log('lets see');
       if (obj.barcode_number === currentUser[0].barcode_number) {
         return {
           ...obj,
-          test: data,
-          perks: {...obj, guest: [...obj.perks?.guest, data]},
+          test: 'example 🦄',
+          perks: {...obj.perks, guest: [data, ...obj.perks.guest]},
+          //perks: {guest: [...obj.perks?.guest, data], ...obj},
         };
       } else {
         return obj;
@@ -147,21 +149,19 @@ export default function Main({
     });
     console.log('switched', db2);
     setTodaysList(db2);
-
     console.log('this curr user', currentUser);
-
     const db3 = currentUser.map(obj => {
       if (obj.barcode_number) {
         return {
           ...obj,
-          test: data,
-          perks: {...obj, guest: [...obj.perks?.guest, data]},
+          test: 'example 🦄',
+          perks: {...obj.perks, guest: [data, ...obj.perks.guest]},
+          //perks: {guest: [...obj.perks?.guest, data], ...obj},
         };
       } else {
         return obj;
       }
     });
-
     setCurrentUser(db3);
   };
 
@@ -272,7 +272,7 @@ export default function Main({
                       </table>
                       <div className="member-service">
                         <Button onClick={() => setTabIndex(2)}>service</Button>
-                        {item.perks ? (
+                        {/* {item.perks ? (
                           <Sample
                             usersDatabase={usersDatabase}
                             currentUser={currentUser}
@@ -281,15 +281,15 @@ export default function Main({
                           />
                         ) : (
                           ''
-                        )}
-                        {/* <Button
+                        )} */}
+                        <Button
                           colorScheme="teal"
                           variant="solid"
                           rounded="200"
                           size="sm"
                           fontSize="sm">
                           Get $
-                        </Button> */}
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -299,6 +299,18 @@ export default function Main({
                       <div>G(1)</div>
                       {item.perks?.guest ? (
                         <GuestList
+                          item={item}
+                          todaysList={todaysList}
+                          usersDatabase={usersDatabase}
+                          currentUser={currentUser}
+                          setUsersDatabase={setUsersDatabase}
+                          changeThisUser={changeThisUser}
+                        />
+                      ) : (
+                        ''
+                      )}
+                      {/* {item.perks?.guest ? (
+                        <GuestList
                           usersDatabase={usersDatabase}
                           todaysList={todaysList}
                           currentUser={currentUser}
@@ -306,7 +318,7 @@ export default function Main({
                         />
                       ) : (
                         ''
-                      )}
+                      )} */}
                     </div>
                     <EX1
                       imgAfterUpdate={imgAfterUpdate}
@@ -451,7 +463,8 @@ export default function Main({
                       </td>
                       <td>{item.barcode_number}</td>
                       <td>
-                        {item.fitness_type} {item.perks ? item.test : ''}
+                        {item.fitness_type}
+                        {/* {item.perks ? item.test : ''} */}
                       </td>
                       <td>
                         {item.first_name} {item.last_name}
