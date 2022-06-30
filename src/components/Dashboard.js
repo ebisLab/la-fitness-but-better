@@ -7,14 +7,16 @@ import Management from '../views/Management'
 
 
 export default function Dashboard(props) {
-    const {patronsCount, setPatronsCount, handleTabsChange, setTabIndex}=props;
+    const { patronsCount2, setPatronsCount, setPatronsCount2, handleTabsChange, setTabIndex}=props;
   return (
 <TabPanels>
 <TabPanel p="0px 0px 10px 0px">
 <Main 
+patronsCount2={patronsCount2}
 setTabIndex={setTabIndex}
     handleTabsChange={handleTabsChange}
-    patronsCount={patronsCount} setPatronsCount={setPatronsCount}
+    setPatronsCount={setPatronsCount}
+    setPatronsCount2={setPatronsCount2}
     />
 </TabPanel>
 <TabPanel>

@@ -23,13 +23,24 @@ import {
   Td,
   FormControl } from '@chakra-ui/react'
 import FamilyPlanDrop from '../components/FamilyPlanDrop';
+import PatronList2 from '../components/modals/PatronList';
+import GuestList from '../components/modals/GuestList';
 
 
-export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount, handleTabsChange, setTabIndex}) {
+export default function Main({
+  bg = "#e6dfd1", 
+  color = "gray.800",
+  setPatronsCount, 
+  patronsCount2,
+  handleTabsChange, 
+  setTabIndex,
+  setPatronsCount2
+}) {
     const [userBarcode, setUserBarcode]=useState('')
     const [userInfo, setUserInfo]=useState('')
     const [todaysList, setTodaysList]=useState([])
     const [currentUser, setCurrentUser]=useState([])
+    const [currentGuestList, setCurrentGuestList] = useState([])
     const [currentImg, setCurrentImg] = useState(null);
     const [usersDatabase, setUsersDatabase]= useState([])
     const time= new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) 
@@ -63,7 +74,6 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
       setCurrentUser(filterUser)
       if (findUser){
         const user={...filterUser[0], time, timesheet:[Date.now()]}
-        console.log('this is the name', name)
       setTodaysList([user,...todaysList]);
 
 
@@ -132,7 +142,10 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
       })
       return distinctAarr.length
     }
+
+
     useEffect(() => {
+      setPatronsCount2(todaysList)
       setPatronsCount(removeduplicates())
 
     }, [addName])
@@ -211,7 +224,12 @@ export default function Main({bg = "#e6dfd1", color = "gray.800",setPatronsCount
           <div className='member-privileges'>
             <div>🎾</div>
             <div>G(1)</div>
-            <Button>Guest Waiver</Button>
+            {item.perks?.guest ? (
+            <GuestList 
+            usersDatabase={usersDatabase}
+            todaysList={todaysList}
+            currentUser={currentUser}
+            item={item}/>):''}
           </div>
           <EX1 
             imgAfterUpdate={imgAfterUpdate}

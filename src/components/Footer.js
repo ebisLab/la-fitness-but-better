@@ -1,14 +1,19 @@
 import React from 'react'
 import {
   Box,
+  Button,
   Container,
   Stack,
   Text,
   Link,
   useColorModeValue,
 } from '@chakra-ui/react';
+import PatronList2 from './modals/PatronList';
 
-export default function Footer({patronsCount}) {
+export default function Footer({
+  isOpen, onOpen, onClose,
+  patronsCount, patronsCount2, removeduplicates2}) {
+  console.log('remove from footer', removeduplicates2())
   return (
     <footer>
     <section> 
@@ -17,10 +22,12 @@ export default function Footer({patronsCount}) {
         maxW={'6xl'}
         direction={{ base: 'column', md: 'row' }}
         spacing={4}
-        justify={{ base: 'center', md: 'space-between' }}
+        justify={{ base: 'center',  }}
         align={{ base: 'center', md: 'center' }}>
-      <Text>
-        <b>{patronsCount}</b> guests today </Text>
+
+        <PatronList2 removeduplicates2={removeduplicates2} />
+
+
         </Container>
         </section>
   </footer>

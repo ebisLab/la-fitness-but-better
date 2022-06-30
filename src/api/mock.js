@@ -16,7 +16,20 @@ export const mock= [
             towel: false,
             racketball: false,
             guestAllowed: true,
-            guest: []
+            guest: [{
+                first_name: "dfdfs",
+            guest_image: "https://picsum.photos/id/2/200/200",
+            id: 2,
+            last_name: "manchuri",
+            phone_number: "45352",},
+            {
+            first_name: "patrick",
+            guest_image: "https://picsum.photos/id/1/200/200",
+            id: 1,
+            last_name: "starr",
+            membership: "guest",
+            phone_number: "920000"
+        }],
         }
     },
     {
