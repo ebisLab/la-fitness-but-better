@@ -11,6 +11,7 @@ export const mock = [
     time: 0,
     timesheet: [],
     status: 'OK',
+    expiration: 'none',
     perks: {
       kids: [false],
       towel: false,
@@ -48,6 +49,7 @@ export const mock = [
     time: 0,
     timesheet: [],
     status: 'OK',
+    expiration: 'none',
     perks: {
       kids: [true],
       towel: true,
@@ -85,6 +87,7 @@ export const mock = [
     fitness_type: 'fitness',
     member_photo: '',
     status: 'OK',
+    expiration: 'none',
     time: 0,
     timesheet: [],
     membership: 2,
@@ -99,6 +102,7 @@ export const mock = [
     member_photo:
       'https://images.unsplash.com/photo-1655857202782-8d0ef8f0254b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2528&q=80',
     status: 'OK',
+    expiration: 'none',
     time: 0,
     timesheet: [],
     membership: 1,
@@ -118,6 +122,7 @@ export const mock2 = [
     time: 0,
     timesheet: [],
     status: 'OK',
+    expiration: 'none',
     perks: {
       kids: [false],
       towel: false,
@@ -133,6 +138,7 @@ export const mock2 = [
     last_name: 'Boccielli',
     fitness_type: 'fitness',
     status: 'OK',
+    expiration: 'none',
     membership: 2,
   },
 ];
