@@ -91,6 +91,20 @@ th, td {
   text-align: center;
 }
 
+.camera_capture {
+  border-color: rgba(0,0,0,0.5);
+  border-radius: 50px;
+  z-index: 1;
+  position: relative;
+  margin: -20px -20px;
+  padding: 0.6em;
+  background-color: #fff;
+}
+
+.camera_center{
+  text-align: center;
+}
+
 tr.checked-in-user-table-status {
   color: #9B2C2C;
   background: #FED7D7 !important;

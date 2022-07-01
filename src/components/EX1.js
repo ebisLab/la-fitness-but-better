@@ -23,6 +23,8 @@ export default function EX1({
  setImgAfterUpdate={setImgAfterUpdate}
     setCurrentImg={setCurrentImg}
     changecurrentuser={changecurrentuser} dontRefresh={dontRefresh} setDontRefresh={setDontRefresh} 
-    item={item} currentImg={currentImg}/>
+    item={item} 
+    currentImg={item.member_photo}
+    />
   }
 }

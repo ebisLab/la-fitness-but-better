@@ -1,37 +1,43 @@
-import React, { useState} from 'react'
+import React, {useState} from 'react';
 import './App.css';
-import { ChakraProvider } from '@chakra-ui/react'
+import {ChakraProvider} from '@chakra-ui/react';
 import Footer from './components/Footer';
-import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import TabWrapper from './components/TabWrapper';
+import {UNRECOGNIZED} from './store/constants';
 
 function App() {
-  const [patronsCount, setPatronsCount]=useState(0)
-  const [patronsCount2, setPatronsCount2]=useState([])
-  const [tabIndex, setTabIndex] = React.useState(0)
-  const handleTabsChange = (index) => {
-    setTabIndex(index)
-  }
+  const [patronsCount, setPatronsCount] = useState(0);
+  const [patronsCount2, setPatronsCount2] = useState([]);
+  const [tabIndex, setTabIndex] = React.useState(0);
+  const handleTabsChange = index => {
+    setTabIndex(index);
+  };
 
-  function removeduplicates2(){
-         let duplicateRemover = new Set();
-      let distinctAarr = patronsCount2.filter((obj,i)=>{
-        if( !duplicateRemover.has(obj.barcode_number) && obj.status !== 'UNRECOGNIZED'){
-          duplicateRemover.add(obj.barcode_number)
-          return obj
-         }
-      })
-      return distinctAarr
+  function removeduplicates2() {
+    let duplicateRemover = new Set();
+    let distinctAarr = patronsCount2.filter((obj, i) => {
+      if (
+        !duplicateRemover.has(obj.barcode_number) &&
+        obj.status !== UNRECOGNIZED
+      ) {
+        duplicateRemover.add(obj.barcode_number);
+        return obj;
+      }
+      return false;
+    });
+    return distinctAarr;
   }
 
   return (
-    <div className='platform'>
-       <ChakraProvider>
-        <Header/>
-        <TabWrapper tabIndex={tabIndex} setTabIndex={setTabIndex} handleTabsChange={handleTabsChange}>
-          <Dashboard 
+    <div className="platform">
+      <ChakraProvider>
+        <TabWrapper
+          tabIndex={tabIndex}
           setTabIndex={setTabIndex}
+          handleTabsChange={handleTabsChange}>
+          <Dashboard
+            setTabIndex={setTabIndex}
             handleTabsChange={handleTabsChange}
             setPatronsCount2={setPatronsCount2}
             patronsCount2={patronsCount2}
@@ -39,11 +45,11 @@ function App() {
           />
         </TabWrapper>
         <Footer
-        removeduplicates2={removeduplicates2}
-         patronsCount={patronsCount}
-        patronsCount2={patronsCount2}
+          removeduplicates2={removeduplicates2}
+          patronsCount={patronsCount}
+          patronsCount2={patronsCount2}
         />
-        </ChakraProvider>
+      </ChakraProvider>
     </div>
   );
 }
