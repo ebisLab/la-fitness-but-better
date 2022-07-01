@@ -42,7 +42,7 @@ export const mock = [
     barcode_number: 'F33501292',
     first_name: 'Hermoinie',
     last_name: 'Granger',
-    member_photo: 'https://picsum.photos/id/1000/200/200',
+    member_photo: 'https://picsum.photos/id/1027/200',
     fitness_type: 'employee',
     membership: 3,
     time: 0,

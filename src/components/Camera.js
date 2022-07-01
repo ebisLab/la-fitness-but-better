@@ -18,27 +18,45 @@ export default function Camera({item, changecurrentuser}) {
 
   React.useEffect(() => {
     setImage(item.member_photo);
-  }, []);
+  }, [item.member_photo]);
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImage(imageSrc);
     changecurrentuser(imageSrc);
-  }, [webcamRef, changecurrentuser, item.member_photo]);
+  }, [webcamRef, changecurrentuser]);
 
   return (
     <Box className="card-profile-picture" bg={status[item.status]} h="40vh">
       <Center>
         <Grid>
-          <div>
+          <div className="camera_center">
             {!image ? (
               <div>
-                <Webcam
-                  audio={false}
-                  ref={webcamRef}
-                  screenshotFormat="image/jpeg"
-                  videoConstraints={videoConstraints}
-                />
+                <div style={{height: '200px', width: '200px', zIndex: 0}}>
+                  <span
+                    style={{
+                      zIndex: 0,
+                      position: 'absolute',
+                      margin: '5.4em -1.7em',
+                    }}>
+                    {/* loading... */}
+                  </span>
+                  <div
+                    style={{
+                      position: 'absolute',
+                      overflow: 'hidden',
+                      zIndex: 1,
+                    }}>
+                    <Webcam
+                      className="border-8 max-h-60 md:max-h-96"
+                      audio={false}
+                      ref={webcamRef}
+                      screenshotFormat="image/jpeg"
+                      videoConstraints={videoConstraints}
+                    />
+                  </div>
+                </div>
               </div>
             ) : (
               <Image
@@ -47,10 +65,6 @@ export default function Camera({item, changecurrentuser}) {
                 alt={`${item.first_name} ${item.last_name}`}
               />
             )}
-
-            {/* <button onClick={() => (!image ? capture() : setImage(undefined))}>
-              {!image ? 'Capture photo' : 'take photo'}
-            </button> */}
             {item?.status !== UNRECOGNIZED ? (
               <button
                 className="camera_capture"

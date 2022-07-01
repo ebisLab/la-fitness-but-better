@@ -92,16 +92,17 @@ th, td {
 }
 
 .camera_capture {
-  border-width: 1;
   border-color: rgba(0,0,0,0.5);
- align-items: center;
-  justify-content: center;
-   border-radius: 50px;
+  border-radius: 50px;
   z-index: 1;
-  position: absolute;
+  position: relative;
   margin: -20px -20px;
-  padding: .6em;
-  background-color: #fff; 
+  padding: 0.6em;
+  background-color: #fff;
+}
+
+.camera_center{
+  text-align: center;
 }
 
 tr.checked-in-user-table-status {

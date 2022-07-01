@@ -4,6 +4,7 @@ import {ChakraProvider} from '@chakra-ui/react';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import TabWrapper from './components/TabWrapper';
+import {UNRECOGNIZED} from './store/constants';
 
 function App() {
   const [patronsCount, setPatronsCount] = useState(0);
@@ -18,11 +19,12 @@ function App() {
     let distinctAarr = patronsCount2.filter((obj, i) => {
       if (
         !duplicateRemover.has(obj.barcode_number) &&
-        obj.status !== 'UNRECOGNIZED'
+        obj.status !== UNRECOGNIZED
       ) {
         duplicateRemover.add(obj.barcode_number);
         return obj;
       }
+      return false;
     });
     return distinctAarr;
   }

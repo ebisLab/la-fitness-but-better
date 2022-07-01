@@ -1,42 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
-import EX1 from '../components/EX1';
 import imgplaceholder from '../assets/img/userplaceholder.png';
 import {UNRECOGNIZED, OK} from '../store/constants';
 import {
   Alert,
   AlertIcon,
   Input,
-  IconButton,
   Button,
   ButtonGroup,
   Box,
   Center,
   Grid,
-  Tabs,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  FormControl,
 } from '@chakra-ui/react';
 import FamilyPlanDrop from '../components/FamilyPlanDrop';
-import PatronList2 from '../components/modals/PatronList';
 import GuestList from '../components/modals/Guest/GuestList';
-import Sample from '../components/Sample';
-import GuestForm from '../components/modals/Guest/GuestForm';
-import Screen from '../components/Screen';
 import Camera from '../components/Camera';
 
 export default function Main({
   bg = '#e6dfd1',
   color = 'gray.800',
   setPatronsCount,
-  patronsCount2,
-  handleTabsChange,
   setTabIndex,
   setPatronsCount2,
 }) {
@@ -44,7 +28,6 @@ export default function Main({
   const [userInfo, setUserInfo] = useState('');
   const [todaysList, setTodaysList] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
-  const [currentGuestList, setCurrentGuestList] = useState([]);
   const [currentImg, setCurrentImg] = useState(null);
   const [usersDatabase, setUsersDatabase] = useState([]);
   const time = new Date().toLocaleString('en-US', {
@@ -62,11 +45,6 @@ export default function Main({
     DECLINED: 'warning',
   };
   const status_table = {UNRECOGNIZED: '', OK: '#0bbd0b', DECLINED: '#ED8936'};
-  const stats = [
-    {status: 'UNRECOGNIZED', main: 'red', dark: 'dark red'},
-    {status: 'OK', main: 'green', dark: 'dark green'},
-    {status: 'DECLINED', main: 'orange', dark: 'dark orange'},
-  ];
   useEffect(() => {
     setUsersDatabase(mock);
   }, []);
@@ -78,7 +56,6 @@ export default function Main({
     let filterUser = usersDatabase.filter(
       item => item.first_name.toLowerCase() === name.toLowerCase(),
     );
-    console.log('filteruser', filterUser);
     setCurrentUser(filterUser);
     if (findUser) {
       const user = {...filterUser[0], time, timesheet: [Date.now()]};
@@ -227,7 +204,6 @@ export default function Main({
   };
 
   console.log('userdata💃', usersDatabase);
-
   return (
     <main className="grid-container">
       <section style={{background: '#ebf0f7'}} className="first-column">
