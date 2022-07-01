@@ -25,9 +25,11 @@ import {
 } from '@chakra-ui/react';
 import FamilyPlanDrop from '../components/FamilyPlanDrop';
 import PatronList2 from '../components/modals/PatronList';
-import GuestList from '../components/modals/GuestList';
+import GuestList from '../components/modals/Guest/GuestList';
 import Sample from '../components/Sample';
-import GuestForm from '../components/modals/GuestForm';
+import GuestForm from '../components/modals/Guest/GuestForm';
+import Screen from '../components/Screen';
+import Camera from '../components/Camera';
 
 export default function Main({
   bg = '#e6dfd1',
@@ -96,6 +98,7 @@ export default function Main({
         id: todaysList.length + 1,
         first_name: name,
         status: UNRECOGNIZED,
+        member_photo: imgplaceholder,
         time,
       };
       setTodaysList([user, ...todaysList]);
@@ -176,6 +179,8 @@ export default function Main({
       }
     });
 
+    console.log('changing user database ', db);
+
     setUsersDatabase(db);
     const db2 = todaysList.map(obj => {
       if (obj.barcode_number === currentUser[0].barcode_number) {
@@ -184,8 +189,18 @@ export default function Main({
         return obj;
       }
     });
-    console.log('switched', db2);
+    console.log('changing todays list', db2);
     setTodaysList(db2);
+
+    const db3 = currentUser.map(obj => {
+      if (obj.barcode_number) {
+        return {...obj, member_photo: img};
+      } else {
+        return obj;
+      }
+    });
+    console.log('setting current uuser');
+    setCurrentUser(db3);
   };
 
   const removeduplicates = () => {
@@ -320,7 +335,30 @@ export default function Main({
                         ''
                       )} */}
                     </div>
-                    <EX1
+                    {/* <EX1
+                      imgAfterUpdate={imgAfterUpdate}
+                      setImgAfterUpdate={setImgAfterUpdate}
+                      currentImg={currentImg}
+                      setCurrentImg={setCurrentImg}
+                      dontRefresh={dontRefresh}
+                      setDontRefresh={setDontRefresh}
+                      item={item}
+                      currentUser={currentUser}
+                      changecurrentuser={changecurrentuser}
+                    /> */}
+                    {/* <Screen
+                      imgAfterUpdate={imgAfterUpdate}
+                      setImgAfterUpdate={setImgAfterUpdate}
+                      currentImg={currentImg}
+                      setCurrentImg={setCurrentImg}
+                      dontRefresh={dontRefresh}
+                      setDontRefresh={setDontRefresh}
+                      item={item}
+                      currentUser={currentUser}
+                      changecurrentuser={changecurrentuser}
+                    /> */}
+
+                    <Camera
                       imgAfterUpdate={imgAfterUpdate}
                       setImgAfterUpdate={setImgAfterUpdate}
                       currentImg={currentImg}

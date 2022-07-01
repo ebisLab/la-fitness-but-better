@@ -36,16 +36,9 @@ export default function GuestForm({
     phone_number: '',
     membership: 'guest',
   });
-  const [guestName, setGuestName] = React.useState('');
   const [guesList, setGuestList] = React.useState([]);
-  const [changeData, setChangeData] = React.useState('');
-  //   const changeHandler =(e)=>{
-  //       setGetInput(e.target.value)
-
-  //   }
 
   React.useEffect(() => {
-    console.log('iteem geu', item.perks.guest);
     setGuestList(item.perks?.guest);
   }, []);
 
@@ -122,13 +115,7 @@ export default function GuestForm({
           />
         </InputGroup>
 
-        <Button
-          type="submit"
-          //   onClick={() => changeThisUser('🌈🌿🌹')}
-          // onClick={() => changeThisUser(guestInfo)}
-        >
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   );
