@@ -17,7 +17,7 @@ import {
   Tag,
 } from '@chakra-ui/react';
 import FamilyPlanDrop from '../components/FamilyPlanDrop';
-import GuestList from '../components/modals/Guest/GuestList';
+import GuestList from '../components/modals/MemberGuest/GuestList';
 import Camera from '../components/Camera';
 import WalkInGuest from '../components/modals/WalkInGuest/WalkInGuest';
 // import {faTwitter, faFontAwesome} from '@fortawesome/free-brands-svg-icons';

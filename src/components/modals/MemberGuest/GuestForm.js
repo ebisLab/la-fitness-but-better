@@ -12,6 +12,7 @@ import {
   Grid,
   Tabs,
   Table,
+  Checkbox,
   Thead,
   Tbody,
   Tr,
@@ -37,6 +38,7 @@ export default function GuestForm({
     membership: 'guest',
   });
   const [guesList, setGuestList] = React.useState([]);
+  const [isChecked, setIsChecked] = React.useState(false);
 
   React.useEffect(() => {
     setGuestList(item.perks?.guest);
@@ -66,6 +68,8 @@ export default function GuestForm({
     });
   };
 
+  const onChange = () => {};
+
   return (
     <div>
       <div>
@@ -73,6 +77,14 @@ export default function GuestForm({
           <Tbody>
             {guesList?.map((item, i) => (
               <Tr key={i}>
+                <Td>
+                  <Checkbox
+                    onChange={onChange}
+                    textTransform="capitalize"
+                    // ref={ref}
+                    isChecked={isChecked}
+                  />
+                </Td>
                 <Td>
                   <Image
                     boxSize="45px"

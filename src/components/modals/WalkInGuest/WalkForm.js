@@ -11,7 +11,9 @@ export default function WalkForm({todaysList, setTodaysList}) {
     status: 'OK',
     fitness_type: 'guest',
   });
-  const time = new Date().toLocaleString();
+  const time = (world, conversion) => {
+    return new Date().toLocaleString(world, conversion);
+  };
   const changeHandler = e => {
     const value = e.target.value;
     setInput({
@@ -19,9 +21,13 @@ export default function WalkForm({todaysList, setTodaysList}) {
       id: todaysList.length + 1,
       member_photo: 'https://picsum.photos/id/222/200',
       barcode_number: `555${todaysList.length + 1}`,
-      time: 'jly 1',
+      time: time('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+      }),
       status: 'OK',
-      expiration: time,
+      expiration: time(),
       fitness_type: 'guest',
       [e.target.name]: value,
     });
