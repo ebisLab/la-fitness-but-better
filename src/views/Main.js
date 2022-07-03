@@ -211,7 +211,7 @@ export default function Main({
     setCurrentUser([e]);
   };
 
-  console.log('userdata💃', usersDatabase);
+  console.log('userdata🌈', usersDatabase);
 
   return (
     <main className="grid-container">
@@ -226,6 +226,7 @@ export default function Main({
           <form onSubmit={submitHandler}>
             <ButtonGroup>
               <Input
+                autoFocus
                 style={{background: '#FEFCBF'}}
                 name="barcode"
                 type="text"
@@ -387,6 +388,8 @@ export default function Main({
         className="second-column">
         <WalkInGuest todaysList={todaysList} setTodaysList={setTodaysList} />
         <HealthProgram
+          setCurrentUser={setCurrentUser}
+          setUsersDatabase={setUsersDatabase}
           usersDatabase={usersDatabase}
           todaysList={todaysList}
           setTodaysList={setTodaysList}

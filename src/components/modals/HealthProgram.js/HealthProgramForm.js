@@ -3,7 +3,9 @@ import {Input, Button, InputGroup, Stack, SimpleGrid} from '@chakra-ui/react';
 import {health_program} from '../../../api/mock';
 
 export default function HealthProgramForm({
+  setCurrentUser,
   usersDatabase,
+  setUsersDatabase,
   todaysList,
   setTodaysList,
 }) {
@@ -37,7 +39,9 @@ export default function HealthProgramForm({
       }),
       timesheet: [Date.now()],
     };
+    setCurrentUser([user]);
     setTodaysList([user, ...todaysList]);
+    setUsersDatabase([user, ...usersDatabase]);
   };
 
   const changeHandler = e => {
@@ -78,6 +82,7 @@ export default function HealthProgramForm({
   };
 
   console.log('submit', userInfo);
+  console.log('userdatabase', usersDatabase);
   return (
     <>
       <form onSubmit={submitHandler}>
@@ -101,8 +106,6 @@ export default function HealthProgramForm({
             onChange={changeHandler}
           />
           <Input
-            // isInvalid={error}
-            // errorBorderColor={'red.500'}
             placeholder="date of birth"
             name="dob"
             value={input.dob}

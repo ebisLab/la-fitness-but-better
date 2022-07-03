@@ -16,6 +16,8 @@ import {faHeartCirclePlus} from '@fortawesome/free-solid-svg-icons';
 import HealthProgramForm from './HealthProgramForm';
 
 export default function HealthProgram({
+  setCurrentUser,
+  setUsersDatabase,
   usersDatabase,
   todaysList,
   setTodaysList,
@@ -38,6 +40,8 @@ export default function HealthProgram({
           <ModalCloseButton />
           <ModalBody>
             <HealthProgramForm
+              setCurrentUser={setCurrentUser}
+              setUsersDatabase={setUsersDatabase}
               usersDatabase={usersDatabase}
               todaysList={todaysList}
               setTodaysList={setTodaysList}
