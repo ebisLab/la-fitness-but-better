@@ -20,6 +20,7 @@ import FamilyPlanDrop from '../components/FamilyPlanDrop';
 import GuestList from '../components/modals/MemberGuest/GuestList';
 import Camera from '../components/Camera';
 import WalkInGuest from '../components/modals/WalkInGuest/WalkInGuest';
+import HealthProgram from '../components/modals/HealthProgram.js/HealthProgram';
 // import {faTwitter, faFontAwesome} from '@fortawesome/free-brands-svg-icons';
 
 library.add(faCamera);
@@ -94,7 +95,6 @@ export default function Main({
   };
   const submitHandler = e => {
     e.preventDefault();
-    setImgAfterUpdate('');
     setUserInfo(userBarcode);
     addName(userBarcode);
     setCurrentTime(currentTime);
@@ -211,7 +211,7 @@ export default function Main({
     setCurrentUser([e]);
   };
 
-  console.log('userdata💃', usersDatabase);
+  console.log('userdata🌈', usersDatabase);
 
   return (
     <main className="grid-container">
@@ -226,6 +226,7 @@ export default function Main({
           <form onSubmit={submitHandler}>
             <ButtonGroup>
               <Input
+                autoFocus
                 style={{background: '#FEFCBF'}}
                 name="barcode"
                 type="text"
@@ -272,16 +273,6 @@ export default function Main({
                       </table>
                       <div className="member-service">
                         <Button onClick={() => setTabIndex(2)}>service</Button>
-                        {/* {item.perks ? (
-                          <Sample
-                            usersDatabase={usersDatabase}
-                            currentUser={currentUser}
-                            setUsersDatabase={setUsersDatabase}
-                            changeThisUser={changeThisUser}
-                          />
-                        ) : (
-                          ''
-                        )} */}
                         <Button
                           colorScheme="teal"
                           variant="solid"
@@ -396,6 +387,14 @@ export default function Main({
         style={{background: '#ebf0f7', padding: '2% 2% 0 2%'}}
         className="second-column">
         <WalkInGuest todaysList={todaysList} setTodaysList={setTodaysList} />
+        <HealthProgram
+          setCurrentUser={setCurrentUser}
+          setUsersDatabase={setUsersDatabase}
+          usersDatabase={usersDatabase}
+          todaysList={todaysList}
+          setTodaysList={setTodaysList}
+        />
+
         <div className="record-container">
           <div>
             Last Refresh: {currentTime}
