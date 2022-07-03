@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {v4 as uuidv4} from 'uuid';
 import {mock} from '../api/mock';
 import imgplaceholder from '../assets/img/userplaceholder.png';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faCamera} from '@fortawesome/free-solid-svg-icons';
+// import {solid, regular, brands} from '@fortawesome/fontawesome-svg-core';
 import {UNRECOGNIZED, OK} from '../store/constants';
 import {
   Alert,
@@ -12,10 +14,16 @@ import {
   Box,
   Center,
   Grid,
+  Tag,
 } from '@chakra-ui/react';
 import FamilyPlanDrop from '../components/FamilyPlanDrop';
-import GuestList from '../components/modals/Guest/GuestList';
+import GuestList from '../components/modals/MemberGuest/GuestList';
 import Camera from '../components/Camera';
+import WalkInGuest from '../components/modals/WalkInGuest/WalkInGuest';
+import HealthProgram from '../components/modals/HealthProgram.js/HealthProgram';
+// import {faTwitter, faFontAwesome} from '@fortawesome/free-brands-svg-icons';
+
+library.add(faCamera);
 
 export default function Main({
   bg = '#e6dfd1',
@@ -87,7 +95,6 @@ export default function Main({
   };
   const submitHandler = e => {
     e.preventDefault();
-    setImgAfterUpdate('');
     setUserInfo(userBarcode);
     addName(userBarcode);
     setCurrentTime(currentTime);
@@ -190,6 +197,7 @@ export default function Main({
         duplicateRemover.add(obj.barcode_number);
         return obj;
       }
+      return false;
     });
     return distinctAarr.length;
   };
@@ -203,7 +211,8 @@ export default function Main({
     setCurrentUser([e]);
   };
 
-  console.log('userdata💃', usersDatabase);
+  console.log('userdata🌈', usersDatabase);
+
   return (
     <main className="grid-container">
       <section style={{background: '#ebf0f7'}} className="first-column">
@@ -217,6 +226,7 @@ export default function Main({
           <form onSubmit={submitHandler}>
             <ButtonGroup>
               <Input
+                autoFocus
                 style={{background: '#FEFCBF'}}
                 name="barcode"
                 type="text"
@@ -257,22 +267,12 @@ export default function Main({
                           </tr>
                           <tr>
                             <th>Expiration</th>
-                            <td>none</td>
+                            <td>{item.expiration}</td>
                           </tr>
                         </tbody>
                       </table>
                       <div className="member-service">
                         <Button onClick={() => setTabIndex(2)}>service</Button>
-                        {/* {item.perks ? (
-                          <Sample
-                            usersDatabase={usersDatabase}
-                            currentUser={currentUser}
-                            setUsersDatabase={setUsersDatabase}
-                            changeThisUser={changeThisUser}
-                          />
-                        ) : (
-                          ''
-                        )} */}
                         <Button
                           colorScheme="teal"
                           variant="solid"
@@ -300,39 +300,7 @@ export default function Main({
                       ) : (
                         ''
                       )}
-                      {/* {item.perks?.guest ? (
-                        <GuestList
-                          usersDatabase={usersDatabase}
-                          todaysList={todaysList}
-                          currentUser={currentUser}
-                          item={item}
-                        />
-                      ) : (
-                        ''
-                      )} */}
                     </div>
-                    {/* <EX1
-                      imgAfterUpdate={imgAfterUpdate}
-                      setImgAfterUpdate={setImgAfterUpdate}
-                      currentImg={currentImg}
-                      setCurrentImg={setCurrentImg}
-                      dontRefresh={dontRefresh}
-                      setDontRefresh={setDontRefresh}
-                      item={item}
-                      currentUser={currentUser}
-                      changecurrentuser={changecurrentuser}
-                    /> */}
-                    {/* <Screen
-                      imgAfterUpdate={imgAfterUpdate}
-                      setImgAfterUpdate={setImgAfterUpdate}
-                      currentImg={currentImg}
-                      setCurrentImg={setCurrentImg}
-                      dontRefresh={dontRefresh}
-                      setDontRefresh={setDontRefresh}
-                      item={item}
-                      currentUser={currentUser}
-                      changecurrentuser={changecurrentuser}
-                    /> */}
 
                     <Camera
                       imgAfterUpdate={imgAfterUpdate}
@@ -415,8 +383,18 @@ export default function Main({
           )}
         </Box>
       </section>
-      <section style={{background: '#ebf0f7'}} className="second-column">
-        <div>check in tools</div>
+      <section
+        style={{background: '#ebf0f7', padding: '2% 2% 0 2%'}}
+        className="second-column">
+        <WalkInGuest todaysList={todaysList} setTodaysList={setTodaysList} />
+        <HealthProgram
+          setCurrentUser={setCurrentUser}
+          setUsersDatabase={setUsersDatabase}
+          usersDatabase={usersDatabase}
+          todaysList={todaysList}
+          setTodaysList={setTodaysList}
+        />
+
         <div className="record-container">
           <div>
             Last Refresh: {currentTime}
@@ -477,7 +455,14 @@ export default function Main({
                       </td>
                       <td>{item.barcode_number}</td>
                       <td>
-                        {item.fitness_type}
+                        {item.fitness_type === 'guest' ? (
+                          <Tag size="sm" variant="solid" colorScheme="green">
+                            {item.fitness_type}
+                          </Tag>
+                        ) : (
+                          item.fitness_type
+                        )}
+
                         {/* {item.perks ? item.test : ''} */}
                       </td>
                       <td>
