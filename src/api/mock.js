@@ -5,6 +5,7 @@ export const mock = [
     barcode_number: 'F33501272',
     first_name: 'Jennifer',
     last_name: 'Lewis',
+    payment: 'credit card',
     member_photo: 'https://placekitten.com/200/200',
     fitness_type: 'trainer',
     membership: 3,
@@ -45,6 +46,7 @@ export const mock = [
     barcode_number: 'F33501292',
     first_name: 'Hermoinie',
     last_name: 'Granger',
+    payment: 'credit card',
     member_photo: 'https://picsum.photos/id/1027/200',
     fitness_type: 'employee',
     membership: 3,
@@ -66,6 +68,7 @@ export const mock = [
     barcode_number: 'F33501211',
     first_name: 'Kelly',
     last_name: 'Stewart',
+    payment: 'credit card',
     member_photo: 'https://picsum.photos/id/212/200/200',
     fitness_type: 'member',
     membership: 2,
@@ -87,6 +90,7 @@ export const mock = [
     first_name: 'Andrea',
     last_name: 'Boccielli',
     fitness_type: 'fitness',
+    payment: 'credit card',
     member_photo: '',
     status: 'OK',
     expiration: 'none',
@@ -101,6 +105,7 @@ export const mock = [
     first_name: 'Yelena',
     last_name: 'Makron',
     fitness_type: 'trainer',
+    payment: 'credit card',
     member_photo:
       'https://images.unsplash.com/photo-1655857202782-8d0ef8f0254b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2528&q=80',
     status: 'OK',
@@ -111,6 +116,44 @@ export const mock = [
   },
 ];
 
+export const health_program = [
+  {
+    barcode_number: 'EWMFQAVNGLBJ',
+    first_name: 'emezie',
+    last_name: 'okorafor',
+    dob: '',
+    zip: 0,
+  },
+  {
+    barcode_number: 'E0U1HNRL4F7O',
+    first_name: 'harry',
+    last_name: 'okorafor',
+    dob: '',
+    zip: 0,
+  },
+  {
+    barcode_number: 'DW4CITBSR1HY',
+    first_name: 'ron',
+    last_name: 'okorafor',
+    dob: '',
+    zip: 0,
+  },
+  {
+    barcode_number: '6CDXIU0YBHLW',
+    first_name: 'malfoy',
+    last_name: 'okorafor',
+    dob: '',
+    zip: 0,
+  },
+  {
+    barcode_number: '6CDXIUDW',
+    first_name: 'malfoy',
+    last_name: 'okorafor',
+    dob: '',
+    zip: 0,
+  },
+];
+
 export const mock2 = [
   {
     id: 0,
@@ -118,6 +161,7 @@ export const mock2 = [
     barcode_number: 'F33501272',
     first_name: 'Jennifer444',
     last_name: 'Lewis',
+    payment: 'credit card',
     member_photo: '🐝',
     fitness_type: 'trainer',
     membership: 3,
