@@ -245,7 +245,7 @@ export default function Main({
           </form>
           {currentUser.length ? (
             currentUser.map((item, i) => (
-              <div key={Date.now()}>
+              <div key={i}>
                 <div className="member-card">
                   <div className="member-info">
                     <Alert status={status_map[item.status]}>
