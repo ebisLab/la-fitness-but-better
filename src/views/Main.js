@@ -105,7 +105,7 @@ export default function Main({
   };
 
   const changeThisUser = (e, data) => {
-    console.log('change this user', data);
+    console.log('change this user🌹', data);
     e.preventDefault();
     const db = usersDatabase.map(obj => {
       console.log('🐝', obj.perks?.guest);
@@ -150,6 +150,23 @@ export default function Main({
       }
     });
     setCurrentUser(db3);
+  };
+
+  const checkInMemberGuest = data => {
+    console.log('data', data);
+    const db = usersDatabase.map(obj => {
+      if (obj.barcode_number === currentUser[0].barcode_number) {
+        return {
+          ...obj,
+          test: 'example 🌸',
+          //     perks: {...obj.perks, guest: [data, ...obj.perks.guest]},
+          //     //perks: {guest: [...obj.perks?.guest, data], ...obj},
+        };
+      } else {
+        return obj;
+      }
+    });
+    console.log('database changed', db);
   };
 
   const changecurrentuser = img => {
@@ -296,6 +313,7 @@ export default function Main({
                           currentUser={currentUser}
                           setUsersDatabase={setUsersDatabase}
                           changeThisUser={changeThisUser}
+                          checkInMemberGuest={checkInMemberGuest}
                         />
                       ) : (
                         ''
