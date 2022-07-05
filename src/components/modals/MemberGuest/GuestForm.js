@@ -31,10 +31,7 @@ import GuestList from './GuestList';
 export default function GuestForm({
   item,
   checkInMemberGuest,
-  setCurrentUser,
-  currentUser,
   todaysList,
-  setUsersDatabase,
   setTodaysList,
   changeThisUser,
 }) {
@@ -47,28 +44,19 @@ export default function GuestForm({
     membership: 'guest',
   });
   const [guesList, setGuestList] = React.useState([]);
-  const [checked, setChecked] = React.useState(false);
-  const [index, setIndex] = React.useState(0);
-  const [todos, setTodos] = React.useState(item.perks?.guest);
-  const [selectedTodo, setSelectedTodo] = React.useState();
-  const [checkedList, setCheckedList] = React.useState(todos);
+  const [guest, setGuest] = React.useState(item.perks?.guest);
+  const [checkedList, setCheckedList] = React.useState(guest);
 
   React.useEffect(() => {
     setGuestList(item.perks?.guest);
   }, []);
 
-  function handleToggleChecked(todoid) {
-    setTodos(it => {
-      console.log('im it', it);
-      let todo = it.find(td => td.first_name === todoid.first_name);
+  function handleToggleChecked(clickedguestinfo) {
+    setGuest(it => {
+      let todo = it.find(td => td.first_name === clickedguestinfo.first_name);
       todo.isChecked = !todo.isChecked;
-      console.log('finding todo', todo);
       return it;
     });
-  }
-
-  function handleselect(todoid) {
-    setSelectedTodo(todos.find(todo => todo.id === todoid));
   }
 
   const handleChange = async e => {
@@ -87,6 +75,7 @@ export default function GuestForm({
   const submitHandler = e => {
     e.preventDefault();
     setGuestList([guestInfo, ...guesList]);
+    setGuest([guestInfo, ...guesList]);
     changeThisUser(e, guestInfo);
     setGuestInfo({
       guest_image: '',
@@ -97,7 +86,6 @@ export default function GuestForm({
     });
   };
 
-  function handleChangeCheck(guestid) {}
   const changeCheck = gst => e => {
     console.log('gst', gst);
     console.log('eee', e.target.checked);
@@ -139,42 +127,28 @@ export default function GuestForm({
 
   const addToTodaysList = e => {
     e.preventDefault();
-    // console.log('checing to see somefin', guesList);
-    let me = todos.filter(stuff => {
+    let me = guest.filter(stuff => {
       if (stuff.isChecked === true) return stuff;
     });
-    console.log('checked me', me);
+
     setCheckedList(
-      todos.filter(stuff => {
+      guest.filter(stuff => {
         if (stuff.isChecked === true) return stuff;
       }),
     );
-    // let addToList = todos.filter(stuff => {
-    //   if (stuff.isChecked === true) return stuff;
-    // });
 
-    todos.filter(stuff => {
+    guest.filter(stuff => {
       if (stuff.isChecked === true) {
         return setTodaysList([...todaysList, stuff]);
       }
     });
-    // console.log('addToLit', [...todaysList, ...addToList]);
 
-    // setTodaysList([...todaysList, ...addToList]);
-
-    checkInMemberGuest(todos);
+    checkInMemberGuest(guest);
   };
 
-  function toggleComplete(todo) {
+  function toggleCheck(todo) {
     handleToggleChecked(todo);
-    console.log('todo id', todo.id);
   }
-  console.log('guest info', guestInfo);
-  console.log('guest list🌈', guesList);
-  console.log('checked', checked);
-
-  console.log('todo', todos);
-  console.log('checkedList 🔥', checkedList);
 
   return (
     <div>
@@ -186,8 +160,7 @@ export default function GuestForm({
                 <Td>
                   <Checkbox
                     value={gst.isChecked}
-                    onChange={() => toggleComplete(gst)}
-                    // onChange={changeCheck(gst)}
+                    onChange={() => toggleCheck(gst)}
                   />
                 </Td>
                 <Td>
