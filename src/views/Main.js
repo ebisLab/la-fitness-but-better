@@ -7,6 +7,7 @@ import {faCamera} from '@fortawesome/free-solid-svg-icons';
 import {UNRECOGNIZED, OK} from '../store/constants';
 import {
   Alert,
+  Image,
   AlertIcon,
   Input,
   Button,
@@ -21,7 +22,6 @@ import GuestList from '../components/modals/MemberGuest/GuestList';
 import Camera from '../components/Camera';
 import WalkInGuest from '../components/modals/WalkInGuest/WalkInGuest';
 import HealthProgram from '../components/modals/HealthProgram.js/HealthProgram';
-// import {faTwitter, faFontAwesome} from '@fortawesome/free-brands-svg-icons';
 
 library.add(faCamera);
 
@@ -167,6 +167,24 @@ export default function Main({
       }
     });
     console.log('database changed', db);
+    setUsersDatabase(db);
+
+    //highly considering creating a 4th state independent of this todayslist state to count for checked in people and guests
+
+    const db2 = todaysList.map(obj => {
+      if (obj.barcode_number === currentUser[0].barcode_number) {
+        return {
+          ...obj,
+          test: 'example 🌸',
+          //     perks: {...obj.perks, guest: [data, ...obj.perks.guest]},
+          //     //perks: {guest: [...obj.perks?.guest, data], ...obj},
+        };
+      } else {
+        return obj;
+      }
+    });
+    console.log('seeing if this is outputting', db2);
+    // setTodaysList(db2);
   };
 
   const changecurrentuser = img => {
@@ -228,7 +246,7 @@ export default function Main({
     setCurrentUser([e]);
   };
 
-  console.log('userdata🌈', usersDatabase);
+  console.log('userdata🌿', usersDatabase);
 
   return (
     <main className="grid-container">
@@ -309,8 +327,10 @@ export default function Main({
                         <GuestList
                           item={item}
                           todaysList={todaysList}
+                          setTodaysList={setTodaysList}
                           usersDatabase={usersDatabase}
                           currentUser={currentUser}
+                          setCurrentUser={setCurrentUser}
                           setUsersDatabase={setUsersDatabase}
                           changeThisUser={changeThisUser}
                           checkInMemberGuest={checkInMemberGuest}
@@ -435,64 +455,95 @@ export default function Main({
               {todaysList &&
                 todaysList.map((item, i) => {
                   return (
-                    <tr
-                      key={i}
-                      onClick={() => clickedRows(item)}
-                      className={
-                        item.status === UNRECOGNIZED
-                          ? 'checked-in-user-table-status'
-                          : ''
-                      }>
-                      <td>
-                        <div
-                          style={{
-                            width: '50px',
-                            height: '50px',
-                            background:
-                              item.status === UNRECOGNIZED ? 'red' : 'blue',
-                          }}>
-                          <img
-                            width="50px"
-                            height="50px"
-                            src={
-                              item.status === UNRECOGNIZED ||
-                              item.member_photo === ''
-                                ? imgplaceholder
-                                : item.member_photo
-                            }
-                            alt={item.barcode_number}
-                          />
-                        </div>
-                      </td>
-                      <td>
-                        {item.status === UNRECOGNIZED ? (
-                          ''
-                        ) : (
-                          <Button>Service</Button>
-                        )}
-                      </td>
-                      <td>{item.barcode_number}</td>
-                      <td>
-                        {item.fitness_type === 'guest' ? (
-                          <Tag size="sm" variant="solid" colorScheme="green">
-                            {item.fitness_type}
-                          </Tag>
-                        ) : (
-                          item.fitness_type
-                        )}
+                    <React.Fragment key={i}>
+                      <tr
+                        onClick={() => clickedRows(item)}
+                        className={
+                          item.status === UNRECOGNIZED
+                            ? 'checked-in-user-table-status'
+                            : ''
+                        }>
+                        <td>
+                          <div
+                            style={{
+                              width: '50px',
+                              height: '50px',
+                              background:
+                                item.status === UNRECOGNIZED ? 'red' : 'blue',
+                            }}>
+                            <img
+                              width="50px"
+                              height="50px"
+                              src={
+                                item.status === UNRECOGNIZED ||
+                                item.member_photo === ''
+                                  ? imgplaceholder
+                                  : item.member_photo
+                              }
+                              alt={item.barcode_number}
+                            />
+                          </div>
+                        </td>
+                        <td>
+                          {item.status === UNRECOGNIZED ? (
+                            ''
+                          ) : (
+                            <Button>Service</Button>
+                          )}
+                        </td>
+                        <td>{item.barcode_number}</td>
+                        <td>
+                          {item.fitness_type === 'guest' ? (
+                            <Tag size="sm" variant="solid" colorScheme="green">
+                              {item.fitness_type}
+                            </Tag>
+                          ) : (
+                            item.fitness_type
+                          )}
 
-                        {/* {item.perks ? item.test : ''} */}
-                      </td>
-                      <td>
-                        {item.first_name} {item.last_name}
-                      </td>
-                      <td
-                        className={item.status === OK ? 'status_cell' : ''}
-                        style={{color: status_table[item.status]}}>
-                        {item.status}
-                      </td>
-                      <td>{item.time}</td>
-                    </tr>
+                          {/* {item.perks ? item.test : ''} */}
+                        </td>
+                        <td>
+                          {item.first_name} {item.last_name}
+                        </td>
+                        <td
+                          className={item.status === OK ? 'status_cell' : ''}
+                          style={{color: status_table[item.status]}}>
+                          {item.status}
+                        </td>
+                        <td>{item.time}</td>
+                      </tr>
+                      {/* {console.log(
+                        'checking to see here ppl',
+                        ,
+                      )} */}
+
+                      {/* {item.perks?.guest.map(
+                        ppl =>
+                          ppl.isChecked && (
+                            <tr>
+                              <td>
+                                <Image
+                                  width="50px"
+                                  height="50px"
+                                  src={ppl.guest_image}
+                                  alt={ppl.first_name}
+                                />
+                              </td>
+                              <td>
+                                <button>something</button>
+                              </td>
+                              <td></td>
+                              <td>{ppl.membership}</td>
+                              <td>
+                                {ppl.first_name} {ppl.last_name}
+                              </td>
+                              <td>OK</td>
+                              <td></td>
+                            </tr>
+                          ),
+                      )} */}
+                    </React.Fragment>
                   );
                 })}
             </tbody>

@@ -31,9 +31,11 @@ import GuestList from './GuestList';
 export default function GuestForm({
   item,
   checkInMemberGuest,
+  setCurrentUser,
   currentUser,
   todaysList,
   setUsersDatabase,
+  setTodaysList,
   changeThisUser,
 }) {
   const [guestInfo, setGuestInfo] = React.useState({
@@ -46,10 +48,28 @@ export default function GuestForm({
   });
   const [guesList, setGuestList] = React.useState([]);
   const [checked, setChecked] = React.useState(false);
+  const [index, setIndex] = React.useState(0);
+  const [todos, setTodos] = React.useState(item.perks?.guest);
+  const [selectedTodo, setSelectedTodo] = React.useState();
+  const [checkedList, setCheckedList] = React.useState(todos);
 
   React.useEffect(() => {
     setGuestList(item.perks?.guest);
   }, []);
+
+  function handleToggleChecked(todoid) {
+    setTodos(it => {
+      console.log('im it', it);
+      let todo = it.find(td => td.first_name === todoid.first_name);
+      todo.isChecked = !todo.isChecked;
+      console.log('finding todo', todo);
+      return it;
+    });
+  }
+
+  function handleselect(todoid) {
+    setSelectedTodo(todos.find(todo => todo.id === todoid));
+  }
 
   const handleChange = async e => {
     const value = e.target.value;
@@ -77,41 +97,97 @@ export default function GuestForm({
     });
   };
 
-  const changeCheck = (e, gst) => {
-    // console.log(e.target.checked);
-    setChecked(e.target.checked);
+  function handleChangeCheck(guestid) {}
+  const changeCheck = gst => e => {
+    console.log('gst', gst);
+    console.log('eee', e.target.checked);
+
     const lastguestindex = guesList.findIndex(
       obj => obj.first_name === gst.first_name,
     );
-    guesList[lastguestindex] = {
-      ...gst,
-      isChecked: e.target.checked,
-    };
+    console.log('lastgues', lastguestindex);
+    const newAr = guesList.map((obj, i) => {
+      return obj[lastguestindex];
+      // if (gst[lastguestindex] === obj[lastguestindex]) return obj;
+    });
+    console.log('neww', newAr);
+
+    // console.log(e.target.checked);
+    // setChecked(e.target.checked);
+
+    // const lastguestindex = guesList.findIndex(
+    //   obj => obj.first_name === gst.first_name,
+    // );
+    // setIndex(lastguestindex);
+
+    // guesList.map(obj => {
+    //   if (obj[lastguestindex] === gst[lastguestindex]) {
+    //     return (guesList[lastguestindex] = {
+    //       ...gst,
+    //       isChecked: e.target.checked,
+    //     });
+    //   }
+    // });
+
+    // guesList[lastguestindex] = {
+    //   ...gst,
+    //   isChecked: e.target.checked,
+    // };
 
     // setIsChecked(e.target.checked);
   };
 
   const addToTodaysList = e => {
     e.preventDefault();
-    console.log('checing to see somefin', guesList);
-    // setGuestList([guestInfo, ...guesList]);
-    checkInMemberGuest(guesList);
+    // console.log('checing to see somefin', guesList);
+    let me = todos.filter(stuff => {
+      if (stuff.isChecked === true) return stuff;
+    });
+    console.log('checked me', me);
+    setCheckedList(
+      todos.filter(stuff => {
+        if (stuff.isChecked === true) return stuff;
+      }),
+    );
+    // let addToList = todos.filter(stuff => {
+    //   if (stuff.isChecked === true) return stuff;
+    // });
+
+    todos.filter(stuff => {
+      if (stuff.isChecked === true) {
+        return setTodaysList([...todaysList, stuff]);
+      }
+    });
+    // console.log('addToLit', [...todaysList, ...addToList]);
+
+    // setTodaysList([...todaysList, ...addToList]);
+
+    checkInMemberGuest(todos);
   };
+
+  function toggleComplete(todo) {
+    handleToggleChecked(todo);
+    console.log('todo id', todo.id);
+  }
   console.log('guest info', guestInfo);
   console.log('guest list🌈', guesList);
   console.log('checked', checked);
+
+  console.log('todo', todos);
+  console.log('checkedList 🔥', checkedList);
 
   return (
     <div>
       <div>
         <Table size="sm">
           <Tbody>
-            {guesList?.map((gst, i) => (
-              <Tr key={i}>
+            {guesList?.map(gst => (
+              <Tr key={gst.id}>
                 <Td>
                   <Checkbox
-                    value={gst.first_name}
-                    onChange={e => changeCheck(e, gst)}
+                    value={gst.isChecked}
+                    onChange={() => toggleComplete(gst)}
+                    // onChange={changeCheck(gst)}
                   />
                 </Td>
                 <Td>

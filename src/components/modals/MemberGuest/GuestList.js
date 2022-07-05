@@ -16,10 +16,12 @@ export default function GuestList({
   item,
   currentUser,
   todaysList,
+  setTodaysList,
   usersDatabase,
   setUsersDatabase,
   changeThisUser,
   checkInMemberGuest,
+  setCurrentUser,
 }) {
   const {isOpen, onOpen, onClose} = useDisclosure();
   return (
@@ -33,6 +35,8 @@ export default function GuestList({
           <ModalCloseButton />
           <ModalBody>
             <GuestForm
+              setCurrentUser={setCurrentUser}
+              setTodaysList={setTodaysList}
               setUsersDatabase={setUsersDatabase}
               changeThisUser={changeThisUser}
               usersDatabase={usersDatabase}
