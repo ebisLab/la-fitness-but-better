@@ -41,7 +41,7 @@ export default function GuestForm({
     last_name: '',
     phone_number: '',
     isChecked: false,
-    membership: 'guest',
+    fitness_type: "member's guest",
   });
   const [guesList, setGuestList] = React.useState([]);
   const [guest, setGuest] = React.useState(item.perks?.guest);
@@ -127,19 +127,16 @@ export default function GuestForm({
 
   const addToTodaysList = e => {
     e.preventDefault();
-    let me = guest.filter(stuff => {
-      if (stuff.isChecked === true) return stuff;
-    });
 
     setCheckedList(
-      guest.filter(stuff => {
+      guesList.filter(stuff => {
         if (stuff.isChecked === true) return stuff;
       }),
     );
 
-    guest.filter(stuff => {
+    guesList.filter(stuff => {
       if (stuff.isChecked === true) {
-        return setTodaysList([...todaysList, stuff]);
+        return setTodaysList([stuff, ...todaysList]);
       }
     });
 
@@ -149,7 +146,6 @@ export default function GuestForm({
   function toggleCheck(todo) {
     handleToggleChecked(todo);
   }
-
   return (
     <div>
       <div>
@@ -159,6 +155,7 @@ export default function GuestForm({
               <Tr key={gst.id}>
                 <Td>
                   <Checkbox
+                    defaultChecked={gst.isChecked ? true : null}
                     value={gst.isChecked}
                     onChange={() => toggleCheck(gst)}
                   />

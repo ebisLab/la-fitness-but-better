@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {mock} from '../api/mock';
-import imgplaceholder from '../assets/img/userplaceholder.png';
+import {mock} from '../../api/mock';
+import imgplaceholder from '../../assets/img/userplaceholder.png';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {faCamera} from '@fortawesome/free-solid-svg-icons';
-// import {solid, regular, brands} from '@fortawesome/fontawesome-svg-core';
-import {UNRECOGNIZED, OK} from '../store/constants';
+import {UNRECOGNIZED, OK} from '../../store/constants';
 import {
   Alert,
   Image,
@@ -17,11 +16,11 @@ import {
   Grid,
   Tag,
 } from '@chakra-ui/react';
-import FamilyPlanDrop from '../components/FamilyPlanDrop';
-import GuestList from '../components/modals/MemberGuest/GuestList';
-import Camera from '../components/Camera';
-import WalkInGuest from '../components/modals/WalkInGuest/WalkInGuest';
-import HealthProgram from '../components/modals/HealthProgram.js/HealthProgram';
+import FamilyPlanDrop from '../../components/FamilyPlanDrop';
+import GuestList from '../../components/modals/MemberGuest/GuestList';
+import Camera from '../../components/Camera';
+import WalkInGuest from '../../components/modals/WalkInGuest/WalkInGuest';
+import HealthProgram from '../../components/modals/HealthProgram.js/HealthProgram';
 
 library.add(faCamera);
 
@@ -114,7 +113,6 @@ export default function Main({
           ...obj,
           test: 'example 🦄',
           perks: {...obj.perks, guest: [data, ...obj.perks.guest]},
-          //perks: {guest: [...obj.perks?.guest, data], ...obj},
         };
       } else {
         return obj;
@@ -128,7 +126,6 @@ export default function Main({
           ...obj,
           test: 'example 🦄',
           perks: {...obj.perks, guest: [data, ...obj.perks.guest]},
-          //perks: {guest: [...obj.perks?.guest, data], ...obj},
         };
       } else {
         return obj;
@@ -143,7 +140,6 @@ export default function Main({
           ...obj,
           test: 'example 🦄',
           perks: {...obj.perks, guest: [data, ...obj.perks.guest]},
-          //perks: {guest: [...obj.perks?.guest, data], ...obj},
         };
       } else {
         return obj;
@@ -159,8 +155,6 @@ export default function Main({
         return {
           ...obj,
           test: 'example 🌸',
-          //     perks: {...obj.perks, guest: [data, ...obj.perks.guest]},
-          //     //perks: {guest: [...obj.perks?.guest, data], ...obj},
         };
       } else {
         return obj;
@@ -176,8 +170,6 @@ export default function Main({
         return {
           ...obj,
           test: 'example 🌸',
-          //     perks: {...obj.perks, guest: [data, ...obj.perks.guest]},
-          //     //perks: {guest: [...obj.perks?.guest, data], ...obj},
         };
       } else {
         return obj;
