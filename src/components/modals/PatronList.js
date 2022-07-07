@@ -25,6 +25,29 @@ import {faTurnUp} from '@fortawesome/free-solid-svg-icons';
 
 export default function PatronList2({removeduplicates2}) {
   const {isOpen, onOpen, onClose} = useDisclosure();
+  const removeduplicate = removeduplicates2();
+
+  let happy = removeduplicate.map((item, index, arr) => {
+    console.log('data i want to play with', item);
+    console.log('index position', index);
+    console.log('arr', arr);
+
+    const lastguestindex = arr.findIndex(
+      obj => obj.first_name === item.first_name,
+    );
+    console.log('last guest index', lastguestindex);
+
+    // array.map((element, index, arr) => {
+    //   if (index === indexOfGuest) {
+    //     return arr[indexOfTrainer];
+    //   }
+    //   if (index === indexOfTrainer) {
+    //     return arr[indexOfGuest];
+    //   }
+    //   return element;
+    // })
+  });
+  console.log('list after new addded', happy);
   return (
     <>
       <Button onClick={onOpen} variant="ghost">
