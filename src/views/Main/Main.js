@@ -18,11 +18,8 @@ export default function Main({
   const [userInfo, setUserInfo] = useState('');
   const [todaysList, setTodaysList] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
-  const [currentImg, setCurrentImg] = useState(null);
   const [usersDatabase, setUsersDatabase] = useState([]);
   const [currentTime, setCurrentTime] = useState(time);
-  const [dontRefresh, setDontRefresh] = useState(false);
-  const [imgAfterUpdate, setImgAfterUpdate] = useState('');
   const status_map = {
     UNRECOGNIZED: 'error',
     OK: 'success',
@@ -158,8 +155,6 @@ export default function Main({
   };
 
   const changecurrentuser = img => {
-    setCurrentImg(img);
-
     const db = usersDatabase.map(obj => {
       if (obj.barcode_number === currentUser[0].barcode_number) {
         return {...obj, member_photo: img};
@@ -221,12 +216,6 @@ export default function Main({
   return (
     <main className="grid-container">
       <ProfileSection
-        imgAfterUpdate={imgAfterUpdate}
-        setImgAfterUpdate={setImgAfterUpdate}
-        currentImg={currentImg}
-        setCurrentImg={setCurrentImg}
-        dontRefresh={dontRefresh}
-        setDontRefresh={setDontRefresh}
         currentUser={currentUser}
         changecurrentuser={changecurrentuser}
         bg={bg}
@@ -249,12 +238,6 @@ export default function Main({
       <TableSection
         clickedRows={clickedRows}
         status_table={status_table}
-        imgAfterUpdate={imgAfterUpdate}
-        setImgAfterUpdate={setImgAfterUpdate}
-        currentImg={currentImg}
-        setCurrentImg={setCurrentImg}
-        dontRefresh={dontRefresh}
-        setDontRefresh={setDontRefresh}
         currentUser={currentUser}
         changecurrentuser={changecurrentuser}
         bg={bg}

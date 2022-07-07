@@ -18,9 +18,7 @@ export default function ProfileSection({
   setTabIndex,
   changeHandler,
   kidsModal,
-  currentImg,
   currentUser,
-  setCurrentImg,
   status_map,
   todaysList,
   setTodaysList,
@@ -30,12 +28,8 @@ export default function ProfileSection({
   setUsersDatabase,
   changeThisUser,
   checkInMemberGuest,
-  setDontRefresh, //
   changecurrentuser,
   userInfo,
-  imgAfterUpdate, //
-  setImgAfterUpdate,
-  dontRefresh, //
 }) {
   return (
     <section style={{background: '#ebf0f7'}} className="first-column">
@@ -129,12 +123,6 @@ export default function ProfileSection({
                   </div>
 
                   <Camera
-                    imgAfterUpdate={imgAfterUpdate}
-                    setImgAfterUpdate={setImgAfterUpdate}
-                    currentImg={currentImg}
-                    setCurrentImg={setCurrentImg}
-                    dontRefresh={dontRefresh}
-                    setDontRefresh={setDontRefresh}
                     item={item}
                     currentUser={currentUser}
                     changecurrentuser={changecurrentuser}
