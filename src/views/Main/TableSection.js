@@ -22,6 +22,7 @@ export default function TableSection({
     todaysList,
     setTodaysList,
   } = useContext(CardContext);
+
   return (
     <section
       style={{background: '#ebf0f7', padding: '2% 2% 0 2%'}}

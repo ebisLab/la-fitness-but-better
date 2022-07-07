@@ -1,4 +1,7 @@
 import {createContext, useState, useEffect} from 'react';
+import {UNRECOGNIZED} from '../../store/constants';
+import imgplaceholder from '../../assets/img/userplaceholder.png';
+
 import {mock} from '../../api/mock.js';
 import {time} from '../../utils/apputils.js';
 
@@ -10,9 +13,15 @@ export function CardProvider({children}) {
   const [userInfo, setUserInfo] = useState(''); //is this needed
   const [currentUser, setCurrentUser] = useState([]);
   const [todaysList, setTodaysList] = useState([]);
+  const [currentTime, setCurrentTime] = useState(time);
+  const [timeArr, setTimeArr] = useState([]);
 
   useEffect(() => {
     setUsersDatabase(mock);
+  }, []);
+
+  useEffect(() => {
+    setTimeArr(data => [time, ...data]);
   }, []);
 
   //user inputs value
@@ -30,34 +39,35 @@ export function CardProvider({children}) {
 
     setCurrentUser(searchForUser); //might move this to the isuserfound condition
     if (isUserFound) {
-      console.log('we found user', ...searchForUser);
+      const user = {
+        ...searchForUser[0],
+        time,
+        success: '✅',
+        timesheet: timeArr,
+      };
+      setTodaysList(prevstate => [user, ...prevstate]);
+      setTimeArr(prevstate => [time, ...prevstate]);
 
-      //timesheet ==> time array
-      const user = {...searchForUser[0], time, timesheet: 'to be determined'};
-      console.log('user thrown in the table', user);
-      setTodaysList(prevstate => [...prevstate, user]);
-      //   setTodaysList([user, ...todaysList]);
-
-      //   //find the user from the database list and update their info
-      //   const db = usersDatabase.map(obj => {
-      //     if (obj.barcode_number === searchForUser[0].barcode_number) {
-      //       return {...obj, time};
-      //     } else {
-      //       return obj;
-      //     }
-      //   });
-      //   setUsersDatabase(db);
+      //we want to update the database with the time the member checked in
+      setUsersDatabase(datalist =>
+        datalist.map(obj => {
+          if (obj.barcode_number === searchForUser[0].barcode_number) {
+            return {...obj, time, success: '✅', timesheet: timeArr};
+          } else {
+            return obj;
+          }
+        }),
+      );
     } else {
-      console.log('user isnt found');
-      //   const user = {
-      //     id: todaysList.length + 1,
-      //     first_name: name,
-      //     status: UNRECOGNIZED,
-      //     member_photo: imgplaceholder,
-      //     time,
-      //   };
-      //   setTodaysList([user, ...todaysList]);
-      //   setCurrentUser([user]);
+      const user = {
+        id: todaysList.length + 1,
+        first_name: data,
+        status: UNRECOGNIZED,
+        member_photo: imgplaceholder,
+        time,
+      };
+      setTodaysList(prevstate => [user, ...prevstate]);
+      setCurrentUser([user]);
     }
   };
 
@@ -66,10 +76,8 @@ export function CardProvider({children}) {
     e.preventDefault();
     setUserInfo(userBarcode);
     addName(userBarcode);
-    setUserBarcode('');
-
-    // setCurrentTime(currentTime);
-    // e.target.reset();
+    setCurrentTime(currentTime);
+    e.target.reset();
   };
 
   return (
@@ -84,6 +92,7 @@ export function CardProvider({children}) {
         setCurrentUser,
         todaysList,
         setTodaysList,
+        currentTime,
       }}>
       {children}
     </CardContext.Provider>

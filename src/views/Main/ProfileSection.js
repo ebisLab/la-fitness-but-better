@@ -32,7 +32,6 @@ export default function ProfileSection({
     submitBarcodeHandler,
     currentUser,
     setCurrentUser,
-    todaysList,
     setTodaysList,
   } = useContext(CardContext);
 

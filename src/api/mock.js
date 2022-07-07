@@ -10,7 +10,7 @@ export const mock = [
     fitness_type: 'trainer',
     membership: 3,
     time: 0,
-    timesheet: [],
+    timesheet: ['🌸'],
     status: 'OK',
     expiration: 'none',
     perks: {
@@ -75,7 +75,7 @@ export const mock = [
     fitness_type: 'member',
     membership: 2,
     time: 0,
-    timesheet: [],
+    timesheet: ['helpme'],
     status: 'DECLINED',
     perks: {
       kids: [false],

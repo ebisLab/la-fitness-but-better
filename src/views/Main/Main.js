@@ -216,17 +216,12 @@ export default function Main({
   return (
     <main className="grid-container">
       <ProfileSection
-        currentUser={currentUser}
         changecurrentuser={changecurrentuser}
         bg={bg}
         color={color}
         setTabIndex={setTabIndex}
         kidsModal={kidsModal}
         status_map={status_map}
-        todaysList={todaysList}
-        setTodaysList={setTodaysList}
-        submitHandler={submitHandler}
-        setCurrentUser={setCurrentUser}
         changeThisUser={changeThisUser}
         checkInMemberGuest={checkInMemberGuest}
         userInfo={userInfo}
