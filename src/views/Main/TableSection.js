@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import CardContext from '../../store/constants/CardContext';
 import imgplaceholder from '../../assets/img/userplaceholder.png';
 import {UNRECOGNIZED, OK} from '../../store/constants';
 import {Button, Tag} from '@chakra-ui/react';
@@ -6,15 +7,21 @@ import WalkInGuest from '../../components/modals/WalkInGuest/WalkInGuest';
 import HealthProgram from '../../components/modals/HealthProgram.js/HealthProgram';
 
 export default function TableSection({
-  todaysList,
-  setTodaysList,
   currentTime,
   clickedRows,
   status_table,
   usersDatabase,
-  setCurrentUser,
   setUsersDatabase,
 }) {
+  const {
+    onBarcodeChange,
+    userBarcode,
+    submitBarcodeHandler,
+    currentUser,
+    setCurrentUser,
+    todaysList,
+    setTodaysList,
+  } = useContext(CardContext);
   return (
     <section
       style={{background: '#ebf0f7', padding: '2% 2% 0 2%'}}

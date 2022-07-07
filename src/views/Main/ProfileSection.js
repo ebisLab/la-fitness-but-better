@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import CardContext from '../../store/constants/CardContext';
 import {
   Alert,
   AlertIcon,
@@ -16,21 +17,25 @@ export default function ProfileSection({
   bg,
   color,
   setTabIndex,
-  changeHandler,
   kidsModal,
-  currentUser,
   status_map,
-  todaysList,
-  setTodaysList,
-  submitHandler,
   usersDatabase,
-  setCurrentUser,
   setUsersDatabase,
   changeThisUser,
   checkInMemberGuest,
   changecurrentuser,
   userInfo,
 }) {
+  const {
+    onBarcodeChange,
+    userBarcode,
+    submitBarcodeHandler,
+    currentUser,
+    setCurrentUser,
+    todaysList,
+    setTodaysList,
+  } = useContext(CardContext);
+
   return (
     <section style={{background: '#ebf0f7'}} className="first-column">
       <Box
@@ -40,14 +45,14 @@ export default function ProfileSection({
         color={color}
         rounded="lg"
         p={5}>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitBarcodeHandler}>
           <ButtonGroup>
             <Input
               autoFocus
               style={{background: '#FEFCBF'}}
               name="barcode"
               type="text"
-              onChange={changeHandler}
+              onChange={onBarcodeChange}
             />
             <Button type="submit">✔</Button>
             <Button
@@ -108,7 +113,6 @@ export default function ProfileSection({
                     {item.perks?.guest ? (
                       <GuestList
                         item={item}
-                        todaysList={todaysList}
                         setTodaysList={setTodaysList}
                         usersDatabase={usersDatabase}
                         currentUser={currentUser}

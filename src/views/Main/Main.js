@@ -221,15 +221,12 @@ export default function Main({
         bg={bg}
         color={color}
         setTabIndex={setTabIndex}
-        changeHandler={changeHandler}
         kidsModal={kidsModal}
         status_map={status_map}
         todaysList={todaysList}
         setTodaysList={setTodaysList}
         submitHandler={submitHandler}
-        usersDatabase={usersDatabase}
         setCurrentUser={setCurrentUser}
-        setUsersDatabase={setUsersDatabase}
         changeThisUser={changeThisUser}
         checkInMemberGuest={checkInMemberGuest}
         userInfo={userInfo}
