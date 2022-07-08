@@ -64,16 +64,16 @@ export default function Main({
       setCurrentUser([user]);
     }
   };
-  const changeHandler = e => {
-    setUserBarcode(e.target.value);
-  };
-  const submitHandler = e => {
-    e.preventDefault();
-    setUserInfo(userBarcode);
-    addName(userBarcode);
-    setCurrentTime(currentTime);
-    e.target.reset();
-  };
+  // const changeHandler = e => {
+  //   setUserBarcode(e.target.value);
+  // };
+  // const submitHandler = e => {
+  //   e.preventDefault();
+  //   setUserInfo(userBarcode);
+  //   addName(userBarcode);
+  //   setCurrentTime(currentTime);
+  //   e.target.reset();
+  // };
   const kidsModal = () => {
     console.log('heee');
   };
@@ -154,38 +154,38 @@ export default function Main({
     // setTodaysList(db2);
   };
 
-  const changecurrentuser = img => {
-    const db = usersDatabase.map(obj => {
-      if (obj.barcode_number === currentUser[0].barcode_number) {
-        return {...obj, member_photo: img};
-      } else {
-        return obj;
-      }
-    });
+  // const changecurrentuser = img => {
+  //   const db = usersDatabase.map(obj => {
+  //     if (obj.barcode_number === currentUser[0].barcode_number) {
+  //       return {...obj, member_photo: img};
+  //     } else {
+  //       return obj;
+  //     }
+  //   });
 
-    console.log('changing user database ', db);
+  //   console.log('changing user database ', db);
 
-    setUsersDatabase(db);
-    const db2 = todaysList.map(obj => {
-      if (obj.barcode_number === currentUser[0].barcode_number) {
-        return {...obj, member_photo: img};
-      } else {
-        return obj;
-      }
-    });
-    console.log('changing todays list', db2);
-    setTodaysList(db2);
+  //   setUsersDatabase(db);
+  //   const db2 = todaysList.map(obj => {
+  //     if (obj.barcode_number === currentUser[0].barcode_number) {
+  //       return {...obj, member_photo: img};
+  //     } else {
+  //       return obj;
+  //     }
+  //   });
+  //   console.log('changing todays list', db2);
+  //   setTodaysList(db2);
 
-    const db3 = currentUser.map(obj => {
-      if (obj.barcode_number) {
-        return {...obj, member_photo: img};
-      } else {
-        return obj;
-      }
-    });
-    console.log('setting current uuser');
-    setCurrentUser(db3);
-  };
+  //   const db3 = currentUser.map(obj => {
+  //     if (obj.barcode_number) {
+  //       return {...obj, member_photo: img};
+  //     } else {
+  //       return obj;
+  //     }
+  //   });
+  //   console.log('setting current uuser');
+  //   setCurrentUser(db3);
+  // };
 
   const removeduplicates = () => {
     let duplicateRemover = new Set();
@@ -207,16 +207,15 @@ export default function Main({
     setPatronsCount(removeduplicates());
   }, [addName]);
 
-  const clickedRows = e => {
-    setCurrentUser([e]);
-  };
+  // const clickedRows = e => {
+  //   setCurrentUser([e]);
+  // };
 
   console.log('userdata🌿', usersDatabase);
 
   return (
     <main className="grid-container">
       <ProfileSection
-        changecurrentuser={changecurrentuser}
         bg={bg}
         color={color}
         setTabIndex={setTabIndex}
@@ -228,22 +227,16 @@ export default function Main({
       />
 
       <TableSection
-        clickedRows={clickedRows}
         status_table={status_table}
         currentUser={currentUser}
-        changecurrentuser={changecurrentuser}
         bg={bg}
         color={color}
         setTabIndex={setTabIndex}
-        changeHandler={changeHandler}
         kidsModal={kidsModal}
         status_map={status_map}
         todaysList={todaysList}
         setTodaysList={setTodaysList}
-        submitHandler={submitHandler}
-        usersDatabase={usersDatabase}
         setCurrentUser={setCurrentUser}
-        setUsersDatabase={setUsersDatabase}
         changeThisUser={changeThisUser}
         checkInMemberGuest={checkInMemberGuest}
         userInfo={userInfo}

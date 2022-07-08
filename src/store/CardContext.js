@@ -1,9 +1,9 @@
 import {createContext, useState, useEffect} from 'react';
-import {UNRECOGNIZED} from '../../store/constants';
-import imgplaceholder from '../../assets/img/userplaceholder.png';
+import {UNRECOGNIZED} from './constants';
+import imgplaceholder from '../assets/img/userplaceholder.png';
 
-import {mock} from '../../api/mock.js';
-import {time} from '../../utils/apputils.js';
+import {mock} from '../api/mock.js';
+import {time} from '../utils/apputils.js';
 
 const CardContext = createContext();
 
@@ -80,6 +80,42 @@ export function CardProvider({children}) {
     e.target.reset();
   };
 
+  const changecurrentuser = img => {
+    const db = usersDatabase.map(obj => {
+      if (obj.barcode_number === currentUser[0].barcode_number) {
+        return {...obj, member_photo: img};
+      } else {
+        return obj;
+      }
+    });
+
+    console.log('changing user database ', db);
+
+    setUsersDatabase(db);
+    const db2 = todaysList.map(obj => {
+      if (obj.barcode_number === currentUser[0].barcode_number) {
+        return {...obj, member_photo: img};
+      } else {
+        return obj;
+      }
+    });
+    console.log('changing todays list', db2);
+    setTodaysList(db2);
+
+    const db3 = currentUser.map(obj => {
+      if (obj.barcode_number) {
+        return {...obj, member_photo: img};
+      } else {
+        return obj;
+      }
+    });
+    console.log('setting current uuser');
+    setCurrentUser(db3);
+  };
+
+  console.log('usersdatabase', usersDatabase);
+  console.log('toays tab', todaysList);
+
   return (
     <CardContext.Provider
       value={{
@@ -93,6 +129,7 @@ export function CardProvider({children}) {
         todaysList,
         setTodaysList,
         currentTime,
+        changecurrentuser,
       }}>
       {children}
     </CardContext.Provider>

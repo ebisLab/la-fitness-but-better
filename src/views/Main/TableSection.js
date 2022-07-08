@@ -1,27 +1,26 @@
 import React, {useContext} from 'react';
-import CardContext from '../../store/constants/CardContext';
+import CardContext from '../../store/CardContext.js';
+import TableContext from '../../store/TableContext.js';
 import imgplaceholder from '../../assets/img/userplaceholder.png';
 import {UNRECOGNIZED, OK} from '../../store/constants';
 import {Button, Tag} from '@chakra-ui/react';
 import WalkInGuest from '../../components/modals/WalkInGuest/WalkInGuest';
 import HealthProgram from '../../components/modals/HealthProgram.js/HealthProgram';
 
-export default function TableSection({
-  currentTime,
-  clickedRows,
-  status_table,
-  usersDatabase,
-  setUsersDatabase,
-}) {
+export default function TableSection({currentTime, status_table}) {
+  const {clickedRows} = useContext(TableContext);
+
   const {
-    onBarcodeChange,
-    userBarcode,
-    submitBarcodeHandler,
-    currentUser,
+    // onBarcodeChange,
+    // userBarcode,
+    // submitBarcodeHandler,
+    // currentUser,
     setCurrentUser,
     todaysList,
     setTodaysList,
   } = useContext(CardContext);
+
+  console.log('okay table now', todaysList);
 
   return (
     <section
@@ -30,8 +29,6 @@ export default function TableSection({
       <WalkInGuest todaysList={todaysList} setTodaysList={setTodaysList} />
       <HealthProgram
         setCurrentUser={setCurrentUser}
-        setUsersDatabase={setUsersDatabase}
-        usersDatabase={usersDatabase}
         todaysList={todaysList}
         setTodaysList={setTodaysList}
       />

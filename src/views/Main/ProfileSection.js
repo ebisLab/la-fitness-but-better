@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import CardContext from '../../store/constants/CardContext';
+import CardContext from '../../store/CardContext';
 import {
   Alert,
   AlertIcon,
@@ -19,20 +19,20 @@ export default function ProfileSection({
   setTabIndex,
   kidsModal,
   status_map,
-  usersDatabase,
-  setUsersDatabase,
   changeThisUser,
   checkInMemberGuest,
-  changecurrentuser,
   userInfo,
 }) {
   const {
+    usersDatabase,
+    setUsersDatabase,
     onBarcodeChange,
     userBarcode,
     submitBarcodeHandler,
     currentUser,
     setCurrentUser,
     setTodaysList,
+    changecurrentuser,
   } = useContext(CardContext);
 
   return (
