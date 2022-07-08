@@ -7,6 +7,7 @@ import TabWrapper from './components/TabWrapper';
 import {UNRECOGNIZED} from './store/constants';
 import {CardProvider} from './store/CardContext';
 import {TableProvider} from './store/TableContext';
+import {FooterProvider} from './store/FooterContext';
 
 function App() {
   const [patronsCount, setPatronsCount] = useState(0);
@@ -48,11 +49,13 @@ function App() {
                 setPatronsCount={setPatronsCount}
               />
             </TabWrapper>
-            <Footer
-              removeduplicates2={removeduplicates2}
-              patronsCount={patronsCount}
-              patronsCount2={patronsCount2}
-            />
+            <FooterProvider>
+              <Footer
+                removeduplicates2={removeduplicates2}
+                patronsCount={patronsCount}
+                patronsCount2={patronsCount2}
+              />{' '}
+            </FooterProvider>
           </ChakraProvider>
         </TableProvider>
       </CardProvider>

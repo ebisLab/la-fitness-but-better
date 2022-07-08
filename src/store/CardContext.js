@@ -15,6 +15,15 @@ export function CardProvider({children}) {
   const [todaysList, setTodaysList] = useState([]);
   const [currentTime, setCurrentTime] = useState(time);
   const [timeArr, setTimeArr] = useState([]);
+  const [dataToAdd, setDataToAdd] = useState(null);
+  const [patronList, setPatronList] = useState([]);
+
+  const color = bg => `color: white; background-color: ${bg}`;
+  const Style = {
+    normal: color('gray'),
+    warning: color('red'),
+    success: color('green'),
+  };
 
   useEffect(() => {
     setUsersDatabase(mock);
@@ -45,7 +54,9 @@ export function CardProvider({children}) {
         success: '✅',
         timesheet: timeArr,
       };
+      //add to totoday's list
       setTodaysList(prevstate => [user, ...prevstate]);
+      setPatronList(prevstate => [user, ...prevstate]);
       setTimeArr(prevstate => [time, ...prevstate]);
 
       //we want to update the database with the time the member checked in
@@ -143,9 +154,12 @@ export function CardProvider({children}) {
     // console.log('seeing if this is outputting', db2);
     // // setTodaysList(db2);
   };
+  const log = (str, style = Style.success) =>
+    console.log(`%c${str}`, style, usersDatabase);
 
-  console.log('usersdatabase', usersDatabase);
   console.log('toays tab', todaysList);
+  console.log('patronlist 🌸', patronList);
+  log('normal logs');
 
   return (
     <CardContext.Provider
@@ -162,6 +176,10 @@ export function CardProvider({children}) {
         currentTime,
         changecurrentuser,
         addInMemberGuest,
+        dataToAdd,
+        setDataToAdd,
+        patronList,
+        setPatronList,
       }}>
       {children}
     </CardContext.Provider>

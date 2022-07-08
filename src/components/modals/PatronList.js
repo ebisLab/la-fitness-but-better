@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   useDisclosure,
   Image,
@@ -19,12 +19,14 @@ import {
   Tbody,
 } from '@chakra-ui/react';
 import {faTurnDownRight} from '@fortawesome/free-solid-svg-icons';
-
+import FooterContext from '../../store/FooterContext';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTurnUp} from '@fortawesome/free-solid-svg-icons';
 
 export default function PatronList2({removeduplicates2}) {
   const {isOpen, onOpen, onClose} = useDisclosure();
+  const {patronList, setPatronList} = useContext(FooterContext);
+
   const removeduplicate = removeduplicates2();
 
   let happy = removeduplicate.map((item, index, arr) => {
@@ -47,11 +49,12 @@ export default function PatronList2({removeduplicates2}) {
     //   return element;
     // })
   });
-  console.log('list after new addded', happy);
+
+  //if member has guest checked in add them to the list
   return (
     <>
       <Button onClick={onOpen} variant="ghost">
-        {removeduplicates2().length} guests today
+        {patronList.length} guests today
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
