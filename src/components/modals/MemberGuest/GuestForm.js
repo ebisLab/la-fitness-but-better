@@ -30,7 +30,7 @@ import GuestList from './GuestList';
 
 export default function GuestForm({
   item,
-  checkInMemberGuest,
+  addInMemberGuest,
   todaysList,
   setTodaysList,
   changeThisUser,
@@ -140,7 +140,7 @@ export default function GuestForm({
       }
     });
 
-    checkInMemberGuest(guest);
+    addInMemberGuest(guest);
   };
 
   function toggleCheck(todo) {

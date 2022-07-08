@@ -31,8 +31,10 @@ export default function ProfileSection({
     submitBarcodeHandler,
     currentUser,
     setCurrentUser,
+    todaysList,
     setTodaysList,
     changecurrentuser,
+    addInMemberGuest,
   } = useContext(CardContext);
 
   return (
@@ -112,13 +114,14 @@ export default function ProfileSection({
                     {item.perks?.guest ? (
                       <GuestList
                         item={item}
+                        todaysList={todaysList}
                         setTodaysList={setTodaysList}
                         usersDatabase={usersDatabase}
                         currentUser={currentUser}
                         setCurrentUser={setCurrentUser}
                         setUsersDatabase={setUsersDatabase}
                         changeThisUser={changeThisUser}
-                        checkInMemberGuest={checkInMemberGuest}
+                        addInMemberGuest={addInMemberGuest}
                       />
                     ) : (
                       ''
