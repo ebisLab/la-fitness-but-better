@@ -37,19 +37,20 @@ function App() {
       <CardProvider>
         <TableProvider>
           <ChakraProvider>
-            <TabWrapper
-              tabIndex={tabIndex}
-              setTabIndex={setTabIndex}
-              handleTabsChange={handleTabsChange}>
-              <Dashboard
-                setTabIndex={setTabIndex}
-                handleTabsChange={handleTabsChange}
-                setPatronsCount2={setPatronsCount2}
-                patronsCount2={patronsCount2}
-                setPatronsCount={setPatronsCount}
-              />
-            </TabWrapper>
             <FooterProvider>
+              <TabWrapper
+                tabIndex={tabIndex}
+                setTabIndex={setTabIndex}
+                handleTabsChange={handleTabsChange}>
+                <Dashboard
+                  setTabIndex={setTabIndex}
+                  handleTabsChange={handleTabsChange}
+                  setPatronsCount2={setPatronsCount2}
+                  patronsCount2={patronsCount2}
+                  setPatronsCount={setPatronsCount}
+                />
+              </TabWrapper>
+              {/* <FooterProvider> */}
               <Footer
                 removeduplicates2={removeduplicates2}
                 patronsCount={patronsCount}

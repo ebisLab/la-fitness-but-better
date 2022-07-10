@@ -180,6 +180,7 @@ export function CardProvider({children}) {
         setDataToAdd,
         patronList,
         setPatronList,
+        setUsersDatabase,
       }}>
       {children}
     </CardContext.Provider>
