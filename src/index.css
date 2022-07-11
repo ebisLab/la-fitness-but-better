@@ -44,7 +44,7 @@ code {
     gap: 60px !important;
     align-items: center !important;}    */
   }
-  /* .member-privileges{
+  .member-privileges{
     grid-area: 1 / 1 / 3 / 3;
   }
 
@@ -54,7 +54,7 @@ code {
 
   .family-plan {
     grid-area: 3 / 1 / 5 / 3;
-  } */
+  }
 }
   
 }
