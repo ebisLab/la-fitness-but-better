@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   chakra,
   Text,
@@ -27,14 +27,22 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import GuestList from './GuestList';
+import FooterContext from '../../../store/FooterContext';
+import CardContext from '../../../store/CardContext';
 
 export default function GuestForm({
   item,
   addInMemberGuest,
-  todaysList,
+  // todaysList,
   setTodaysList,
   changeThisUser,
+  currentUser,
 }) {
+  const {setPatronList} = useContext(FooterContext);
+  const {
+    todaysList,
+    // setTodaysList
+  } = useContext(CardContext);
   const [guestInfo, setGuestInfo] = React.useState({
     guest_image: '',
     first_name: '',
@@ -46,17 +54,21 @@ export default function GuestForm({
   const [guesList, setGuestList] = React.useState([]);
   const [guest, setGuest] = React.useState(item.perks?.guest);
   const [checkedList, setCheckedList] = React.useState(guest);
+  const [changeData, setChangeData] = React.useState([]);
 
   React.useEffect(() => {
     setGuestList(item.perks?.guest);
   }, []);
 
-  function handleToggleChecked(clickedguestinfo) {
+  function handleToggleChecked(e, clickedguestinfo) {
     setGuest(it => {
       let todo = it.find(td => td.first_name === clickedguestinfo.first_name);
       todo.isChecked = !todo.isChecked;
       return it;
     });
+    return e.target.checked === true
+      ? setChangeData([...changeData, {...guest, isSelected: e.target.checked}])
+      : null;
   }
 
   const handleChange = async e => {
@@ -77,6 +89,7 @@ export default function GuestForm({
     setGuestList([guestInfo, ...guesList]);
     setGuest([guestInfo, ...guesList]);
     changeThisUser(e, guestInfo);
+
     setGuestInfo({
       guest_image: '',
       first_name: '',
@@ -86,44 +99,44 @@ export default function GuestForm({
     });
   };
 
-  const changeCheck = gst => e => {
-    console.log('gst', gst);
-    console.log('eee', e.target.checked);
+  // const changeCheck = gst => e => {
+  //   console.log('gst', gst);
+  //   console.log('eee', e.target.checked);
 
-    const lastguestindex = guesList.findIndex(
-      obj => obj.first_name === gst.first_name,
-    );
-    console.log('lastgues', lastguestindex);
-    const newAr = guesList.map((obj, i) => {
-      return obj[lastguestindex];
-      // if (gst[lastguestindex] === obj[lastguestindex]) return obj;
-    });
-    console.log('neww', newAr);
+  //   const lastguestindex = guesList.findIndex(
+  //     obj => obj.first_name === gst.first_name,
+  //   );
+  //   console.log('lastgues', lastguestindex);
+  //   const newAr = guesList.map((obj, i) => {
+  //     return obj[lastguestindex];
+  //     // if (gst[lastguestindex] === obj[lastguestindex]) return obj;
+  //   });
+  //   console.log('neww', newAr);
 
-    // console.log(e.target.checked);
-    // setChecked(e.target.checked);
+  //   // console.log(e.target.checked);
+  //   // setChecked(e.target.checked);
 
-    // const lastguestindex = guesList.findIndex(
-    //   obj => obj.first_name === gst.first_name,
-    // );
-    // setIndex(lastguestindex);
+  //   // const lastguestindex = guesList.findIndex(
+  //   //   obj => obj.first_name === gst.first_name,
+  //   // );
+  //   // setIndex(lastguestindex);
 
-    // guesList.map(obj => {
-    //   if (obj[lastguestindex] === gst[lastguestindex]) {
-    //     return (guesList[lastguestindex] = {
-    //       ...gst,
-    //       isChecked: e.target.checked,
-    //     });
-    //   }
-    // });
+  //   // guesList.map(obj => {
+  //   //   if (obj[lastguestindex] === gst[lastguestindex]) {
+  //   //     return (guesList[lastguestindex] = {
+  //   //       ...gst,
+  //   //       isChecked: e.target.checked,
+  //   //     });
+  //   //   }
+  //   // });
 
-    // guesList[lastguestindex] = {
-    //   ...gst,
-    //   isChecked: e.target.checked,
-    // };
+  //   // guesList[lastguestindex] = {
+  //   //   ...gst,
+  //   //   isChecked: e.target.checked,
+  //   // };
 
-    // setIsChecked(e.target.checked);
-  };
+  //   // setIsChecked(e.target.checked);
+  // };
 
   const addToTodaysList = e => {
     e.preventDefault();
@@ -136,16 +149,46 @@ export default function GuestForm({
 
     guesList.filter(stuff => {
       if (stuff.isChecked === true) {
-        return setTodaysList([stuff, ...todaysList]);
+        return setTodaysList(prevState => [stuff, ...prevState]);
       }
     });
-
-    addInMemberGuest(guest);
+    console.log('changed data guest to throw in ', changeData);
+    setChangeData(changeData);
+    addInMemberGuest(changeData);
   };
 
-  function toggleCheck(todo) {
-    handleToggleChecked(todo);
+  function toggleCheck(e, todo) {
+    handleToggleChecked(e, todo);
   }
+
+  function seeifintable() {
+    let isUserThere = todaysList.findIndex(
+      obj => obj.first_name == item.first_name,
+    );
+
+    //is it found
+    const ismainuserfound = todaysList.some(
+      obj => obj.first_name === item.first_name,
+    );
+    const lastguestindex = todaysList.findIndex(
+      obj => obj.first_name === item.first_name,
+    );
+
+    if (ismainuserfound) {
+    }
+
+    console.log('searching index....', lastguestindex);
+    console.log('is the user there', ismainuserfound);
+    console.log('todays list seeing if its searcheable', todaysList);
+    // todaysList.map(item =>{
+    //   if(vendors.findIndex(item => item.Name == "Magenic") == -1){
+    //   }
+    // })
+  }
+  seeifintable();
+
+  console.log('tell me', changeData);
+  console.log('current user', currentUser);
   return (
     <div>
       <div>
@@ -157,7 +200,7 @@ export default function GuestForm({
                   <Checkbox
                     defaultChecked={gst.isChecked ? true : null}
                     value={gst.isChecked}
-                    onChange={() => toggleCheck(gst)}
+                    onChange={e => toggleCheck(e, gst)}
                   />
                 </Td>
                 <Td>
