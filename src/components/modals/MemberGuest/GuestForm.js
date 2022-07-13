@@ -36,8 +36,9 @@ export default function GuestForm({
   changeThisUser,
   currentUser,
 }) {
-  const {setPatronList} = useContext(FooterContext);
+  const {patronList, setPatronList} = useContext(FooterContext);
   const {todaysList, setTodaysList} = useContext(CardContext);
+
   const [guestInfo, setGuestInfo] = React.useState({
     guest_image: '',
     first_name: '',
@@ -48,11 +49,11 @@ export default function GuestForm({
   });
   const [guesList, setGuestList] = React.useState([]);
   const [guest, setGuest] = React.useState(item.perks?.guest);
-  const [checkedList, setCheckedList] = React.useState(guest);
   const [changeData, setChangeData] = React.useState([]);
 
   React.useEffect(() => {
     setGuestList(item.perks?.guest);
+    setTodaysList(todaysList);
   }, []);
 
   function handleToggleChecked(e, clickedguestinfo) {
@@ -85,7 +86,7 @@ export default function GuestForm({
   const submitHandler = e => {
     e.preventDefault();
     setGuestList([guestInfo, ...guesList]);
-    setGuest([guestInfo, ...guesList]);
+    // setGuest([guestInfo, ...guesList]);
     changeThisUser(e, guestInfo);
 
     setGuestInfo({
@@ -96,6 +97,10 @@ export default function GuestForm({
       isChecked: false,
     });
   };
+
+  function toggleCheck(e, todo) {
+    handleToggleChecked(e, todo);
+  }
 
   // const changeCheck = gst => e => {
   //   console.log('gst', gst);
@@ -139,75 +144,28 @@ export default function GuestForm({
   const addToTodaysList = e => {
     e.preventDefault();
 
-    setCheckedList(
-      guesList.filter(stuff => {
-        if (stuff.isChecked === true) return stuff;
-      }),
-    );
-
-    guesList.filter(stuff => {
-      if (stuff.isChecked === true) {
-        seeifintable();
-        return setTodaysList(prevState => [stuff, ...prevState]);
-      }
-    });
     setChangeData(changeData);
     addInMemberGuest(changeData);
+    guesList.filter((stuff, m) => {
+      console.log('filtering stuff', stuff);
+      if (stuff.isChecked === true) {
+        setTodaysList(prevState => [stuff, ...prevState]);
+        setPatronList(prevState => [...prevState]);
+
+        //change position
+        //if main user is in the table ✅
+        //get main user current position ✅
+        //get guest users current positions ✅
+        // place them after main user's position
+        let mainmember = patronList.findIndex(
+          e => e.first_name === item.first_name,
+        );
+        patronList.splice(mainmember + 1, 0, stuff);
+      }
+    });
   };
 
-  function toggleCheck(e, todo) {
-    handleToggleChecked(e, todo);
-  }
-
-  const mainmemberindex = todaysList.findIndex(
-    obj => obj.first_name === 'Jennifer',
-  );
-
-  function seeifintable() {
-    console.log('clicked if it can be seen');
-    //is it found
-    const ismainuserfound = todaysList.some(
-      obj => obj.first_name === item.first_name,
-    );
-
-    //this list will not be duplicated
-
-    //if main user is in the table ✅
-    //get main user current position ✅
-    //get guest users current positions ✅
-    // place them after main user's position
-
-    if (ismainuserfound) {
-      console.log('it can be found!!');
-      //get the position of the main member
-
-      console.log(
-        `this is ${item.first_name} position`,
-        mainmemberindex,
-        todaysList,
-      );
-      // get the position of the guest
-      const positionofguests = guesList.map(el => {
-        return todaysList?.findIndex(
-          obj => obj?.first_name === el.first_name, //change to barcode
-        );
-      });
-
-      function moveguesttoaftermainposition() {
-        console.log('its moving around');
-        positionofguests.map((is, i, arr) => {
-          let maybe = todaysList.splice(i, arr.length);
-          console.log('supposed to remove these', maybe);
-          todaysList.splice(mainmemberindex, 0, ...maybe);
-          setTodaysList(prevstate => [...prevstate]);
-        });
-        console.log('finished calculations');
-      }
-      moveguesttoaftermainposition();
-    }
-  }
-
-  console.log('today', todaysList);
+  console.log('today patron checking', patronList);
 
   return (
     <div>
@@ -267,7 +225,12 @@ export default function GuestForm({
 
         <Button type="submit">Submit</Button>
       </form>
-      <button type="submit" onClick={addToTodaysList}>
+      <button
+        type="submit"
+        onClick={e => {
+          addToTodaysList(e);
+          console.log('checking', todaysList);
+        }}>
         submit to table
       </button>
     </div>

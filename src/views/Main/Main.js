@@ -64,16 +64,7 @@ export default function Main({
       setCurrentUser([user]);
     }
   };
-  // const changeHandler = e => {
-  //   setUserBarcode(e.target.value);
-  // };
-  // const submitHandler = e => {
-  //   e.preventDefault();
-  //   setUserInfo(userBarcode);
-  //   addName(userBarcode);
-  //   setCurrentTime(currentTime);
-  //   e.target.reset();
-  // };
+
   const kidsModal = () => {
     console.log('heee');
   };
@@ -124,6 +115,7 @@ export default function Main({
   };
 
   const checkInMemberGuest = data => {
+    //now known as addInMemberGuest
     console.log('data', data);
     const db = usersDatabase.map(obj => {
       if (obj.barcode_number === currentUser[0].barcode_number) {
@@ -228,15 +220,15 @@ export default function Main({
 
       <TableSection
         status_table={status_table}
-        currentUser={currentUser}
+        // currentUser={currentUser}
         bg={bg}
         color={color}
         setTabIndex={setTabIndex}
-        kidsModal={kidsModal}
+        // kidsModal={kidsModal}
         status_map={status_map}
-        todaysList={todaysList}
-        setTodaysList={setTodaysList}
-        setCurrentUser={setCurrentUser}
+        // todaysList={todaysList}
+        // setTodaysList={setTodaysList}
+        // setCurrentUser={setCurrentUser}
         changeThisUser={changeThisUser}
         checkInMemberGuest={checkInMemberGuest}
         userInfo={userInfo}
