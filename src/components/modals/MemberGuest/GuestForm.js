@@ -33,16 +33,11 @@ import CardContext from '../../../store/CardContext';
 export default function GuestForm({
   item,
   addInMemberGuest,
-  // todaysList,
-  setTodaysList,
   changeThisUser,
   currentUser,
 }) {
   const {setPatronList} = useContext(FooterContext);
-  const {
-    todaysList,
-    // setTodaysList
-  } = useContext(CardContext);
+  const {todaysList, setTodaysList} = useContext(CardContext);
   const [guestInfo, setGuestInfo] = React.useState({
     guest_image: '',
     first_name: '',
@@ -67,7 +62,10 @@ export default function GuestForm({
       return it;
     });
     return e.target.checked === true
-      ? setChangeData([...changeData, {...guest, isSelected: e.target.checked}])
+      ? setChangeData([
+          ...changeData,
+          {...clickedguestinfo, isSelected: e.target.checked},
+        ])
       : null;
   }
 
@@ -149,10 +147,10 @@ export default function GuestForm({
 
     guesList.filter(stuff => {
       if (stuff.isChecked === true) {
+        seeifintable();
         return setTodaysList(prevState => [stuff, ...prevState]);
       }
     });
-    console.log('changed data guest to throw in ', changeData);
     setChangeData(changeData);
     addInMemberGuest(changeData);
   };
@@ -161,34 +159,56 @@ export default function GuestForm({
     handleToggleChecked(e, todo);
   }
 
-  function seeifintable() {
-    let isUserThere = todaysList.findIndex(
-      obj => obj.first_name == item.first_name,
-    );
+  const mainmemberindex = todaysList.findIndex(
+    obj => obj.first_name === 'Jennifer',
+  );
 
+  function seeifintable() {
+    console.log('clicked if it can be seen');
     //is it found
     const ismainuserfound = todaysList.some(
       obj => obj.first_name === item.first_name,
     );
-    const lastguestindex = todaysList.findIndex(
-      obj => obj.first_name === item.first_name,
-    );
+
+    //this list will not be duplicated
+
+    //if main user is in the table ✅
+    //get main user current position ✅
+    //get guest users current positions ✅
+    // place them after main user's position
 
     if (ismainuserfound) {
+      console.log('it can be found!!');
+      //get the position of the main member
+
+      console.log(
+        `this is ${item.first_name} position`,
+        mainmemberindex,
+        todaysList,
+      );
+      // get the position of the guest
+      const positionofguests = guesList.map(el => {
+        return todaysList?.findIndex(
+          obj => obj?.first_name === el.first_name, //change to barcode
+        );
+      });
+
+      function moveguesttoaftermainposition() {
+        console.log('its moving around');
+        positionofguests.map((is, i, arr) => {
+          let maybe = todaysList.splice(i, arr.length);
+          console.log('supposed to remove these', maybe);
+          todaysList.splice(mainmemberindex, 0, ...maybe);
+          setTodaysList(prevstate => [...prevstate]);
+        });
+        console.log('finished calculations');
+      }
+      moveguesttoaftermainposition();
     }
-
-    console.log('searching index....', lastguestindex);
-    console.log('is the user there', ismainuserfound);
-    console.log('todays list seeing if its searcheable', todaysList);
-    // todaysList.map(item =>{
-    //   if(vendors.findIndex(item => item.Name == "Magenic") == -1){
-    //   }
-    // })
   }
-  seeifintable();
 
-  console.log('tell me', changeData);
-  console.log('current user', currentUser);
+  console.log('today', todaysList);
+
   return (
     <div>
       <div>
