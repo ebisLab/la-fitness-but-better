@@ -26,7 +26,6 @@ import {
   ChakraProvider,
   Flex,
 } from '@chakra-ui/react';
-import GuestList from './GuestList';
 import FooterContext from '../../../store/FooterContext';
 import CardContext from '../../../store/CardContext';
 

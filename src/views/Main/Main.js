@@ -12,7 +12,6 @@ export default function Main({
   color = 'gray.800',
   setPatronsCount,
   setTabIndex,
-  setPatronsCount2,
 }) {
   const [userBarcode, setUserBarcode] = useState('');
   const [userInfo, setUserInfo] = useState('');
@@ -195,7 +194,6 @@ export default function Main({
   };
 
   useEffect(() => {
-    setPatronsCount2(todaysList);
     setPatronsCount(removeduplicates());
   }, [addName]);
 

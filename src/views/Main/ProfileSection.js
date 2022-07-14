@@ -20,19 +20,15 @@ export default function ProfileSection({
   kidsModal,
   status_map,
   changeThisUser,
-  checkInMemberGuest,
   userInfo,
 }) {
   const {
     usersDatabase,
     setUsersDatabase,
     onBarcodeChange,
-    userBarcode,
     submitBarcodeHandler,
     currentUser,
     setCurrentUser,
-    todaysList,
-    setTodaysList,
     changecurrentuser,
     addInMemberGuest,
   } = useContext(CardContext);
