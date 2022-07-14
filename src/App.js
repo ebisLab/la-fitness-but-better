@@ -4,7 +4,6 @@ import {ChakraProvider} from '@chakra-ui/react';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import TabWrapper from './components/TabWrapper';
-import {UNRECOGNIZED} from './store/constants';
 import {CardProvider} from './store/CardContext';
 import {TableProvider} from './store/TableContext';
 import {FooterProvider} from './store/FooterContext';
@@ -17,20 +16,20 @@ function App() {
     setTabIndex(index);
   };
 
-  function removeduplicates2() {
-    let duplicateRemover = new Set();
-    let distinctAarr = patronsCount2.filter((obj, i) => {
-      if (
-        !duplicateRemover.has(obj.barcode_number) &&
-        obj.status !== UNRECOGNIZED
-      ) {
-        duplicateRemover.add(obj.barcode_number);
-        return obj;
-      }
-      return false;
-    });
-    return distinctAarr;
-  }
+  // function removeduplicates2() {
+  //   let duplicateRemover = new Set();
+  //   let distinctAarr = patronsCount2.filter((obj, i) => {
+  //     if (
+  //       !duplicateRemover.has(obj.barcode_number) &&
+  //       obj.status !== UNRECOGNIZED
+  //     ) {
+  //       duplicateRemover.add(obj.barcode_number);
+  //       return obj;
+  //     }
+  //     return false;
+  //   });
+  //   return distinctAarr;
+  // }
 
   return (
     <div className="platform">
@@ -52,7 +51,7 @@ function App() {
               </TabWrapper>
               {/* <FooterProvider> */}
               <Footer
-                removeduplicates2={removeduplicates2}
+                // removeduplicates2={removeduplicates2}
                 patronsCount={patronsCount}
                 patronsCount2={patronsCount2}
               />{' '}

@@ -114,8 +114,6 @@ export default function ProfileSection({
                     {item.perks?.guest ? (
                       <GuestList
                         item={item}
-                        todaysList={todaysList}
-                        setTodaysList={setTodaysList}
                         usersDatabase={usersDatabase}
                         currentUser={currentUser}
                         setCurrentUser={setCurrentUser}

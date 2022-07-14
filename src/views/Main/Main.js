@@ -199,10 +199,6 @@ export default function Main({
     setPatronsCount(removeduplicates());
   }, [addName]);
 
-  // const clickedRows = e => {
-  //   setCurrentUser([e]);
-  // };
-
   console.log('userdata🌿', usersDatabase);
 
   return (
@@ -220,15 +216,10 @@ export default function Main({
 
       <TableSection
         status_table={status_table}
-        // currentUser={currentUser}
         bg={bg}
         color={color}
         setTabIndex={setTabIndex}
-        // kidsModal={kidsModal}
         status_map={status_map}
-        // todaysList={todaysList}
-        // setTodaysList={setTodaysList}
-        // setCurrentUser={setCurrentUser}
         changeThisUser={changeThisUser}
         checkInMemberGuest={checkInMemberGuest}
         userInfo={userInfo}

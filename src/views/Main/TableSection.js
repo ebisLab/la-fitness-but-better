@@ -9,18 +9,7 @@ import HealthProgram from '../../components/modals/HealthProgram.js/HealthProgra
 
 export default function TableSection({currentTime, status_table}) {
   const {clickedRows} = useContext(TableContext);
-
-  const {
-    // onBarcodeChange,
-    // userBarcode,
-    // submitBarcodeHandler,
-    // currentUser,
-    setCurrentUser,
-    todaysList,
-    setTodaysList,
-  } = useContext(CardContext);
-
-  console.log('okay table now', todaysList);
+  const {setCurrentUser, todaysList, setTodaysList} = useContext(CardContext);
 
   return (
     <section

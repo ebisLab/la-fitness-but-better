@@ -18,43 +18,27 @@ import {
   Thead,
   Tbody,
 } from '@chakra-ui/react';
-import {faTurnDownRight} from '@fortawesome/free-solid-svg-icons';
 import FooterContext from '../../store/FooterContext';
+import CardContext from '../../store/CardContext';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTurnUp} from '@fortawesome/free-solid-svg-icons';
+import {UNRECOGNIZED} from '../../store/constants';
 
-export default function PatronList2({removeduplicates2}) {
+export default function PatronList2() {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const {patronList, setPatronList} = useContext(FooterContext);
+  const {todaysList, setTodaysList} = useContext(CardContext);
 
-  const removeduplicate = removeduplicates2();
-
-  let happy = removeduplicate.map((item, index, arr) => {
-    console.log('data i want to play with', item);
-    console.log('index position', index);
-    console.log('arr', arr);
-
-    const lastguestindex = arr.findIndex(
-      obj => obj.first_name === item.first_name,
-    );
-    console.log('last guest index', lastguestindex);
-
-    // array.map((element, index, arr) => {
-    //   if (index === indexOfGuest) {
-    //     return arr[indexOfTrainer];
-    //   }
-    //   if (index === indexOfTrainer) {
-    //     return arr[indexOfGuest];
-    //   }
-    //   return element;
-    // })
-  });
+  let removeduplicates = patronList.filter(
+    (data, i, arr) =>
+      arr.findIndex(v2 => v2.barcode_number === data.barcode_number) === i,
+  );
 
   //if member has guest checked in add them to the list
   return (
     <>
       <Button onClick={onOpen} variant="ghost">
-        {patronList.length} guests today
+        {removeduplicates.length} guests today
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -72,7 +56,7 @@ export default function PatronList2({removeduplicates2}) {
                 </Tr>
               </Thead>
               <Tbody>
-                {removeduplicates2().map((item, i) => (
+                {removeduplicates.map((item, i) => (
                   <Tr key={item.id}>
                     {item.fitness_type === "member's guest" && (
                       <Td
@@ -116,38 +100,6 @@ export default function PatronList2({removeduplicates2}) {
                     <Td>{item.fitness_type}</Td>
                     {item.fitness_type !== "member's guest" && <Td></Td>}
                   </Tr>
-
-                  // <Tr>
-                  //   {item.fitness_type === "member's guest" && (
-                  //     <Td
-                  //       style={{
-                  //         textAlignLast: 'center',
-                  //         padding: 0,
-                  //         position: 'relative',
-                  //         left: '2%',
-                  //       }}>
-                  //       <FontAwesomeIcon
-                  //         icon={faTurnUp}
-                  //         size="xl"
-                  //         style={{
-                  //           transform: 'rotate(90deg)',
-                  //         }}
-                  //       />
-                  //     </Td>
-                  //   )}
-                  //   <Td>
-                  //     <Image
-                  //       boxSize="45px"
-                  //       borderRadius="10px"
-                  //       src={item.member_photo}
-                  //       alt={item.first_name}
-                  //     />
-                  //   </Td>
-                  //   <Td>
-                  //     {item.first_name} {item.last_name}
-                  //   </Td>
-                  //   <Td>{item.fitness_type}</Td>
-                  // </Tr>
                 ))}
               </Tbody>
             </Table>

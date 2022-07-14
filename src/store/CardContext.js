@@ -113,6 +113,15 @@ export function CardProvider({children}) {
     console.log('changing todays list', db2);
     setTodaysList(db2);
 
+    const db4 = patronList.map(obj => {
+      if (obj.barcode_number === currentUser[0].barcode_number) {
+        return {...obj, member_photo: img};
+      } else {
+        return obj;
+      }
+    });
+    setPatronList(db4);
+
     const db3 = currentUser.map(obj => {
       if (obj.barcode_number) {
         return {...obj, member_photo: img};
@@ -124,36 +133,7 @@ export function CardProvider({children}) {
     setCurrentUser(db3);
   };
 
-  const addInMemberGuest = data => {
-    console.log('data im supposed to add to table', data);
-    // const db = usersDatabase.map(obj => {
-    //   if (obj.barcode_number === currentUser[0].barcode_number) {
-    //     return {
-    //       ...obj,
-    //       test: 'example 🌸',
-    //     };
-    //   } else {
-    //     return obj;
-    //   }
-    // });
-    // console.log('database changed', db);
-    // setUsersDatabase(db);
-
-    // //highly considering creating a 4th state independent of this todayslist state to count for checked in people and guests
-
-    // const db2 = todaysList.map(obj => {
-    //   if (obj.barcode_number === currentUser[0].barcode_number) {
-    //     return {
-    //       ...obj,
-    //       test: 'example 🌸',
-    //     };
-    //   } else {
-    //     return obj;
-    //   }
-    // });
-    // console.log('seeing if this is outputting', db2);
-    // // setTodaysList(db2);
-  };
+  const addInMemberGuest = data => {};
   const log = (str, style = Style.success) =>
     console.log(`%c${str}`, style, usersDatabase);
 
