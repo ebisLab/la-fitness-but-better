@@ -5,7 +5,7 @@ import FooterContext from '../../../store/FooterContext';
 import CardContext from '../../../store/CardContext';
 
 export default function HealthProgramForm() {
-  const {setPatronList} = useContext(FooterContext);
+  const {setOccupantsList} = useContext(FooterContext);
   const {
     usersDatabase,
     setUsersDatabase,
@@ -45,7 +45,7 @@ export default function HealthProgramForm() {
     };
     setCurrentUser([user]);
     setTodaysList([user, ...todaysList]);
-    setPatronList(prevstate => [user, ...prevstate]);
+    setOccupantsList(prevstate => [user, ...prevstate]);
 
     //submitted to main database
     setUsersDatabase(prevstate => [user, ...prevstate]);

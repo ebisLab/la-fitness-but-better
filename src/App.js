@@ -9,8 +9,7 @@ import {TableProvider} from './store/TableContext';
 import {FooterProvider} from './store/FooterContext';
 
 function App() {
-  const [patronsCount, setPatronsCount] = useState(0);
-  const [patronsCount2, setPatronsCount2] = useState([]);
+  const [occupantsCount, setOccupantsCount] = useState(0);
   const [tabIndex, setTabIndex] = React.useState(0);
   const handleTabsChange = index => {
     setTabIndex(index);
@@ -18,7 +17,7 @@ function App() {
 
   // function removeduplicates2() {
   //   let duplicateRemover = new Set();
-  //   let distinctAarr = patronsCount2.filter((obj, i) => {
+  //   let distinctAarr = occupantsCount2.filter((obj, i) => {
   //     if (
   //       !duplicateRemover.has(obj.barcode_number) &&
   //       obj.status !== UNRECOGNIZED
@@ -44,17 +43,11 @@ function App() {
                 <Dashboard
                   setTabIndex={setTabIndex}
                   handleTabsChange={handleTabsChange}
-                  setPatronsCount2={setPatronsCount2}
-                  patronsCount2={patronsCount2}
-                  setPatronsCount={setPatronsCount}
+                  setOccupantsCount={setOccupantsCount}
                 />
               </TabWrapper>
               {/* <FooterProvider> */}
-              <Footer
-                // removeduplicates2={removeduplicates2}
-                patronsCount={patronsCount}
-                patronsCount2={patronsCount2}
-              />{' '}
+              <Footer occupantsCount={occupantsCount} />{' '}
             </FooterProvider>
           </ChakraProvider>
         </TableProvider>

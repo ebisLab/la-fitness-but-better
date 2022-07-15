@@ -4,7 +4,7 @@ import CardContext from '../../../store/CardContext';
 import FooterContext from '../../../store/FooterContext';
 
 export default function WalkForm() {
-  const {setPatronList} = useContext(FooterContext);
+  const {setOccupantsList} = useContext(FooterContext);
   const {todaysList, setTodaysList} = useContext(CardContext);
   const [input, setInput] = React.useState({
     first_name: '',
@@ -40,7 +40,7 @@ export default function WalkForm() {
   const submitHandler = e => {
     e.preventDefault();
     setTodaysList([input, ...todaysList]);
-    setPatronList(prevstate => [input, ...prevstate]);
+    setOccupantsList(prevstate => [input, ...prevstate]);
   };
 
   console.log('input', input);

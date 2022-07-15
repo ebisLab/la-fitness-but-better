@@ -11,7 +11,7 @@ import TableSection from './TableSection';
 export default function Main({
   bg = '#e6dfd1',
   color = 'gray.800',
-  setPatronsCount,
+  setOccupantsCount,
   setTabIndex,
 }) {
   const {
@@ -206,7 +206,7 @@ export default function Main({
   };
 
   useEffect(() => {
-    setPatronsCount(removeduplicates());
+    setOccupantsCount(removeduplicates());
   }, [addName]);
 
   console.log('userdata🌿', usersDatabase);

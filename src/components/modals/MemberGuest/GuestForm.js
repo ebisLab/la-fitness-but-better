@@ -20,7 +20,7 @@ export default function GuestForm({
   changeThisUser,
   currentUser,
 }) {
-  const {patronList, setPatronList} = useContext(FooterContext);
+  const {occupantsList, setOccupantsList} = useContext(FooterContext);
   const {todaysList, setTodaysList} = useContext(CardContext);
 
   const [guestInfo, setGuestInfo] = React.useState({
@@ -136,23 +136,20 @@ export default function GuestForm({
       console.log('filtering stuff', stuff);
       if (stuff.isChecked === true) {
         setTodaysList(prevState => [stuff, ...prevState]);
-        setPatronList(prevState => [...prevState]);
+        setOccupantsList(prevState => [...prevState]);
 
         //change position
         //if main user is in the table ✅
         //get main user current position ✅
         //get guest users current positions ✅
         // place them after main user's position
-        let mainmember = patronList.findIndex(
+        let mainmember = occupantsList.findIndex(
           e => e.first_name === item.first_name,
         );
-        patronList.splice(mainmember + 1, 0, stuff);
+        occupantsList.splice(mainmember + 1, 0, stuff);
       }
     });
   };
-
-  console.log('today patron checking', patronList);
-  console.log('guest', guest);
 
   return (
     <div>

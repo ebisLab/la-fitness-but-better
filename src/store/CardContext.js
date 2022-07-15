@@ -16,7 +16,7 @@ export function CardProvider({children}) {
   const [currentTime, setCurrentTime] = useState(time);
   const [timeArr, setTimeArr] = useState([]);
   const [dataToAdd, setDataToAdd] = useState(null);
-  const [patronList, setPatronList] = useState([]);
+  const [occupantsList, setOccupantsList] = useState([]);
 
   const color = bg => `color: white; background-color: ${bg}`;
   const Style = {
@@ -56,7 +56,7 @@ export function CardProvider({children}) {
       };
       //add to totoday's list
       setTodaysList(prevstate => [user, ...prevstate]);
-      setPatronList(prevstate => [user, ...prevstate]);
+      setOccupantsList(prevstate => [user, ...prevstate]);
       setTimeArr(prevstate => [time, ...prevstate]);
 
       //we want to update the database with the time the member checked in
@@ -113,14 +113,14 @@ export function CardProvider({children}) {
     console.log('changing todays list', db2);
     setTodaysList(db2);
 
-    const db4 = patronList.map(obj => {
+    const db4 = occupantsList.map(obj => {
       if (obj.barcode_number === currentUser[0].barcode_number) {
         return {...obj, member_photo: img};
       } else {
         return obj;
       }
     });
-    setPatronList(db4);
+    setOccupantsList(db4);
 
     const db3 = currentUser.map(obj => {
       if (obj.barcode_number) {
@@ -138,7 +138,6 @@ export function CardProvider({children}) {
     console.log(`%c${str}`, style, usersDatabase);
 
   console.log('toays tab', todaysList);
-  console.log('patronlist 🌸', patronList);
   log('normal logs');
 
   return (
@@ -158,8 +157,8 @@ export function CardProvider({children}) {
         addInMemberGuest,
         dataToAdd,
         setDataToAdd,
-        patronList,
-        setPatronList,
+        occupantsList,
+        setOccupantsList,
         setUsersDatabase,
       }}>
       {children}

@@ -26,10 +26,10 @@ import {UNRECOGNIZED} from '../../store/constants';
 
 export default function PatronList2() {
   const {isOpen, onOpen, onClose} = useDisclosure();
-  const {patronList, setPatronList} = useContext(FooterContext);
+  const {occupantsList, setOccupantsList} = useContext(FooterContext);
   const {todaysList, setTodaysList} = useContext(CardContext);
 
-  let removeduplicates = patronList.filter(
+  let removeduplicates = occupantsList.filter(
     (data, i, arr) =>
       arr.findIndex(v2 => v2.barcode_number === data.barcode_number) === i,
   );

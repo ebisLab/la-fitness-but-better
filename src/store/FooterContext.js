@@ -3,9 +3,9 @@ import CardContext from './CardContext';
 
 const FooterContext = createContext();
 export function FooterProvider({children}) {
-  const {patronList, setPatronList} = useContext(CardContext);
+  const {occupantsList, setOccupantsList} = useContext(CardContext);
   return (
-    <FooterContext.Provider value={{patronList, setPatronList}}>
+    <FooterContext.Provider value={{occupantsList, setOccupantsList}}>
       {children}
     </FooterContext.Provider>
   );
