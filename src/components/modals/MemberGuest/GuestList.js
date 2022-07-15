@@ -1,12 +1,6 @@
 import React from 'react';
 import {
   useDisclosure,
-  Image,
-  Text,
-  Table,
-  Th,
-  Tr,
-  Td,
   Modal,
   ModalBody,
   ModalOverlay,
@@ -15,8 +9,6 @@ import {
   ModalCloseButton,
   ModalFooter,
   Button,
-  Thead,
-  Tbody,
 } from '@chakra-ui/react';
 import GuestForm from './GuestForm';
 
@@ -24,9 +16,12 @@ export default function GuestList({
   item,
   currentUser,
   todaysList,
+  setTodaysList,
   usersDatabase,
   setUsersDatabase,
   changeThisUser,
+  addInMemberGuest,
+  setCurrentUser,
 }) {
   const {isOpen, onOpen, onClose} = useDisclosure();
   return (
@@ -40,12 +35,15 @@ export default function GuestList({
           <ModalCloseButton />
           <ModalBody>
             <GuestForm
+              setCurrentUser={setCurrentUser}
+              setTodaysList={setTodaysList}
               setUsersDatabase={setUsersDatabase}
               changeThisUser={changeThisUser}
               usersDatabase={usersDatabase}
               todaysList={todaysList}
               item={item}
               currentUser={currentUser}
+              addInMemberGuest={addInMemberGuest}
             />
           </ModalBody>
 

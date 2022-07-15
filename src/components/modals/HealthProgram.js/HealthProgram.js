@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   useDisclosure,
   IconButton,
@@ -11,18 +11,25 @@ import {
   ModalFooter,
   Button,
 } from '@chakra-ui/react';
+import CardContext from '../../../store/CardContext';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faHeartCirclePlus} from '@fortawesome/free-solid-svg-icons';
 import HealthProgramForm from './HealthProgramForm';
 
-export default function HealthProgram({
-  setCurrentUser,
-  setUsersDatabase,
-  usersDatabase,
-  todaysList,
-  setTodaysList,
-}) {
+export default function HealthProgram() {
+  const {
+    onBarcodeChange,
+    userBarcode,
+    submitBarcodeHandler,
+    currentUser,
+    setUsersDatabase,
+    usersDatabase,
+    setCurrentUser,
+    todaysList,
+    setTodaysList,
+  } = useContext(CardContext);
   const {isOpen, onOpen, onClose} = useDisclosure();
+
   return (
     <>
       <IconButton

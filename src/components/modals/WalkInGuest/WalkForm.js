@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Input, Button, InputGroup} from '@chakra-ui/react';
+import CardContext from '../../../store/CardContext';
+import FooterContext from '../../../store/FooterContext';
 
-export default function WalkForm({todaysList, setTodaysList}) {
+export default function WalkForm() {
+  const {setOccupantsList} = useContext(FooterContext);
+  const {todaysList, setTodaysList} = useContext(CardContext);
   const [input, setInput] = React.useState({
     first_name: '',
     last_name: '',
@@ -36,6 +40,7 @@ export default function WalkForm({todaysList, setTodaysList}) {
   const submitHandler = e => {
     e.preventDefault();
     setTodaysList([input, ...todaysList]);
+    setOccupantsList(prevstate => [input, ...prevstate]);
   };
 
   console.log('input', input);

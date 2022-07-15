@@ -1,48 +1,59 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
-  Alert,
-  AlertIcon,
   Input,
   Image,
-  IconButton,
   Button,
-  ButtonGroup,
-  Box,
-  Center,
-  Grid,
-  Tabs,
   Table,
   Checkbox,
-  Thead,
   Tbody,
   Tr,
-  Th,
   Td,
-  FormControl,
   InputGroup,
 } from '@chakra-ui/react';
-import GuestList from './GuestList';
+import FooterContext from '@store/FooterContext';
+import CardContext from '@store/CardContext';
+import {MEMBER, GUEST} from '@store/constants';
 
 export default function GuestForm({
   item,
-  currentUser,
-  todaysList,
-  setUsersDatabase,
+  addInMemberGuest,
   changeThisUser,
+  currentUser,
 }) {
+  const {occupantsList, setOccupantsList} = useContext(FooterContext);
+  const {todaysList, setTodaysList} = useContext(CardContext);
+
   const [guestInfo, setGuestInfo] = React.useState({
     guest_image: '',
     first_name: '',
     last_name: '',
     phone_number: '',
-    membership: 'guest',
+    isChecked: false,
+    fitness_type: "member's guest",
   });
   const [guesList, setGuestList] = React.useState([]);
-  const [isChecked, setIsChecked] = React.useState(false);
+  const [guest, setGuest] = React.useState(item.perks?.guest);
+  const [changeData, setChangeData] = React.useState([]);
 
   React.useEffect(() => {
     setGuestList(item.perks?.guest);
+    setTodaysList(todaysList);
   }, []);
+
+  function handleToggleChecked(e, clickedguestinfo) {
+    setGuest(it => {
+      let todo = it.find(td => td.first_name === clickedguestinfo.first_name);
+      todo.isChecked = !todo.isChecked;
+      return it;
+    });
+    return e.target.checked === true
+      ? setChangeData([
+          ...changeData,
+          {...clickedguestinfo, isChecked: e.target.checked},
+        ])
+      : null;
+  }
+  console.log('changed data', changeData);
 
   const handleChange = async e => {
     const value = e.target.value;
@@ -50,6 +61,8 @@ export default function GuestForm({
     await setGuestInfo({
       ...guestInfo,
       id: guesList ? guesList.length + 1 : 0,
+      isChecked: e.target.checked,
+      member_photo: '',
       guest_image: `https://picsum.photos/id/11${
         guesList ? guesList.length + 1 : 0
       }/200/200`,
@@ -59,44 +72,111 @@ export default function GuestForm({
   const submitHandler = e => {
     e.preventDefault();
     setGuestList([guestInfo, ...guesList]);
+    setGuest([guestInfo, ...guesList]);
     changeThisUser(e, guestInfo);
+
     setGuestInfo({
       guest_image: '',
       first_name: '',
       last_name: '',
       phone_number: '',
+      isChecked: false,
     });
   };
 
-  const onChange = () => {};
+  function toggleCheck(e, todo) {
+    handleToggleChecked(e, todo);
+  }
+
+  // const changeCheck = gst => e => {
+  //   console.log('gst', gst);
+  //   console.log('eee', e.target.checked);
+
+  //   const lastguestindex = guesList.findIndex(
+  //     obj => obj.first_name === gst.first_name,
+  //   );
+  //   console.log('lastgues', lastguestindex);
+  //   const newAr = guesList.map((obj, i) => {
+  //     return obj[lastguestindex];
+  //     // if (gst[lastguestindex] === obj[lastguestindex]) return obj;
+  //   });
+  //   console.log('neww', newAr);
+
+  //   // console.log(e.target.checked);
+  //   // setChecked(e.target.checked);
+
+  //   // const lastguestindex = guesList.findIndex(
+  //   //   obj => obj.first_name === gst.first_name,
+  //   // );
+  //   // setIndex(lastguestindex);
+
+  //   // guesList.map(obj => {
+  //   //   if (obj[lastguestindex] === gst[lastguestindex]) {
+  //   //     return (guesList[lastguestindex] = {
+  //   //       ...gst,
+  //   //       isChecked: e.target.checked,
+  //   //     });
+  //   //   }
+  //   // });
+
+  //   // guesList[lastguestindex] = {
+  //   //   ...gst,
+  //   //   isChecked: e.target.checked,
+  //   // };
+
+  //   // setIsChecked(e.target.checked);
+  // };
+
+  const addToTodaysList = e => {
+    e.preventDefault();
+
+    setChangeData(changeData);
+    addInMemberGuest(changeData);
+    guesList.filter((stuff, m) => {
+      console.log('filtering stuff', stuff);
+      if (stuff.isChecked === true) {
+        setTodaysList(prevState => [stuff, ...prevState]);
+        setOccupantsList(prevState => [...prevState]);
+
+        //change position
+        //if main user is in the table ✅
+        //get main user current position ✅
+        //get guest users current positions ✅
+        // place them after main user's position
+        let mainmember = occupantsList.findIndex(
+          e => e.first_name === item.first_name,
+        );
+        occupantsList.splice(mainmember + 1, 0, stuff);
+      }
+    });
+  };
 
   return (
     <div>
       <div>
         <Table size="sm">
           <Tbody>
-            {guesList?.map((item, i) => (
-              <Tr key={i}>
+            {guesList?.map(gst => (
+              <Tr key={gst.id}>
                 <Td>
                   <Checkbox
-                    onChange={onChange}
-                    textTransform="capitalize"
-                    // ref={ref}
-                    isChecked={isChecked}
+                    defaultChecked={gst.isChecked ? true : null}
+                    value={gst.isChecked}
+                    onChange={e => toggleCheck(e, gst)}
                   />
                 </Td>
                 <Td>
                   <Image
                     boxSize="45px"
                     borderRadius="10px"
-                    src={item.guest_image}
-                    alt={item.first_name}
+                    src={gst.guest_image}
+                    alt={gst.first_name}
                   />
                 </Td>
                 <Td>
-                  {item.first_name} {item.last_name}
+                  {gst.first_name} {gst.last_name}
                 </Td>
-                <Td>{item.phone_number}</Td>
+                <Td>{gst.phone_number}</Td>
               </Tr>
             ))}
           </Tbody>
@@ -129,6 +209,14 @@ export default function GuestForm({
 
         <Button type="submit">Submit</Button>
       </form>
+      <button
+        type="submit"
+        onClick={e => {
+          addToTodaysList(e);
+          console.log('checking', todaysList);
+        }}>
+        submit to table
+      </button>
     </div>
   );
 }

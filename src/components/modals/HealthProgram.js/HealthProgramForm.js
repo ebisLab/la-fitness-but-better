@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Input, Button, InputGroup, Stack, SimpleGrid} from '@chakra-ui/react';
 import {health_program} from '../../../api/mock';
+import FooterContext from '../../../store/FooterContext';
+import CardContext from '../../../store/CardContext';
 
-export default function HealthProgramForm({
-  setCurrentUser,
-  usersDatabase,
-  setUsersDatabase,
-  todaysList,
-  setTodaysList,
-}) {
+export default function HealthProgramForm() {
+  const {setOccupantsList} = useContext(FooterContext);
+  const {
+    usersDatabase,
+    setUsersDatabase,
+    setCurrentUser,
+    todaysList,
+    setTodaysList,
+  } = useContext(CardContext);
   const [healthData, setHealthData] = React.useState(health_program);
   const time = (world, conversion) => {
     return new Date().toLocaleString(world, conversion);
@@ -41,7 +45,10 @@ export default function HealthProgramForm({
     };
     setCurrentUser([user]);
     setTodaysList([user, ...todaysList]);
-    setUsersDatabase([user, ...usersDatabase]);
+    setOccupantsList(prevstate => [user, ...prevstate]);
+
+    //submitted to main database
+    setUsersDatabase(prevstate => [user, ...prevstate]);
   };
 
   const changeHandler = e => {
@@ -82,7 +89,7 @@ export default function HealthProgramForm({
   };
 
   console.log('submit', userInfo);
-  console.log('userdatabase', usersDatabase);
+  console.log('userdatabase ~~~>', usersDatabase);
   return (
     <>
       <form onSubmit={submitHandler}>

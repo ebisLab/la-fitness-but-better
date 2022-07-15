@@ -1,21 +1,26 @@
-
 import {
-    OK,
-    EXPIRED,
-    EXPIRING, 
-    DECLINED,
-    FROZEN,
-    UNRECOGNIZED,
-    MEMBERSHIP_REVOCKED
-} from './status'
+  OK,
+  EXPIRED,
+  EXPIRING,
+  DECLINED,
+  FROZEN,
+  UNRECOGNIZED,
+  MEMBERSHIP_REVOCKED,
+} from './status';
 
+import {MEMBER, GUEST, VISITOR, EMPLOYEE, TRAINER} from './memberType';
 
 export {
-    OK,
-    EXPIRED,
-    EXPIRING, 
-    DECLINED,
-    FROZEN,
-    UNRECOGNIZED,
-    MEMBERSHIP_REVOCKED
-}
+  OK,
+  EXPIRED,
+  EXPIRING,
+  DECLINED,
+  FROZEN,
+  UNRECOGNIZED,
+  MEMBERSHIP_REVOCKED,
+  MEMBER,
+  GUEST,
+  VISITOR,
+  EMPLOYEE,
+  TRAINER,
+};
