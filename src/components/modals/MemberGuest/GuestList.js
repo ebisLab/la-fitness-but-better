@@ -20,7 +20,7 @@ export default function GuestList({
   usersDatabase,
   setUsersDatabase,
   changeThisUser,
-  checkInMemberGuest,
+  addInMemberGuest,
   setCurrentUser,
 }) {
   const {isOpen, onOpen, onClose} = useDisclosure();
@@ -43,7 +43,7 @@ export default function GuestList({
               todaysList={todaysList}
               item={item}
               currentUser={currentUser}
-              checkInMemberGuest={checkInMemberGuest}
+              addInMemberGuest={addInMemberGuest}
             />
           </ModalBody>
 

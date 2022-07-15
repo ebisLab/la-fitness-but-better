@@ -1,20 +1,16 @@
-import React from 'react';
-import imgplaceholder from '../../assets/img/userplaceholder.png';
-import {UNRECOGNIZED, OK} from '../../store/constants';
+import React, {useContext} from 'react';
+import CardContext from '@app/store/CardContext.js';
+import TableContext from '@app/store/TableContext.js';
+import imgplaceholder from '@app/assets/img/userplaceholder.png';
+import {UNRECOGNIZED, OK} from '@app/store/constants';
 import {Button, Tag} from '@chakra-ui/react';
-import WalkInGuest from '../../components/modals/WalkInGuest/WalkInGuest';
-import HealthProgram from '../../components/modals/HealthProgram.js/HealthProgram';
+import WalkInGuest from '@app/components/modals/WalkInGuest/WalkInGuest';
+import HealthProgram from '@app/components/modals/HealthProgram.js/HealthProgram';
 
-export default function TableSection({
-  todaysList,
-  setTodaysList,
-  currentTime,
-  clickedRows,
-  status_table,
-  usersDatabase,
-  setCurrentUser,
-  setUsersDatabase,
-}) {
+export default function TableSection({currentTime, status_table}) {
+  const {clickedRows} = useContext(TableContext);
+  const {setCurrentUser, todaysList, setTodaysList} = useContext(CardContext);
+
   return (
     <section
       style={{background: '#ebf0f7', padding: '2% 2% 0 2%'}}
@@ -22,8 +18,6 @@ export default function TableSection({
       <WalkInGuest todaysList={todaysList} setTodaysList={setTodaysList} />
       <HealthProgram
         setCurrentUser={setCurrentUser}
-        setUsersDatabase={setUsersDatabase}
-        usersDatabase={usersDatabase}
         todaysList={todaysList}
         setTodaysList={setTodaysList}
       />
@@ -95,8 +89,6 @@ export default function TableSection({
                         ) : (
                           item.fitness_type
                         )}
-
-                        {/* {item.perks ? item.test : ''} */}
                       </td>
                       <td>
                         {item.first_name} {item.last_name}

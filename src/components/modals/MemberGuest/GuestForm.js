@@ -1,40 +1,28 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
-  chakra,
-  Text,
-  useCheckbox,
-  Alert,
-  AlertIcon,
   Input,
   Image,
-  IconButton,
   Button,
-  ButtonGroup,
-  Box,
-  Center,
-  Grid,
-  Tabs,
   Table,
   Checkbox,
-  Thead,
   Tbody,
   Tr,
-  Th,
   Td,
-  FormControl,
   InputGroup,
-  ChakraProvider,
-  Flex,
 } from '@chakra-ui/react';
-import GuestList from './GuestList';
+import FooterContext from '@store/FooterContext';
+import CardContext from '@store/CardContext';
+import {MEMBER, GUEST} from '@store/constants';
 
 export default function GuestForm({
   item,
-  checkInMemberGuest,
-  todaysList,
-  setTodaysList,
+  addInMemberGuest,
   changeThisUser,
+  currentUser,
 }) {
+  const {occupantsList, setOccupantsList} = useContext(FooterContext);
+  const {todaysList, setTodaysList} = useContext(CardContext);
+
   const [guestInfo, setGuestInfo] = React.useState({
     guest_image: '',
     first_name: '',
@@ -45,19 +33,27 @@ export default function GuestForm({
   });
   const [guesList, setGuestList] = React.useState([]);
   const [guest, setGuest] = React.useState(item.perks?.guest);
-  const [checkedList, setCheckedList] = React.useState(guest);
+  const [changeData, setChangeData] = React.useState([]);
 
   React.useEffect(() => {
     setGuestList(item.perks?.guest);
+    setTodaysList(todaysList);
   }, []);
 
-  function handleToggleChecked(clickedguestinfo) {
+  function handleToggleChecked(e, clickedguestinfo) {
     setGuest(it => {
       let todo = it.find(td => td.first_name === clickedguestinfo.first_name);
       todo.isChecked = !todo.isChecked;
       return it;
     });
+    return e.target.checked === true
+      ? setChangeData([
+          ...changeData,
+          {...clickedguestinfo, isChecked: e.target.checked},
+        ])
+      : null;
   }
+  console.log('changed data', changeData);
 
   const handleChange = async e => {
     const value = e.target.value;
@@ -66,6 +62,7 @@ export default function GuestForm({
       ...guestInfo,
       id: guesList ? guesList.length + 1 : 0,
       isChecked: e.target.checked,
+      member_photo: '',
       guest_image: `https://picsum.photos/id/11${
         guesList ? guesList.length + 1 : 0
       }/200/200`,
@@ -77,6 +74,7 @@ export default function GuestForm({
     setGuestList([guestInfo, ...guesList]);
     setGuest([guestInfo, ...guesList]);
     changeThisUser(e, guestInfo);
+
     setGuestInfo({
       guest_image: '',
       first_name: '',
@@ -86,66 +84,73 @@ export default function GuestForm({
     });
   };
 
-  const changeCheck = gst => e => {
-    console.log('gst', gst);
-    console.log('eee', e.target.checked);
+  function toggleCheck(e, todo) {
+    handleToggleChecked(e, todo);
+  }
 
-    const lastguestindex = guesList.findIndex(
-      obj => obj.first_name === gst.first_name,
-    );
-    console.log('lastgues', lastguestindex);
-    const newAr = guesList.map((obj, i) => {
-      return obj[lastguestindex];
-      // if (gst[lastguestindex] === obj[lastguestindex]) return obj;
-    });
-    console.log('neww', newAr);
+  // const changeCheck = gst => e => {
+  //   console.log('gst', gst);
+  //   console.log('eee', e.target.checked);
 
-    // console.log(e.target.checked);
-    // setChecked(e.target.checked);
+  //   const lastguestindex = guesList.findIndex(
+  //     obj => obj.first_name === gst.first_name,
+  //   );
+  //   console.log('lastgues', lastguestindex);
+  //   const newAr = guesList.map((obj, i) => {
+  //     return obj[lastguestindex];
+  //     // if (gst[lastguestindex] === obj[lastguestindex]) return obj;
+  //   });
+  //   console.log('neww', newAr);
 
-    // const lastguestindex = guesList.findIndex(
-    //   obj => obj.first_name === gst.first_name,
-    // );
-    // setIndex(lastguestindex);
+  //   // console.log(e.target.checked);
+  //   // setChecked(e.target.checked);
 
-    // guesList.map(obj => {
-    //   if (obj[lastguestindex] === gst[lastguestindex]) {
-    //     return (guesList[lastguestindex] = {
-    //       ...gst,
-    //       isChecked: e.target.checked,
-    //     });
-    //   }
-    // });
+  //   // const lastguestindex = guesList.findIndex(
+  //   //   obj => obj.first_name === gst.first_name,
+  //   // );
+  //   // setIndex(lastguestindex);
 
-    // guesList[lastguestindex] = {
-    //   ...gst,
-    //   isChecked: e.target.checked,
-    // };
+  //   // guesList.map(obj => {
+  //   //   if (obj[lastguestindex] === gst[lastguestindex]) {
+  //   //     return (guesList[lastguestindex] = {
+  //   //       ...gst,
+  //   //       isChecked: e.target.checked,
+  //   //     });
+  //   //   }
+  //   // });
 
-    // setIsChecked(e.target.checked);
-  };
+  //   // guesList[lastguestindex] = {
+  //   //   ...gst,
+  //   //   isChecked: e.target.checked,
+  //   // };
+
+  //   // setIsChecked(e.target.checked);
+  // };
 
   const addToTodaysList = e => {
     e.preventDefault();
 
-    setCheckedList(
-      guesList.filter(stuff => {
-        if (stuff.isChecked === true) return stuff;
-      }),
-    );
-
-    guesList.filter(stuff => {
+    setChangeData(changeData);
+    addInMemberGuest(changeData);
+    guesList.filter((stuff, m) => {
+      console.log('filtering stuff', stuff);
       if (stuff.isChecked === true) {
-        return setTodaysList([stuff, ...todaysList]);
+        setTodaysList(prevState => [stuff, ...prevState]);
+        setOccupantsList(prevState => [...prevState]);
+
+        //change position
+        //if main user is in the table ✅
+        //get main user current position ✅
+        //get guest users current positions ✅
+        // place them after main user's position
+        let mainmember = occupantsList.findIndex(
+          e => e.first_name === item.first_name,
+        );
+        occupantsList.splice(mainmember + 1, 0, stuff);
       }
     });
-
-    checkInMemberGuest(guest);
   };
 
-  function toggleCheck(todo) {
-    handleToggleChecked(todo);
-  }
   return (
     <div>
       <div>
@@ -157,7 +162,7 @@ export default function GuestForm({
                   <Checkbox
                     defaultChecked={gst.isChecked ? true : null}
                     value={gst.isChecked}
-                    onChange={() => toggleCheck(gst)}
+                    onChange={e => toggleCheck(e, gst)}
                   />
                 </Td>
                 <Td>
@@ -204,7 +209,12 @@ export default function GuestForm({
 
         <Button type="submit">Submit</Button>
       </form>
-      <button type="submit" onClick={addToTodaysList}>
+      <button
+        type="submit"
+        onClick={e => {
+          addToTodaysList(e);
+          console.log('checking', todaysList);
+        }}>
         submit to table
       </button>
     </div>
