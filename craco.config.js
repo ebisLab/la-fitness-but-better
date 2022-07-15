@@ -11,7 +11,7 @@ module.exports = {
     configure: {
       moduleNameMapper: {
         '^@app(.*)$': '<rootDir>/src',
-        '^@store(.*)$': '<rootDir>/src/store',
+        '^@store(.*)$': '<rootDir>/src/store$1',
       },
     },
   },

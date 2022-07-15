@@ -1,34 +1,18 @@
 import React, {useContext} from 'react';
 import {
-  chakra,
-  Text,
-  useCheckbox,
-  Alert,
-  AlertIcon,
   Input,
   Image,
-  IconButton,
   Button,
-  ButtonGroup,
-  Box,
-  Center,
-  Grid,
-  Tabs,
   Table,
   Checkbox,
-  Thead,
   Tbody,
   Tr,
-  Th,
   Td,
-  FormControl,
   InputGroup,
-  ChakraProvider,
-  Flex,
 } from '@chakra-ui/react';
-import FooterContext from '../../../store/FooterContext';
-import CardContext from '../../../store/CardContext';
-import {MEMBER, GUEST} from '../../../store/constants';
+import FooterContext from '@store/FooterContext';
+import CardContext from '@store/CardContext';
+import {MEMBER, GUEST} from '@store/constants';
 
 export default function GuestForm({
   item,

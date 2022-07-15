@@ -37,7 +37,8 @@ export default function PatronList2() {
   return (
     <>
       <Button onClick={onOpen} variant="ghost">
-        {removeduplicates.length} guests today
+        {removeduplicates.length} occupant
+        {removeduplicates.length === 1 ? '' : 's'} today
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
