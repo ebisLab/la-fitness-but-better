@@ -28,6 +28,7 @@ import {
 } from '@chakra-ui/react';
 import FooterContext from '../../../store/FooterContext';
 import CardContext from '../../../store/CardContext';
+import {MEMBER, GUEST} from '../../../store/constants';
 
 export default function GuestForm({
   item,
@@ -64,10 +65,11 @@ export default function GuestForm({
     return e.target.checked === true
       ? setChangeData([
           ...changeData,
-          {...clickedguestinfo, isSelected: e.target.checked},
+          {...clickedguestinfo, isChecked: e.target.checked},
         ])
       : null;
   }
+  console.log('changed data', changeData);
 
   const handleChange = async e => {
     const value = e.target.value;
@@ -76,6 +78,7 @@ export default function GuestForm({
       ...guestInfo,
       id: guesList ? guesList.length + 1 : 0,
       isChecked: e.target.checked,
+      member_photo: '',
       guest_image: `https://picsum.photos/id/11${
         guesList ? guesList.length + 1 : 0
       }/200/200`,
@@ -85,7 +88,7 @@ export default function GuestForm({
   const submitHandler = e => {
     e.preventDefault();
     setGuestList([guestInfo, ...guesList]);
-    // setGuest([guestInfo, ...guesList]);
+    setGuest([guestInfo, ...guesList]);
     changeThisUser(e, guestInfo);
 
     setGuestInfo({
@@ -165,6 +168,7 @@ export default function GuestForm({
   };
 
   console.log('today patron checking', patronList);
+  console.log('guest', guest);
 
   return (
     <div>

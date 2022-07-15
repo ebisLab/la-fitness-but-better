@@ -34,7 +34,6 @@ export default function PatronList2() {
       arr.findIndex(v2 => v2.barcode_number === data.barcode_number) === i,
   );
 
-  //if member has guest checked in add them to the list
   return (
     <>
       <Button onClick={onOpen} variant="ghost">

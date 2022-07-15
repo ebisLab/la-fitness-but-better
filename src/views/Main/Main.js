@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {mock} from '../../api/mock';
 import {time} from '../../utils/apputils.js';
+import CardContext from '../../store/CardContext';
 
 import imgplaceholder from '../../assets/img/userplaceholder.png';
 import {UNRECOGNIZED} from '../../store/constants';
@@ -13,11 +14,16 @@ export default function Main({
   setPatronsCount,
   setTabIndex,
 }) {
-  const [userBarcode, setUserBarcode] = useState('');
-  const [userInfo, setUserInfo] = useState('');
-  const [todaysList, setTodaysList] = useState([]);
-  const [currentUser, setCurrentUser] = useState([]);
-  const [usersDatabase, setUsersDatabase] = useState([]);
+  const {
+    usersDatabase,
+    setUsersDatabase,
+    todaysList,
+    setTodaysList,
+    userInfo,
+    addName,
+    currentUser,
+    setCurrentUser,
+  } = useContext(CardContext);
   const [currentTime, setCurrentTime] = useState(time);
   const status_map = {
     UNRECOGNIZED: 'error',
@@ -30,39 +36,43 @@ export default function Main({
     setUsersDatabase(mock);
   }, []);
 
-  const addName = name => {
-    let findUser = usersDatabase.some(
-      item => item.first_name.toLowerCase() === name.toLowerCase(),
-    );
-    let filterUser = usersDatabase.filter(
-      item => item.first_name.toLowerCase() === name.toLowerCase(),
-    );
-    setCurrentUser(filterUser);
-    if (findUser) {
-      const user = {...filterUser[0], time, timesheet: [Date.now()]};
-      setTodaysList([user, ...todaysList]);
+  // const addName = name => {
+  //   console.log('ADDEEEEEEEDDDDDDD');
+  //   let findUser = usersDatabase.some(
+  //     item => item.first_name.toLowerCase() === name.toLowerCase(),
+  //   );
+  //   console.log('does this user exist in the database', findUser);
+  //   let filterUser = usersDatabase.filter(
+  //     item => item.first_name.toLowerCase() === name.toLowerCase(),
+  //   );
+  //   console.log('if so find them', findUser);
 
-      //find the user from the database list and update their info
-      const db = usersDatabase.map(obj => {
-        if (obj.barcode_number === filterUser[0].barcode_number) {
-          return {...obj, time};
-        } else {
-          return obj;
-        }
-      });
-      setUsersDatabase(db);
-    } else {
-      const user = {
-        id: todaysList.length + 1,
-        first_name: name,
-        status: UNRECOGNIZED,
-        member_photo: imgplaceholder,
-        time,
-      };
-      setTodaysList([user, ...todaysList]);
-      setCurrentUser([user]);
-    }
-  };
+  //   setCurrentUser(filterUser);
+  //   if (findUser) {
+  //     const user = {...filterUser[0], time, timesheet: [Date.now()]};
+  //     setTodaysList([user, ...todaysList]);
+
+  //     //find the user from the database list and update their info
+  //     const db = usersDatabase.map(obj => {
+  //       if (obj.barcode_number === filterUser[0].barcode_number) {
+  //         return {...obj, time};
+  //       } else {
+  //         return obj;
+  //       }
+  //     });
+  //     setUsersDatabase(db);
+  //   } else {
+  //     const user = {
+  //       id: todaysList.length + 1,
+  //       first_name: name,
+  //       status: UNRECOGNIZED,
+  //       member_photo: imgplaceholder,
+  //       time,
+  //     };
+  //     setTodaysList([user, ...todaysList]);
+  //     setCurrentUser([user]);
+  //   }
+  // };
 
   const kidsModal = () => {
     console.log('heee');
@@ -73,7 +83,9 @@ export default function Main({
     e.preventDefault();
     const db = usersDatabase.map(obj => {
       console.log('🐝', obj.perks?.guest);
-      if (obj.barcode_number === currentUser[0].barcode_number) {
+      console.log('barcode obj', obj.barcode_number);
+      console.log('barcode currentuser', currentUser);
+      if (obj.barcode_number === currentUser[0]?.barcode_number) {
         return {
           ...obj,
           test: 'example 🦄',
