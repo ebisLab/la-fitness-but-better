@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import CardContext from '../../store/CardContext';
+import CardContext from '../../../store/CardContext';
 import {
   Alert,
   AlertIcon,
@@ -8,10 +8,11 @@ import {
   ButtonGroup,
   Box,
 } from '@chakra-ui/react';
-import FamilyPlanDrop from '../../components/FamilyPlanDrop';
-import GuestList from '../../components/modals/MemberGuest/GuestList';
-import Camera from '../../components/Camera';
-import DefaultCard from './DefaultCard';
+import FamilyPlanDrop from '../../../components/FamilyPlanDrop';
+import GuestList from '../../../components/modals/MemberGuest/GuestList';
+import Camera from '../../../components/Camera';
+import DefaultCard from '../DefaultCard';
+import InputComponent from '../../../components/InputComponent';
 
 export default function ProfileSection({
   bg,
@@ -42,26 +43,11 @@ export default function ProfileSection({
         color={color}
         rounded="lg"
         p={5}>
-        <form onSubmit={submitBarcodeHandler}>
-          <ButtonGroup>
-            <Input
-              autoFocus
-              style={{background: '#FEFCBF'}}
-              name="barcode"
-              type="text"
-              onChange={onBarcodeChange}
-            />
-            <Button type="submit">✔</Button>
-            <Button
-              type="submit"
-              onClick={e => {
-                e.preventDefault();
-                kidsModal();
-              }}>
-              🧸
-            </Button>
-          </ButtonGroup>
-        </form>
+        <InputComponent
+          onBarcodeChange={onBarcodeChange}
+          kidsModal={kidsModal}
+          submitBarcodeHandler={submitBarcodeHandler}
+        />
         {currentUser.length ? (
           currentUser.map((item, i) => (
             <div key={i}>

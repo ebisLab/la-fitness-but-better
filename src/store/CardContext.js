@@ -100,7 +100,7 @@ export function CardProvider({children}) {
       }
     });
 
-    console.log('changing user database ', db);
+    // console.log('changing user database ', db);
 
     setUsersDatabase(db);
     const db2 = todaysList.map(obj => {
@@ -110,7 +110,7 @@ export function CardProvider({children}) {
         return obj;
       }
     });
-    console.log('changing todays list', db2);
+    // console.log('changing todays list', db2);
     setTodaysList(db2);
 
     const db4 = occupantsList.map(obj => {
@@ -129,16 +129,24 @@ export function CardProvider({children}) {
         return obj;
       }
     });
-    console.log('setting current uuser');
     setCurrentUser(db3);
   };
 
   const addInMemberGuest = data => {};
-  const log = (str, style = Style.success) =>
-    console.log(`%c${str}`, style, usersDatabase);
 
-  console.log('toays tab', todaysList);
-  log('normal logs');
+  const testerino = e => {
+    e.preventDefault();
+    console.log('testerino');
+    //   window.onload = function() {
+    document.getElementById('first_input').focus();
+    // }
+  };
+
+  // const log = (str, style = Style.success) =>
+  //   console.log(`%c${str}`, style, usersDatabase);
+
+  // console.log('toays tab', todaysList);
+  // log('normal logs');
 
   return (
     <CardContext.Provider

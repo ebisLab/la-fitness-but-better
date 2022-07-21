@@ -132,8 +132,13 @@ tr.checked-in-user-table-status:hover {
     color:#fff;
   }
 
+  .status_header{
+    width:100px !important;
+  }
+
 .status_cell {
   padding: 0 4% !important;
+  /* width: 100px !important; */
   }
 
 .unrecognized{
