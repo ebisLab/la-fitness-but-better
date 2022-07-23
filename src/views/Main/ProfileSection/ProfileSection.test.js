@@ -35,6 +35,16 @@ describe('Add input', () => {
     fireEvent.change(inputElement, {target: {value: 'Patrick'}});
     expect(inputElement.value).toBe('Patrick');
   });
+  //   it('should have empty input when submit button is clicked', async () => {
+  //     const {getByTestId, getByRole} = render(<InputComponent />);
+  //     const inputElement = getByTestId('input-barcode');
+  //     const buttonElement = getByRole('button', {name: /✔/i});
+
+  //     fireEvent.change(inputElement, {target: {value: 'Patrick'}});
+  //     fireEvent.click(buttonElement);
+  //     // expect(inputElement.value).toBe('');
+  //   });
 });
 
+//fitlers data correctly
 //see if input is focused
