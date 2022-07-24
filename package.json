@@ -15,6 +15,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "concurrently": "^7.3.0",
     "framer-motion": "^6.3.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -22,13 +23,17 @@
     "react-webcam": "^7.0.1",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.13",
+    "wait-on": "^6.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "electron": "electron ."
+    "electron": "wait-on http://localhost:3000 && electron .",
+    "app": "concurrently \"npm run start\" \"npm run electron\"",
+    "package": "electron-builder build --mac --win -c.extraMetadata.main=build/index.js --publish never",
+    "publish": "electron-builder build --mac --win --publish always"
   },
   "eslintConfig": {
     "extends": [
@@ -51,7 +56,8 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "devDependencies": {
-    "electron": "^19.0.9"
+    "electron": "^19.0.9",
+    "electron-builder": "^23.1.0"
   },
   "keywords": [],
   "author": "",
