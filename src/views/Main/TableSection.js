@@ -31,11 +31,11 @@ export default function TableSection({currentTime, status_table}) {
         <table className="fixed_header">
           <thead>
             <tr>
-              <th>Photo</th>
-              <th>Service</th>
-              <th>Barcode</th>
-              <th>Type</th>
-              <th>Name</th>
+              <th style={{width: '80px'}}>Photo</th>
+              <th style={{width: '150px'}}>Service</th>
+              <th style={{width: '180px'}}>Barcode</th>
+              <th style={{width: '170px'}}>Type</th>
+              <th style={{width: '190px'}}>Name</th>
               <th>Status</th>
               <th>Time</th>
             </tr>
@@ -52,7 +52,7 @@ export default function TableSection({currentTime, status_table}) {
                           ? 'checked-in-user-table-status'
                           : ''
                       }>
-                      <td>
+                      <td style={{width: '80px'}}>
                         <div
                           style={{
                             width: '50px',
@@ -73,15 +73,15 @@ export default function TableSection({currentTime, status_table}) {
                           />
                         </div>
                       </td>
-                      <td>
+                      <td style={{width: '125px'}}>
                         {item.status === UNRECOGNIZED ? (
                           ''
                         ) : (
                           <Button>Service</Button>
                         )}
                       </td>
-                      <td>{item.barcode_number}</td>
-                      <td>
+                      <td style={{width: '170px'}}>{item.barcode_number}</td>
+                      <td style={{width: '150px'}}>
                         {item.fitness_type === 'guest' ? (
                           <Tag size="sm" variant="solid" colorScheme="green">
                             {item.fitness_type}
@@ -90,12 +90,15 @@ export default function TableSection({currentTime, status_table}) {
                           item.fitness_type
                         )}
                       </td>
-                      <td>
+                      <td style={{width: '140px'}}>
                         {item.first_name} {item.last_name}
                       </td>
                       <td
                         className={item.status === OK ? 'status_cell' : ''}
-                        style={{color: status_table[item.status]}}>
+                        style={{
+                          color: status_table[item.status],
+                          width: '220px',
+                        }}>
                         {item.status}
                       </td>
                       <td>{item.time}</td>

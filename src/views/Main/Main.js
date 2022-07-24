@@ -5,7 +5,7 @@ import CardContext from '../../store/CardContext';
 
 import imgplaceholder from '../../assets/img/userplaceholder.png';
 import {UNRECOGNIZED} from '../../store/constants';
-import ProfileSection from './ProfileSection';
+import ProfileSection from './ProfileSection/ProfileSection';
 import TableSection from './TableSection';
 
 export default function Main({
@@ -209,7 +209,7 @@ export default function Main({
     setOccupantsCount(removeduplicates());
   }, [addName]);
 
-  console.log('userdata🌿', usersDatabase);
+  // console.log('userdata🌿', usersDatabase);
 
   return (
     <main className="grid-container">

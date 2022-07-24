@@ -10,7 +10,7 @@ module.exports = {
   jest: {
     configure: {
       moduleNameMapper: {
-        '^@app(.*)$': '<rootDir>/src',
+        '^@app(.*)$': '<rootDir>/src$1',
         '^@store(.*)$': '<rootDir>/src/store$1',
       },
     },
