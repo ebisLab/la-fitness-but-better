@@ -2,6 +2,8 @@
 const {app, BrowserWindow} = require('electron');
 const path = require('path');
 
+console.log('stuff', path.join(__dirname, 'favicon.ico'));
+
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -11,14 +13,6 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-
-    // const mainWindow = new BrowserWindow({
-    //   width: 1200,
-    //   height: 800,
-    //   // icon:path.join(__dirname, 'favicon.ico'),
-    //   webPreferences: {
-    //     preload: path.join(__dirname, 'preload.js'),
-    //   },
   });
 
   // and load the index.html of the app.
@@ -48,49 +42,39 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit();
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
-
-// const { app, BrowserWindow } = require('electron')
-
-// const path = require('path')
-// const url = require('url')
-
-// let mainWindow
-
+// const {app, BrowserWindow} = require('electron');
+// const path = require('path');
+// const url = require('url');
 // function createWindow() {
-//   mainWindow = new BrowserWindow({
-//     width: 800,
-//     height: 600,
-//     webPreferences: {
-//       nodeIntegration: true
-//     }
-//   })
-
-//   mainWindow.loadURL(
+//   const startUrl =
 //     process.env.ELECTRON_START_URL ||
-//       url.format({
-//         pathname: path.join(__dirname, '/../public/index.html'),
-//         protocol: 'file:',
-//         slashes: true
-//       })
-//   )
-
-//   mainWindow.on('closed', () => {
-//     mainWindow = null
-//   })
+//     url.format({
+//       pathname: path.join(__dirname, '../index.html'),
+//       protocol: 'file:',
+//       slashes: true,
+//     });
+//   const win = new BrowserWindow({
+//     width: 1200,
+//     height: 800,
+//     webPreferences: {
+//       nodeIntegration: true,
+//     },
+//   });
+//   win.loadURL(startUrl);
+//   app.on('window-all-closed', () => {
+//     if (process.platform !== 'darwin') {
+//       app.quit();
+//     }
+//   });
 // }
-
-// app.on('ready', createWindow)
-
+// app.whenReady().then(createWindow);
 // app.on('window-all-closed', () => {
 //   if (process.platform !== 'darwin') {
-//     app.quit()
+//     app.quit();
 //   }
-// })
-
+// });
 // app.on('activate', () => {
-//   if (mainWindow === null) {
-//     createWindow()
+//   if (BrowserWindow.getAllWindows().length === 0) {
+//     createWindow();
 //   }
-// })
+// });
