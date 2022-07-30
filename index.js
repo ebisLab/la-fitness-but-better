@@ -1,13 +1,14 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron');
 const path = require('path');
+const isDev = require("electron-is-dev");
 
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
-    icon: path.join(__dirname, 'icon.icns'),
+    icon: path.join(__dirname, 'icon.ico'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -22,7 +23,23 @@ function createWindow() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL('http://localhost:3000');
+  // mainWindow.loadURL('http://localhost:3000');
+  // if (isDev) {
+  //   mainWindow.loadURL("http://localhost:3000");
+  // } else {
+  //   mainWindow.loadFile("src/build/index.html");
+  // }
+
+  //   mainWindow.loadURL(
+  //   process.env.ELECTRON_START_URL ||
+  //     url.format({
+  //       pathname: path.join(__dirname, '/../public/index.html'),
+  //       protocol: 'file:',
+  //       slashes: true
+  //     })
+  // )
+  mainWindow.loadFile(`${app.getAppPath()}\/build\/index.html`);
+
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -44,8 +61,13 @@ app.whenReady().then(() => {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit();
+// app.on('window-all-closed', function () {
+//   // if (process.platform !== 'darwin') 
+//   app.quit();
+// });
+app.on("window-all-closed", function () {
+  // if (process.platform !== "darwin")
+  app.quit();
 });
 
 // In this file you can include the rest of your app's specific main process

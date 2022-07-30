@@ -2,8 +2,6 @@
 const {app, BrowserWindow} = require('electron');
 const path = require('path');
 
-console.log('stuff', path.join(__dirname, 'favicon.ico'));
-
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -12,11 +10,13 @@ function createWindow() {
     icon: path.join(__dirname, 'icon.icns'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
     },
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL('http://localhost:3000');
+  // mainWindow.loadURL('http://localhost:3000');
+  mainWindow.loadFile(`${app.getAppPath()}\/build\/index.html`);
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -39,7 +39,8 @@ app.whenReady().then(() => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit();
+  // if (process.platform !== 'darwin')
+  app.quit();
 });
 
 // const {app, BrowserWindow} = require('electron');

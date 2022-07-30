@@ -2,9 +2,12 @@
 
 # dependencies
 /node_modules
-dist/
 /.pnp
 .pnp.js
+
+#related to electron
+dist/
+out/
 
 # testing
 /coverage
