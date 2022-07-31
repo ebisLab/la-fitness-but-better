@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "author":"Ebi Baiden",
+  "author": "Ebi Baiden",
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
@@ -8,6 +8,7 @@
   "license": "ISC",
   "dependencies": {
     "@chakra-ui/react": "^2.2.1",
+    "@craco/craco": "^7.0.0-alpha.7",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -33,15 +34,16 @@
   "scripts": {
     "builder": "electron-builder",
     "start": "electron-forge start",
-    "start-app": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start-app": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
-    "electron":"electron .",
+    "electron": "electron .",
     "app": "concurrently \"npm run start-app\" \"npm run electron\"",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
+  "cracoConfig": "craco.config.js",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -71,8 +73,8 @@
     "electron": "^19.0.9",
     "electron-builder": "^23.1.0"
   },
-  "build":{
-    "productName":"FDMT 2.0"
+  "build": {
+    "productName": "FDMT 2.0"
   },
   "config": {
     "forge": {

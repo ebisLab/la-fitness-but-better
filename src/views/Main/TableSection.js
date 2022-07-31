@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-// import CardContext from '@app/store/CardContext.js';
+import CardContext from '@store/CardContext.js';
 
 import TableContext from '../../store/TableContext.js';
 import imgplaceholder from '../../assets/img/userplaceholder.png';
@@ -7,7 +7,7 @@ import {UNRECOGNIZED, OK} from '../../store/constants';
 import {Button, Tag} from '@chakra-ui/react';
 import WalkInGuest from '../../components/modals/WalkInGuest/WalkInGuest';
 import HealthProgram from '../../components/modals/HealthProgram.js/HealthProgram';
-import CardContext from '../../store/CardContext';
+// import CardContext from '../../store/CardContext';
 
 export default function TableSection({currentTime, status_table}) {
   const {clickedRows} = useContext(TableContext);
