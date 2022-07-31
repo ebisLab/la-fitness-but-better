@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import CardContext from '@store/CardContext.js';
-
 import TableContext from '../../store/TableContext.js';
 import imgplaceholder from '../../assets/img/userplaceholder.png';
 import {UNRECOGNIZED, OK} from '../../store/constants';
