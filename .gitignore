@@ -14,8 +14,7 @@ out/
 
 # production
 /build
-/out
-out/
+/dist
 
 
 # misc
