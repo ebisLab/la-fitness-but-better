@@ -141,7 +141,7 @@ export function CardProvider({children}) {
     document.getElementById('first_input').focus();
     // }
   };
-
+  //
   // const log = (str, style = Style.success) =>
   //   console.log(`%c${str}`, style, usersDatabase);
 

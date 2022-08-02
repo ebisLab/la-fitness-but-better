@@ -35,7 +35,7 @@ export default function ProfileSection({
   } = useContext(CardContext);
 
   return (
-    <section style={{background: '#ebf0f7'}} className="first-column">
+    <aside style={{background: '#ebf0f7'}} className="first-column">
       <Box
         className="sidebar"
         width="100%"
@@ -125,6 +125,6 @@ export default function ProfileSection({
           <DefaultCard userInfo={userInfo} />
         )}
       </Box>
-    </section>
+    </aside>
   );
 }

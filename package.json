@@ -1,10 +1,14 @@
 {
   "name": "client",
+  "author": "Ebi Baiden",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
+  "keywords": [],
+  "license": "ISC",
   "dependencies": {
     "@chakra-ui/react": "^2.2.1",
-    "@craco/craco": "^6.4.5",
+    "@craco/craco": "^7.0.0-alpha.7",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -14,6 +18,9 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "concurrently": "^7.3.0",
+    "electron-is-dev": "^2.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "framer-motion": "^6.3.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -21,13 +28,22 @@
     "react-webcam": "^7.0.1",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.13",
+    "wait-on": "^6.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
+    "builder": "electron-builder",
+    "start": "electron-forge start",
+    "start-app": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "app": "concurrently \"npm run start-app\" \"npm run electron\"",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
+  "cracoConfig": "craco.config.js",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -46,10 +62,16 @@
       "last 1 safari version"
     ]
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "Front Desk Management Tool system to check in members",
   "main": "index.js",
-  "devDependencies": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "electron": "^19.0.9",
+    "electron-builder": "^23.1.0"
+  },
+  "build": {
+    "productName": "FDMT 2.0"
+  },
+  "config": {
+    "forge": {}
+  }
 }
