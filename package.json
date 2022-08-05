@@ -33,7 +33,6 @@
   },
   "scripts": {
     "builder": "electron-builder",
-    "start": "electron-forge start",
     "start-app": "craco start",
     "build": "craco build",
     "test": "craco test",

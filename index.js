@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron');
 const path = require('path');
-const isDev = require("electron-is-dev");
+const isDev = require('electron-is-dev');
 
 function createWindow() {
   // Create the browser window.
@@ -38,8 +38,8 @@ function createWindow() {
   //       slashes: true
   //     })
   // )
-  mainWindow.loadFile(`${app.getAppPath()}\/build\/index.html`);
-
+  // mainWindow.loadFile(`${app.getAppPath()}\/build\/index.html`);
+  mainWindow.loadURL('http://localhost:3000');
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -62,10 +62,10 @@ app.whenReady().then(() => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 // app.on('window-all-closed', function () {
-//   // if (process.platform !== 'darwin') 
+//   // if (process.platform !== 'darwin')
 //   app.quit();
 // });
-app.on("window-all-closed", function () {
+app.on('window-all-closed', function () {
   // if (process.platform !== "darwin")
   app.quit();
 });

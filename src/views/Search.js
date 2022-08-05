@@ -6,9 +6,9 @@ import {Input, Button, Stack, Select, Tag} from '@chakra-ui/react';
 import {mock} from '../api/mock';
 
 export default function Search() {
-  const [input, setInput] = React.useState();
+  const [input, setInput] = React.useState('');
   const [name, setName] = React.useState('');
-  const [result, setResult] = React.useState(null);
+  const [result, setResult] = React.useState([]);
 
   const changeHandler = e => {
     setInput(e.target.value);
@@ -21,20 +21,20 @@ export default function Search() {
       item => item.first_name.toLowerCase() === input.toLowerCase(),
     );
     setResult(newsearch);
+    setInput('');
+    console.log('e.targ', e.target.value);
   };
-
-  console.log('result', result);
 
   return (
     <section>
       <form onSubmit={submitHandler}>
         <Stack direction={['column', 'row']} spacing="24px">
-          <Select placeholder="select option" width="40%" defaultValue="Name">
+          <Select placeholder="select option" width="30%" defaultValue="Name">
             <option value="Name">Name</option>
             <option value="Email">Email</option>
             <option value="Barcode">Barcode</option>
           </Select>
-          <Input placeholder="Search" onChange={changeHandler} />
+          <Input placeholder="Search" value={input} onChange={changeHandler} />
           <Button type="submit">Search</Button>
         </Stack>
       </form>
@@ -43,25 +43,16 @@ export default function Search() {
         <table>
           <thead>
             <tr>
-              <th style={{width: '80px'}}>Photo</th>
-              <th style={{width: '150px'}}>Service</th>
-              <th style={{width: '180px'}}>Barcode</th>
-              <th style={{width: '170px'}}>Type</th>
-              <th style={{width: '190px'}}>Name</th>
+              <th>Photo</th>
+              <th>Service</th>
+              <th>Barcode</th>
+              <th>Type</th>
+              <th>Name</th>
               <th>Status</th>
               <th>Time</th>
             </tr>
           </thead>
           <tbody>
-            {/* {result?.map(item => (
-              <tr key={item.id}>
-                <td>{item.first_name}</td>
-                <td>
-                  <Button>Service</Button>
-                </td>
-                <td>{item.barcode_number}</td>
-              </tr>
-            ))} */}
             {result?.map((item, i) => {
               return (
                 <React.Fragment key={i}>
