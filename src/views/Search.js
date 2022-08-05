@@ -7,29 +7,47 @@ import {mock} from '../api/mock';
 
 export default function Search() {
   const [input, setInput] = React.useState('');
-  const [name, setName] = React.useState('');
   const [result, setResult] = React.useState([]);
+  const [selectedDropDown, setSelectedDropDown] = React.useState('Name');
 
   const changeHandler = e => {
     setInput(e.target.value);
   };
 
+  function handleSelectChange(event) {
+    setSelectedDropDown(event.target.value);
+  }
+
   const submitHandler = e => {
     e.preventDefault();
-    setName(input);
-    let newsearch = mock.filter(
-      item => item.first_name.toLowerCase() === input.toLowerCase(),
-    );
-    setResult(newsearch);
+    if (selectedDropDown === 'Name') {
+      let newsearch = mock.filter(
+        item => item.first_name.toLowerCase() === input.toLowerCase(),
+      );
+      setResult(newsearch);
+    } else if (selectedDropDown === 'Email') {
+      let newsearch = mock.filter(
+        item => item.first_name.toLowerCase() === input.toLowerCase(),
+      );
+      setResult(newsearch);
+    } else if (selectedDropDown === 'Barcode') {
+      let newsearch = mock.filter(
+        item => item.barcode_number.toLowerCase() === input.toLowerCase(),
+      );
+      setResult(newsearch);
+    }
+
     setInput('');
-    console.log('e.targ', e.target.value);
   };
 
   return (
     <section>
       <form onSubmit={submitHandler}>
         <Stack direction={['column', 'row']} spacing="24px">
-          <Select placeholder="select option" width="30%" defaultValue="Name">
+          <Select
+            width="30%"
+            value={selectedDropDown}
+            onChange={handleSelectChange}>
             <option value="Name">Name</option>
             <option value="Email">Email</option>
             <option value="Barcode">Barcode</option>
