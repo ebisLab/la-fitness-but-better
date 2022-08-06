@@ -18,40 +18,37 @@ export default function Search() {
     setSelectedDropDown(event.target.value);
   }
 
-  const submitHandler = e => {
+  const filterHandler = e => {
     e.preventDefault();
+    let newsearch;
+    setResult(() => {
+      return (newsearch = mock.filter(item => {
+        const inputLower = input.toLowerCase();
 
-    if (selectedDropDown === 'Name') {
-      let newsearch = mock.filter(
-        item =>
-          item.first_name.toLowerCase() === input.toLowerCase() ||
-          item.last_name.toLowerCase() === input.toLowerCase() ||
-          item.first_name.toLowerCase() + ' ' + item.last_name.toLowerCase() ===
-            input.toLowerCase() ||
-          item.first_name.toLowerCase() + ',' + item.last_name.toLowerCase() ===
-            input.toLowerCase() ||
-          item.last_name.toLowerCase() + ',' + item.first_name.toLowerCase() ===
-            input.toLowerCase(),
-      );
-      setResult(newsearch);
-    } else if (selectedDropDown === 'Email') {
-      let newsearch = mock.filter(
-        item => item.first_name.toLowerCase() === input.toLowerCase(),
-      );
-      setResult(newsearch);
-    } else if (selectedDropDown === 'Barcode') {
-      let newsearch = mock.filter(
-        item => item.barcode_number.toLowerCase() === input.toLowerCase(),
-      );
-      setResult(newsearch);
-    }
-
+        switch (selectedDropDown) {
+          case 'Name':
+            const firstName = item.first_name.toLowerCase();
+            const lastName = item.last_name.toLowerCase();
+            return [
+              firstName,
+              lastName,
+              `${firstName} ${lastName}`,
+              `${firstName},${lastName}`,
+              `${lastName},${firstName}`,
+              `${firstName}, ${lastName}`,
+              `${lastName}, ${firstName}`,
+            ].includes(inputLower);
+          case 'Barcode':
+            return item.barcode_number.toLowerCase() === inputLower;
+        }
+      }));
+    });
     setInput('');
   };
 
   return (
     <section>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={filterHandler}>
         <Stack direction={['column', 'row']} spacing="24px">
           <Select
             width="30%"
