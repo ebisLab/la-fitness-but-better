@@ -33,12 +33,11 @@
   },
   "scripts": {
     "builder": "electron-builder",
-    "start": "electron-forge start",
     "start-app": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "electron": "electron .",
+    "electron": "wait-on http://localhost:3000 && electron .",
     "app": "concurrently \"npm run start-app\" \"npm run electron\"",
     "package": "electron-forge package",
     "make": "electron-forge make"

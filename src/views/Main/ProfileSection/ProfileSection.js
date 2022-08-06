@@ -24,6 +24,7 @@ export default function ProfileSection({
   userInfo,
 }) {
   const {
+    userBarcode,
     usersDatabase,
     setUsersDatabase,
     onBarcodeChange,
@@ -44,6 +45,7 @@ export default function ProfileSection({
         rounded="lg"
         p={5}>
         <InputComponent
+          userBarcode={userBarcode}
           onBarcodeChange={onBarcodeChange}
           kidsModal={kidsModal}
           submitBarcodeHandler={submitBarcodeHandler}

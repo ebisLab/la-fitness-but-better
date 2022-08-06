@@ -88,7 +88,7 @@ export function CardProvider({children}) {
     setUserInfo(userBarcode);
     addName(userBarcode);
     setCurrentTime(currentTime);
-    e.target.reset();
+    setUserBarcode('');
   };
 
   const changecurrentuser = img => {

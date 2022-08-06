@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 
 export default function InputComponent({
+  userBarcode,
   submitBarcodeHandler,
   onBarcodeChange,
   kidsModal,
@@ -23,6 +24,7 @@ export default function InputComponent({
           style={{background: '#FEFCBF'}}
           name="barcode"
           type="text"
+          value={userBarcode}
           onChange={onBarcodeChange}
         />
         <Button type="submit">✔</Button>
