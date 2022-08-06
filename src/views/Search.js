@@ -9,6 +9,7 @@ export default function Search() {
   const [input, setInput] = React.useState('');
   const [result, setResult] = React.useState([]);
   const [selectedDropDown, setSelectedDropDown] = React.useState('Name');
+  const status_table = {UNRECOGNIZED: '', OK: '#0bbd0b', DECLINED: '#ED8936'};
 
   const changeHandler = e => {
     setInput(e.target.value);
@@ -43,7 +44,7 @@ export default function Search() {
         }
       }));
     });
-    setInput('');
+    // setInput('');
   };
 
   return (
@@ -59,88 +60,65 @@ export default function Search() {
             <option value="Barcode">Barcode</option>
           </Select>
           <Input
+            style={{background: '#FEFCBF'}}
             placeholder={`Search ${selectedDropDown}`}
             value={input}
             onChange={changeHandler}
           />
-          <Button type="submit">Search</Button>
+          <Button type="submit" width={'30%'}>
+            Search
+          </Button>
         </Stack>
       </form>
-      <h2>search result</h2>
-      <div>
-        <table>
+      <div style={{paddingTop: '3%'}}>
+        <table
+          style={{padding: '14px', textAlign: 'center'}}
+          // className="fixed_header"
+        >
           <thead>
             <tr>
-              <th>Photo</th>
-              <th>Service</th>
-              <th>Barcode</th>
-              <th>Type</th>
-              <th>Name</th>
-              <th>Status</th>
-              <th>Time</th>
+              {[
+                'Check In',
+                'Service',
+                'Barcode',
+                'Type',
+                'Home Club',
+                'Name',
+                'State',
+                'Address',
+                'Status',
+                'Contract Exp',
+              ].map(tblitem => (
+                <th>{tblitem}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {result?.map((item, i) => {
               return (
                 <React.Fragment key={i}>
-                  <tr
-                    onClick={() => {}}
-                    className={
-                      item.status === UNRECOGNIZED
-                        ? 'checked-in-user-table-status'
-                        : ''
-                    }>
-                    <td style={{width: '80px'}}>
-                      <div
-                        style={{
-                          width: '50px',
-                          height: '50px',
-                          background:
-                            item.status === UNRECOGNIZED ? 'red' : 'blue',
-                        }}>
-                        <img
-                          width="50px"
-                          height="50px"
-                          src={
-                            item.status === UNRECOGNIZED ||
-                            item.member_photo === ''
-                              ? imgplaceholder
-                              : item.member_photo
-                          }
-                          alt={item.barcode_number}
-                        />
-                      </div>
+                  <tr onClick={() => {}}>
+                    <td>
+                      <Button>In</Button>
                     </td>
-                    <td style={{width: '125px'}}>
-                      {item.status === UNRECOGNIZED ? (
-                        ''
-                      ) : (
-                        <Button>Service</Button>
-                      )}
+                    <td>
+                      <Button>Service</Button>
                     </td>
-                    <td style={{width: '170px'}}>{item.barcode_number}</td>
-                    <td style={{width: '150px'}}>
-                      {item.fitness_type === 'guest' ? (
-                        <Tag size="sm" variant="solid" colorScheme="green">
-                          {item.fitness_type}
-                        </Tag>
-                      ) : (
-                        item.fitness_type
-                      )}
-                    </td>
-                    <td style={{width: '140px'}}>
+                    <td>{item.barcode_number}</td>
+                    <td>{item.fitness_type}</td>
+                    <td>CARMEL</td>
+                    <td>
                       {item.first_name} {item.last_name}
                     </td>
+                    <td>IN</td>
+                    <td>123 Evergreen Terrace</td>
                     <td
-                      className={item.status === OK ? 'status_cell' : ''}
                       style={{
-                        // color: status_table[item.status],
-                        width: '220px',
+                        color: status_table[item.status],
                       }}>
                       {item.status}
                     </td>
-                    <td>{item.time}</td>
+                    <td>10/30/2016</td>
                   </tr>
                 </React.Fragment>
               );
