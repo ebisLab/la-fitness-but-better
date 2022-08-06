@@ -1,5 +1,5 @@
 import React from 'react';
-import {UNRECOGNIZED, OK} from '../store/constants';
+import {UNRECOGNIZED, OK} from '@store/constants';
 import imgplaceholder from '../assets/img/userplaceholder.png';
 
 import {Input, Button, Stack, Select, Tag} from '@chakra-ui/react';
@@ -20,9 +20,18 @@ export default function Search() {
 
   const submitHandler = e => {
     e.preventDefault();
+
     if (selectedDropDown === 'Name') {
       let newsearch = mock.filter(
-        item => item.first_name.toLowerCase() === input.toLowerCase(),
+        item =>
+          item.first_name.toLowerCase() === input.toLowerCase() ||
+          item.last_name.toLowerCase() === input.toLowerCase() ||
+          item.first_name.toLowerCase() + ' ' + item.last_name.toLowerCase() ===
+            input.toLowerCase() ||
+          item.first_name.toLowerCase() + ',' + item.last_name.toLowerCase() ===
+            input.toLowerCase() ||
+          item.last_name.toLowerCase() + ',' + item.first_name.toLowerCase() ===
+            input.toLowerCase(),
       );
       setResult(newsearch);
     } else if (selectedDropDown === 'Email') {
@@ -52,7 +61,11 @@ export default function Search() {
             <option value="Email">Email</option>
             <option value="Barcode">Barcode</option>
           </Select>
-          <Input placeholder="Search" value={input} onChange={changeHandler} />
+          <Input
+            placeholder={`Search ${selectedDropDown}`}
+            value={input}
+            onChange={changeHandler}
+          />
           <Button type="submit">Search</Button>
         </Stack>
       </form>
