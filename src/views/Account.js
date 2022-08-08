@@ -113,32 +113,105 @@ export default function Account() {
           <Button size="sm">Freeze</Button>
           <Button size="sm">Cancel</Button>
         </Stack>
-        <Table size="sm">
+        <Table size="sm" width={'auto'}>
           <Tbody>
-            <tr>
-              <td>Amenities</td>
-              <td>Last Billing</td>
-              <td>Current/Next Billing</td>
-            </tr>
-            <tr>
-              <td colSpan={2}>
-                <table>
+            <Tr>
+              <Th>Amenities</Th>
+              <Th>Last Billing</Th>
+              <Th>Current/Next Billing</Th>
+            </Tr>
+            <Tr>
+              <Td
+                style={{
+                  display: 'block',
+                  height: ' 100px',
+                  overflowY: 'scroll',
+                }}
+                // colSpan={2}
+              >
+                <Table size="sm">
+                  <Tbody>
+                    <Tr>
+                      <Th>Service</Th>
+                      <Th>Dues</Th>
+                      <Th>Freeze</Th>
+                    </Tr>
+                    <Tr>
+                      <Td>Fitness (0.00%)</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>2 Guest Priviledges</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>MultiState</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Group Fitness</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Pool Whirlpool Spa</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Cycle Class</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>LA Fitness Access</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Esporta Access</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </Td>
+              <Td>
+                <Table size="sm">
                   <tbody>
                     <tr>
-                      <td>stuff here</td>
-                      <td>another stuff</td>
+                      <th>Type</th>
+                      <td>Mastercard</td>
+                      <th>Date</th>
+                      <td>7/14/2022</td>
+                      <th>C/C#</th>
+                      <td>XXXXXXXXXXXX9179</td>
+                      <th>Active</th>
+                      <td>2</td>
                     </tr>
                     <tr>
-                      <td colSpan={2}>Paragraph stuff</td>
+                      <th>Next Biling</th>
+                      <td>8/15/2022</td>
+                      <th>C/C#</th>
+                      <td>XXXXXXXXXXXX9179</td>
+                      <th>C/C Exp</th>
+                      <td>6/30/2026</td>
                     </tr>
                     <tr>
-                      <td colSpan={2}>Paragrapht hree stuff</td>
+                      <th>Type</th>
+                      <td>Mastercard</td>
+                      <th>Billing Cycle</th>
+                      <td>Monthly 15th</td>
+                      <th>Billing Name</th>
+                      <td>Bryce Hockman</td>
                     </tr>
                   </tbody>
-                </table>
-              </td>
-              <td>bro haha</td>
-            </tr>
+                </Table>
+              </Td>
+            </Tr>
 
             {/* <Tr>
               <Td>One</Td>
@@ -178,6 +251,7 @@ export default function Account() {
           <Button size="sm">EFT</Button>
         </Stack>
         <Table
+          size={'sm'}
           style={{padding: '14px', textAlign: 'center'}}
           // className="fixed_header"
         >
@@ -228,4 +302,56 @@ export default function Account() {
       </aside>
     </>
   );
+}
+
+{
+  /* <Table size="sm">
+                <Tr>
+                  <Th>Service</Th>
+                  <Th>Dues</Th>
+                  <Th>Freeze</Th>
+                </Tr>
+                <Tr>
+                  <Td>Fitness (0.00%)</Td>
+                </Tr>
+                <Tr>
+                  <Td>2 Guest Priviledges</Td>
+                </Tr>
+                <Tr>
+                  <Td>MultiState</Td>
+                </Tr>
+                <Tr>
+                  <Td>Group Fitness</Td>
+                </Tr>
+                <Tr>
+                  <Td>Pool Whirlpool Spa</Td>
+                </Tr>
+                <Tr>
+                  <Td>Cycle Class</Td>
+                </Tr>
+                <Tr>
+                  <Td>LA Fitness Access</Td>
+                </Tr>
+                <Tr>
+                  <Td>Esporta Access</Td>
+                </Tr>
+              </Table> */
+}
+// <Tr>
+//   <Th>Service</Th>
+//   <Th>Dues</Th>
+//   <Th>Freeze</Th>
+// </Tr>
+// <Tr></Tr>
+{
+  /* <Tr>
+                  <Td>Fitness (0.00%)</Td>
+                  <Td>2 Guest Priviledges</Td>
+                  <Td>MultiState</Td>
+                  <Td>Group Fitness</Td>
+                  <Td>Pool Whirlpool Spa</Td>
+                  <Td>Cycle Class</Td>
+                  <Td>LA Fitness Access</Td>
+                  <Td>Esporta Access</Td>
+                </Tr> */
 }
