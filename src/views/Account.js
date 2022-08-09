@@ -113,22 +113,25 @@ export default function Account() {
           <Button size="sm">Freeze</Button>
           <Button size="sm">Cancel</Button>
         </Stack>
-        <Table size="sm" width={'auto'}>
-          <Tbody>
+        <Table size="sm">
+          <colgroup span="3"></colgroup>
+          <Thead>
             <Tr>
-              <Th>Amenities</Th>
+              <Th span="3">Amenities</Th>
               <Th>Last Billing</Th>
               <Th>Current/Next Billing</Th>
             </Tr>
+          </Thead>
+          <Tbody>
             <Tr>
               <Td
                 style={{
                   display: 'block',
-                  height: ' 100px',
+                  height: '170px',
                   overflowY: 'scroll',
                 }}
-                // colSpan={2}
-              >
+                rowSpan="6"
+                scope="rowgroup">
                 <Table size="sm">
                   <Tbody>
                     <Tr>
@@ -180,70 +183,51 @@ export default function Account() {
                 </Table>
               </Td>
               <Td>
-                <Table size="sm">
-                  <tbody>
-                    <tr>
-                      <th>Type</th>
-                      <td>Mastercard</td>
-                      <th>Date</th>
-                      <td>7/14/2022</td>
-                      <th>C/C#</th>
-                      <td>XXXXXXXXXXXX9179</td>
-                      <th>Active</th>
-                      <td>2</td>
-                    </tr>
-                    <tr>
-                      <th>Next Biling</th>
-                      <td>8/15/2022</td>
-                      <th>C/C#</th>
-                      <td>XXXXXXXXXXXX9179</td>
-                      <th>C/C Exp</th>
-                      <td>6/30/2026</td>
-                    </tr>
-                    <tr>
-                      <th>Type</th>
-                      <td>Mastercard</td>
-                      <th>Billing Cycle</th>
-                      <td>Monthly 15th</td>
-                      <th>Billing Name</th>
-                      <td>Bryce Hockman</td>
-                    </tr>
-                  </tbody>
+                <Table>
+                  <Tbody>
+                    <Tr>
+                      <Th>Type</Th>
+                      <Td>Mastercard</Td>
+                    </Tr>
+                    <Tr>
+                      <Th>Next Biling</Th>
+                      <Td>8/15/2022</Td>
+                    </Tr>
+                    <Tr>
+                      <Th>Type</Th>
+                      <Td>Mastercard</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </Td>
+              <Td>
+                <Table>
+                  <Tbody>
+                    <Tr>
+                      <Th>Date</Th>
+                      <Td>7/14/2022</Td>
+                      <Th>C/C#</Th>
+                      <Td>XXXXXXXXXXXX9179</Td>
+                    </Tr>
+                    <Tr>
+                      <Th>C/C#</Th>
+                      <Td>XXXXXXXXXXXX9179</Td>
+                      <Th>C/C Exp</Th>
+                      <Td>6/30/2026</Td>
+                    </Tr>
+                    <Tr>
+                      <Th>Billing Cycle</Th>
+                      <Td>Monthly 15th</Td>
+                      <Th>Billing Name</Th>
+                      <Td>Bryce Hockman</Td>
+                    </Tr>
+                  </Tbody>
                 </Table>
               </Td>
             </Tr>
-
-            {/* <Tr>
-              <Td>One</Td>
-              <Td>Two</Td>
-              <Td>Three</Td>
-              <Th>Type</Th>
-              <Td>Mastercard</Td>
-              <Th>Date</Th>
-              <Td>7/14/2022</Td>
-              <Th>C/C#</Th>
-              <Td>XXXXXXXXXXXX9179</Td>
-              <Th>Active</Th>
-              <Td>2</Td>
-            </Tr>
-            <Tr>
-              <Th>Next Biling</Th>
-              <Td>8/15/2022</Td>
-              <Th>C/C#</Th>
-              <Td>XXXXXXXXXXXX9179</Td>
-              <Th>C/C Exp</Th>
-              <Td>6/30/2026</Td>
-            </Tr>
-            <Tr>
-              <Th>Type</Th>
-              <Td>Mastercard</Td>
-              <Th>Billing Cycle</Th>
-              <Td>Monthly 15th</Td>
-              <Th>Billing Name</Th>
-              <Td>Bryce Hockman</Td>
-            </Tr> */}
           </Tbody>
         </Table>
+
         <Stack direction={['column', 'row']} spacing="24px">
           <Button size="sm">Upgrade</Button>
           <Button size="sm">Buydown</Button>
@@ -354,4 +338,143 @@ export default function Account() {
                   <Td>LA Fitness Access</Td>
                   <Td>Esporta Access</Td>
                 </Tr> */
+}
+
+{
+  /* <Tr>
+              <Td>One</Td>
+              <Td>Two</Td>
+              <Td>Three</Td>
+              <Th>Type</Th>
+              <Td>Mastercard</Td>
+              <Th>Date</Th>
+              <Td>7/14/2022</Td>
+              <Th>C/C#</Th>
+              <Td>XXXXXXXXXXXX9179</Td>
+              <Th>Active</Th>
+              <Td>2</Td>
+            </Tr>
+            <Tr>
+              <Th>Next Biling</Th>
+              <Td>8/15/2022</Td>
+              <Th>C/C#</Th>
+              <Td>XXXXXXXXXXXX9179</Td>
+              <Th>C/C Exp</Th>
+              <Td>6/30/2026</Td>
+            </Tr>
+            <Tr>
+              <Th>Type</Th>
+              <Td>Mastercard</Td>
+              <Th>Billing Cycle</Th>
+              <Td>Monthly 15th</Td>
+              <Th>Billing Name</Th>
+              <Td>Bryce Hockman</Td>
+            </Tr> */
+}
+{
+  /* <Table size="sm">
+          <Thead>
+            <Tr>
+              <Th span="3">Amenities</Th>
+              <Th>Last Billing</Th>
+              <Th>Current/Next Billing</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            <Tr>
+              <Td
+                style={{
+                  display: 'block',
+                  height: ' 100px',
+                  overflowY: 'scroll',
+                }}
+                // S={2}
+              >
+                <Table size="sm">
+                  <Tbody>
+                    <Tr>
+                      <Th>Service</Th>
+                      <Th>Dues</Th>
+                      <Th>Freeze</Th>
+                    </Tr>
+                    <Tr>
+                      <Td>Fitness (0.00%)</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>2 Guest Priviledges</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>MultiState</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Group Fitness</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Pool Whirlpool Spa</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Cycle Class</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>LA Fitness Access</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Esporta Access</Td>
+                      <Td>0.00</Td>
+                      <Td>0.00</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </Td>
+              <Td>
+                <Table size="sm">
+                  <Tbody>
+                    <Tr>
+                      <Th>Type</Th>
+                      <Td>Mastercard</Td>
+                      <Th>Date</Th>
+                      <Td>7/14/2022</Td>
+                      <Th>C/C#</Th>
+                      <Td>XXXXXXXXXXXX9179</Td>
+                      <Th>Active</Th>
+                      <Td>2</Td>
+                    </Tr>
+                    <Tr>
+                      <Th>Next Biling</Th>
+                      <Td>8/15/2022</Td>
+                      <Th>C/C#</Th>
+                      <Td>XXXXXXXXXXXX9179</Td>
+                      <Th>C/C Exp</Th>
+                      <Td>6/30/2026</Td>
+                    </Tr>
+                    <Tr>
+                      <Th>Type</Th>
+                      <Td>Mastercard</Td>
+                      <Th>Billing Cycle</Th>
+                      <Td>Monthly 15th</Td>
+                      <Th>Billing Name</Th>
+                      <Td>Bryce Hockman</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </Td>
+            </Tr>
+
+           
+          </Tbody>
+        </Table> */
 }
