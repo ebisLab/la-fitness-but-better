@@ -19,7 +19,7 @@ export default function Dashboard(props) {
       <TabPanel>
         <Search />
       </TabPanel>
-      <TabPanel>
+      <TabPanel style={{background: '#ebf0f7'}}>
         <Account />
       </TabPanel>
       <TabPanel>
