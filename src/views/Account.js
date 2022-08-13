@@ -283,16 +283,19 @@ export default function Account() {
           </Table>
         </section>
       </div>
-      <aside
-        style={{
-          position: 'relative',
-          padding: '2%',
-          left: '16px',
-          width: '25%',
-          backgroundColor: '#8BC6EC',
-          backgroundImage: 'linear-gradient(180deg, #8BC6EC 0%, #9599E2 100%)',
-        }}>
-        <li>blalha</li>
+      <aside style={{width: '25%'}}>
+        <div
+          style={{
+            position: 'relative',
+            padding: '2%',
+            left: '16px',
+            backgroundColor: '#8BC6EC',
+            backgroundImage:
+              'linear-gradient(180deg, #8BC6EC 0%, #9599E2 100%)',
+          }}>
+          <li>blalha</li>
+          <li>blalha</li>
+        </div>
       </aside>
     </div>
   );
