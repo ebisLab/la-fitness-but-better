@@ -4,6 +4,7 @@ import {TabPanels, TabPanel} from '@chakra-ui/react';
 import Search from '../views/Search';
 import Account from '../views/Account';
 import Management from '../views/Management';
+import TableDate from '../views/TableDate';
 
 export default function Dashboard(props) {
   const {setOccupantsCount, handleTabsChange, setTabIndex} = props;
@@ -21,6 +22,9 @@ export default function Dashboard(props) {
       </TabPanel>
       <TabPanel style={{background: '#ebf0f7'}}>
         <Account />
+      </TabPanel>
+      <TabPanel style={{background: '#ebf0f7'}}>
+        <TableDate />
       </TabPanel>
       <TabPanel>
         <Management />
