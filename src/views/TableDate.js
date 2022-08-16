@@ -63,11 +63,11 @@ export default function TableDate() {
       </Table>
 
       <Table className="amn_table">
-        {/* <Thead>
-          <Th>jesus</Th>
-          <Th>take</Th>
-          <Th>the</Th>
-        </Thead> */}
+        <Thead style={{display: 'grid', gridTemplateColumns: '1fr 1fr .8fr'}}>
+          <Th>Amenities</Th>
+          <Th>Last Billing</Th>
+          <Th>Current/Last Billing</Th>
+        </Thead>
         <Tbody
           style={{
             display: 'grid',
