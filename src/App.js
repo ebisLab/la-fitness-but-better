@@ -7,13 +7,11 @@ import TabWrapper from './components/TabWrapper';
 import {CardProvider} from './store/CardContext';
 import {TableProvider} from './store/TableContext';
 import {FooterProvider} from './store/FooterContext';
+import {useTabIndexLogic} from './utils/helpers/tabindexlogic';
 
 function App() {
+  const {tabIndex, setTabIndex, handleTabsChange, cellRef} = useTabIndexLogic();
   const [occupantsCount, setOccupantsCount] = useState(0);
-  const [tabIndex, setTabIndex] = React.useState(0);
-  const handleTabsChange = index => {
-    setTabIndex(index);
-  };
 
   // function removeduplicates2() {
   //   let duplicateRemover = new Set();
@@ -41,6 +39,7 @@ function App() {
                 setTabIndex={setTabIndex}
                 handleTabsChange={handleTabsChange}>
                 <Dashboard
+                  cellRef={cellRef}
                   setTabIndex={setTabIndex}
                   handleTabsChange={handleTabsChange}
                   setOccupantsCount={setOccupantsCount}

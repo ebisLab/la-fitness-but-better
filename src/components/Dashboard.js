@@ -7,7 +7,7 @@ import Management from '../views/Management';
 import TableDate from '../views/TableDate';
 
 export default function Dashboard(props) {
-  const {setOccupantsCount, handleTabsChange, setTabIndex} = props;
+  const {setOccupantsCount, handleTabsChange, setTabIndex, cellRef} = props;
   return (
     <TabPanels>
       <TabPanel p="0px 0px 10px 0px">
@@ -24,7 +24,7 @@ export default function Dashboard(props) {
         <Account />
       </TabPanel>
       <TabPanel style={{background: '#ebf0f7'}}>
-        <TableDate />
+        <TableDate cellRef={cellRef} />
       </TabPanel>
       <TabPanel>
         <Management />

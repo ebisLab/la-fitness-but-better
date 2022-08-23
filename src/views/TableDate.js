@@ -1,27 +1,9 @@
 import React from 'react';
 import data from '../api/account_fields';
-import {
-  Alert,
-  AlertIcon,
-  Input,
-  IconButton,
-  Button,
-  ButtonGroup,
-  Box,
-  Center,
-  Grid,
-  Tabs,
-  Stack,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-} from '@chakra-ui/react';
+import {Table, Thead, Tbody, Tr, Th, Td} from '@chakra-ui/react';
 import './tabledatestyle.css';
 
-export default function TableDate() {
+export default function TableDate({cellRef}) {
   return (
     <div className="acc_table_container">
       <Table className="acc_table">
@@ -53,7 +35,6 @@ export default function TableDate() {
           })}
         </Tbody>
       </Table>
-
       <Table>
         <Tr>
           <Td>fooo</Td>
@@ -61,135 +42,138 @@ export default function TableDate() {
           <Td>fooo</Td>
         </Tr>
       </Table>
-
       <Table className="amn_table">
         <Thead style={{display: 'grid', gridTemplateColumns: '1fr 1fr .8fr'}}>
           <Th>Amenities</Th>
           <Th>Last Billing</Th>
           <Th>Current/Last Billing</Th>
         </Thead>
-        <Tbody
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 2fr',
-            // gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
-            // width: '300px',
-          }}>
-          <Td
+        <Tbody>
+          <Tr
             style={{
-              display: 'block',
-              height: ' 100%',
-              overflowY: 'scroll',
-              width: 'fit-content',
-              maxHeight: '50vh',
-              margin: '16px 0',
+              display: 'grid',
+              gridTemplateColumns: '1fr 2fr',
+              // gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
+              // width: '300px',
             }}>
-            <Table size="sm">
-              <Tbody>
-                <Tr>
-                  <Th>Service</Th>
-                  <Th>Dues</Th>
-                  <Th>Freeze</Th>
-                </Tr>
-                <Tr>
-                  <Td>Fitness (0.00%)</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>2 Guest Priviledges</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>MultiState</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>Group Fitness</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>Pool Whirlpool Spa</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>Cycle Class</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>LA Fitness Access</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>Esporta Access</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>Esporta Access</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>Esporta Access</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>Esporta Access</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>Esporta Access</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-                <Tr>
-                  <Td>Esporta Access</Td>
-                  <Td>0.00</Td>
-                  <Td>0.00</Td>
-                </Tr>
-              </Tbody>
-            </Table>
-          </Td>
-          <Td className="grid-container grid-container--fit">
-            <Table size="sm" className="amn_table_billing">
-              <Tbody>
-                <Tr
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
-                  }}>
-                  {data.items.map((item, index) => {
-                    return (
-                      //   <React>
-                      //     <Tr key={index}>
-                      data.fields
-                        .filter(field => field.show)
-                        .map(field => (
-                          <Td
-                            // style={{whiteSpace: 'nowrap'}}
-                            key={index}
-                            data-th={field.description}>
-                            {item[field.id]}
-                          </Td>
-                        ))
-                      //     </Tr>
-                      //   </React>
-                    );
-                  })}
-                </Tr>
-              </Tbody>
-              {/* <Tbody>
+            <Td
+              data-td={cellRef.current?.clientHeight}
+              style={{
+                display: 'block',
+                height: ' 100%',
+                overflowY: 'scroll',
+                width: 'fit-content',
+                maxHeight: cellRef.current?.clientHeight,
+                margin: '16px 0',
+              }}>
+              <Table size="sm">
+                <Tbody>
+                  <Tr>
+                    <Th>Service</Th>
+                    <Th>Dues</Th>
+                    <Th>Freeze</Th>
+                  </Tr>
+                  <Tr>
+                    <Td>Fitness (0.00%)</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>2 Guest Priviledges</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>MultiState</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Group Fitness</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Pool Whirlpool Spa</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Cycle Class</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>LA Fitness Access</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Esporta Access</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Esporta Access</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Esporta Access</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Esporta Access</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Esporta Access</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>Esporta Access</Td>
+                    <Td>0.00</Td>
+                    <Td>0.00</Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </Td>
+            <Td className="grid-container grid-container--fit">
+              <Table size="sm" className="amn_table_billing">
+                <Tbody>
+                  <Tr
+                    ref={cellRef}
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns:
+                        'repeat(auto-fit, minmax(100px, 1fr))',
+                    }}>
+                    {data.items.map((item, index) => {
+                      return (
+                        //   <React>
+                        //     <Tr key={index}>
+                        data.fields
+                          .filter(field => field.show)
+                          .map(field => (
+                            <Td
+                              // style={{whiteSpace: 'nowrap'}}
+                              key={index}
+                              data-th={field.description}>
+                              {item[field.id]}
+                            </Td>
+                          ))
+                        //     </Tr>
+                        //   </React>
+                      );
+                    })}
+                  </Tr>
+                </Tbody>
+                {/* <Tbody>
                 <Tr> */}
-              {/* <Td className="grid-element">wheel</Td>
+                {/* <Td className="grid-element">wheel</Td>
               <Td className="grid-element">wheel</Td>
               <Td className="grid-element">wheel</Td>
               <Td className="grid-element">wheel</Td>
@@ -206,7 +190,7 @@ export default function TableDate() {
               <Td className="grid-element">wheel</Td>
               <Td className="grid-element">wheel</Td>
               <Td className="grid-element">wheel</Td> */}
-              {/* {data.items.map((item, index) => {
+                {/* {data.items.map((item, index) => {
             return (
               <>
                 <Tr key={index}>
@@ -219,10 +203,11 @@ export default function TableDate() {
               </>
             );
           })} */}
-              {/* </Tr>
+                {/* </Tr>
               </Tbody> */}
-            </Table>
-          </Td>
+              </Table>
+            </Td>
+          </Tr>
         </Tbody>
       </Table>
     </div>
