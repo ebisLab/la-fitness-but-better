@@ -12,7 +12,7 @@ export function useTabIndexLogic() {
   React.useEffect(() => {
     function handleResize() {
       if (tabIndex === 3) {
-        setDivSize(cellRef.current?.clientWidth);
+        setDivSize(cellRef.current?.clientHeight);
       }
     }
 
@@ -22,6 +22,8 @@ export function useTabIndexLogic() {
     // Remove event listener on cleanup
     return () => window.removeEventListener('resize', handleResize);
   }, [tabIndex]);
+
+  console.log('heyyyyy there', divSize);
 
   return {tabIndex, setTabIndex, handleTabsChange, cellRef, divSize};
 }

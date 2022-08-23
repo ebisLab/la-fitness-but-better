@@ -3,7 +3,7 @@ import data from '../api/account_fields';
 import {Table, Thead, Tbody, Tr, Th, Td} from '@chakra-ui/react';
 import './tabledatestyle.css';
 
-export default function TableDate({cellRef}) {
+export default function TableDate({cellRef, divSize}) {
   return (
     <div className="acc_table_container">
       <Table className="acc_table">
@@ -63,7 +63,7 @@ export default function TableDate({cellRef}) {
                 height: ' 100%',
                 overflowY: 'scroll',
                 width: 'fit-content',
-                maxHeight: cellRef.current?.clientHeight,
+                maxHeight: divSize,
                 margin: '16px 0',
               }}>
               <Table size="sm">

@@ -10,7 +10,8 @@ import {FooterProvider} from './store/FooterContext';
 import {useTabIndexLogic} from './utils/helpers/tabindexlogic';
 
 function App() {
-  const {tabIndex, setTabIndex, handleTabsChange, cellRef} = useTabIndexLogic();
+  const {tabIndex, setTabIndex, handleTabsChange, cellRef, divSize} =
+    useTabIndexLogic();
   const [occupantsCount, setOccupantsCount] = useState(0);
 
   // function removeduplicates2() {
@@ -39,6 +40,7 @@ function App() {
                 setTabIndex={setTabIndex}
                 handleTabsChange={handleTabsChange}>
                 <Dashboard
+                  divSize={divSize}
                   cellRef={cellRef}
                   setTabIndex={setTabIndex}
                   handleTabsChange={handleTabsChange}
