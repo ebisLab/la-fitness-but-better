@@ -147,27 +147,22 @@ export default function TableDate({cellRef, divSize}) {
                   <Tr
                     ref={cellRef}
                     style={{
-                      display: 'grid',
-                      gridTemplateColumns:
-                        'repeat(auto-fit, minmax(100px, 1fr))',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      flexWrap: 'wrap',
+                      gap: '10px',
+                      // display: 'grid',
+                      // gridTemplateColumns:
+                      //   'repeat(auto-fit, minmax(150px, 1fr))',
                     }}>
                     {data.items.map((item, index) => {
-                      return (
-                        //   <React>
-                        //     <Tr key={index}>
-                        data.fields
-                          .filter(field => field.show)
-                          .map(field => (
-                            <Td
-                              // style={{whiteSpace: 'nowrap'}}
-                              key={index}
-                              data-th={field.description}>
-                              {item[field.id]}
-                            </Td>
-                          ))
-                        //     </Tr>
-                        //   </React>
-                      );
+                      return data.fields
+                        .filter(field => field.show)
+                        .map(field => (
+                          <Td key={index} data-th={field.description}>
+                            {item[field.id]}
+                          </Td>
+                        ));
                     })}
                   </Tr>
                 </Tbody>
