@@ -88,8 +88,8 @@ export default function Search() {
                 'Address',
                 'Status',
                 'Contract Exp',
-              ].map(tblitem => (
-                <th>{tblitem}</th>
+              ].map((tblitem, i) => (
+                <th key={i}>{tblitem}</th>
               ))}
             </tr>
           </thead>

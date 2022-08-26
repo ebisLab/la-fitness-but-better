@@ -18,6 +18,7 @@ export default function TabWrapper({
         <Tab _selected={{bg: '#ebf0f7'}}>Member</Tab>
         <Tab _selected={{bg: '#ebf0f7'}}>Search</Tab>
         <Tab _selected={{bg: '#ebf0f7'}}>Account</Tab>
+        <Tab _selected={{bg: '#ebf0f7'}}>TableDate</Tab>
         <Tab _selected={{bg: '#ebf0f7'}}>Management</Tab>
       </TabList>
       {/* </nav> */}

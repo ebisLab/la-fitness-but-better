@@ -212,7 +212,7 @@ export default function Main({
   // console.log('userdata🌿', usersDatabase);
 
   return (
-    <main className="grid-container">
+    <div className="grid-container">
       <ProfileSection
         bg={bg}
         color={color}
@@ -234,6 +234,6 @@ export default function Main({
         checkInMemberGuest={checkInMemberGuest}
         userInfo={userInfo}
       />
-    </main>
+    </div>
   );
 }

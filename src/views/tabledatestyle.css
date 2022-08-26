@@ -1,0 +1,137 @@
+.acc_table_container {
+    font-size: var(--chakra-fontSizes-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  .acc_table {
+    border-spacing: 0;
+    border-radius: 6px;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+
+    .acc_table {
+        background-color: transparent;
+        box-shadow: none;
+      }
+      /* .acc_table thead {
+        display: none;
+      } */
+
+      .acc_table tr {
+        display: block;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      }
+
+      .acc_table td {
+        border: 0;
+        padding-top: 0;
+      }
+
+      .acc_table td:before {
+        content: attr(data-th) ": ";
+        font-family: var(--chakra-fonts-heading);
+    font-weight: var(--chakra-fontWeights-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--chakra-letterSpacings-wider);
+    text-align: start;
+    font-size: var(--chakra-fontSizes-xs);
+    color: var(--chakra-colors-gray-600);
+    background-color: aquamarine;
+      }
+
+      
+
+      .acc_table tr {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
+
+  @media (max-width: 800px) {
+    .acc_table tr {
+
+      grid-template-columns: 50% 50%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .acc_table tr {
+
+      grid-template-columns: 100%;
+    }
+  }
+
+  /* second table */
+
+  .amn_table {
+    border-spacing: 0;
+    border-radius: 6px;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  }
+
+  .amn_table_billing td {
+    padding-bottom: unset;
+    border-bottom: unset;
+    /* display: block;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+  }
+
+  .amn_table_billing td:before {
+    content: attr(data-th) ": ";
+    font-family: var(--chakra-fonts-heading);
+font-weight: var(--chakra-fontWeights-bold);
+text-transform: uppercase;
+letter-spacing: var(--chakra-letterSpacings-wider);
+text-align: start;
+font-size: var(--chakra-fontSizes-xs);
+color: var(--chakra-colors-gray-600);
+background-color: aquamarine;
+  }
+  /* .amn_table td:before {
+    content: attr(data-th) ": ";
+    font-family: var(--chakra-fonts-heading);
+font-weight: var(--chakra-fontWeights-bold);
+text-transform: uppercase;
+letter-spacing: var(--chakra-letterSpacings-wider);
+text-align: start;
+font-size: var(--chakra-fontSizes-xs);
+color: var(--chakra-colors-gray-600);
+background-color: aquamarine;
+  }
+
+  .amn_table tr {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+  } */
+
+  .grid-container {
+    display: grid;
+}
+.grid-container--fit {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.grid-element {
+    background-color: deepPink;
+    padding: 20px;
+    color: #fff;
+    border: 1px solid #fff;
+  }
