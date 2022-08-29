@@ -1,4 +1,35 @@
 export default {
+  user_field: [
+    {
+      id: 'first_name',
+      description: 'First Name',
+      show: true,
+    },
+    {
+      id: 'last_name',
+      description: 'Last Name',
+      show: true,
+    },
+
+    {
+      id: 'barcode',
+      description: 'Barcode',
+      show: true,
+    },
+    {
+      id: 'status',
+      description: 'Status',
+      show: true,
+    },
+  ],
+  user_item: [
+    {
+      last_name: 'Disney',
+      first_name: 'Walt',
+      status: 'OK',
+      barcode: 'FFFFFFFF',
+    },
+  ],
   fields2: [
     {
       id: 'id',
@@ -119,6 +150,7 @@ export default {
       e_contact: 'N/A',
       rate_id: '1142843',
       phone_barcode: true,
+      last_name: 'Barkley',
     },
   ],
   service_fields: [
