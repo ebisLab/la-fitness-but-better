@@ -153,6 +153,54 @@ export default {
       last_name: 'Barkley',
     },
   ],
+  billing_fields: [
+    {
+      id: 'type',
+      description: 'type',
+      show: true,
+    },
+    {
+      id: 'next_billing',
+      description: 'Next Billing',
+      show: true,
+    },
+    {
+      id: 'date',
+      description: 'Date',
+      show: true,
+    },
+    {
+      id: 'credit_card_num',
+      description: 'CC #',
+      show: true,
+    },
+    {
+      id: 'billing_cycle',
+      description: 'Billing Cycle',
+      show: true,
+    },
+    {
+      id: 'credit_card_exp',
+      description: 'CC Exp',
+      show: true,
+    },
+    {
+      id: 'billing_name',
+      description: 'Billing Name',
+      show: true,
+    },
+  ],
+  billing_items: [
+    {
+      type: 'Mastercard',
+      date: '7/14/2022',
+      next_billing: '8/15/2022',
+      billing_cycle: 'Monthly 15th',
+      credit_card_num: 'XXXXXXXXXXXX9179',
+      credit_card_exp: '6/30/2026',
+      billing_name: 'Bryce Hockman',
+    },
+  ],
   service_fields: [
     {
       id: 'id',

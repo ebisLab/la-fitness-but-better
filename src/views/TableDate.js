@@ -167,8 +167,8 @@ export default function TableDate({cellRef, divSize}) {
                         // gridTemplateColumns:
                         //   'repeat(auto-fit, minmax(150px, 1fr))',
                       }}>
-                      {data.items.map((item, index) => {
-                        return data.fields
+                      {data.billing_items.map((item, index) => {
+                        return data.billing_fields
                           .filter(field => field.show)
                           .map(field => (
                             <Td key={index} data-th={field.description}>
